@@ -1890,33 +1890,461 @@ const reasoningTopics = [
     
             
             'numSeries': [
-        {
-            type: 'theory',
-            illustration: '1️⃣ 2️⃣ 3️⃣',
-            title: 'What is Number Series?',
-            content: 'In this test, you have to find the missing number in a logical sequence.<br>Example: 2, 4, 6, 8, <b>?</b><br>Answer: 10 (+2 pattern).'
-        },
-        {
-            type: 'theory',
-            illustration: '📈',
-            title: 'Difference Pattern',
-            content: 'Check the gap between numbers.<br>5, 10, 15, 20.<br>The gap is 5. Next number is 25.'
-        },
-        {
-            type: 'quiz',
-            illustration: '❓',
-            title: 'Quiz 1',
-            question: 'Find the next number: 10, 20, 30, 40, __',
-            options: ['45', '50', '60', '55'],
-            correctIndex: 1 // 50
-        }
-    ],
+    // PART 1: The Basics (Arithmetic & Geometric)
+    {
+        type: 'theory',
+        illustration: '➕',
+        title: '1. Arithmetic Series (AP)',
+        content: 'The difference between numbers is <b>constant</b>.<br>Example: 2, 5, 8, 11... (+3 each time).<br>Rule: Look for addition or subtraction.'
+    },
+    {
+        type: 'theory',
+        illustration: '✖️',
+        title: '2. Geometric Series (GP)',
+        content: 'The numbers grow very fast.<br>Example: 3, 6, 12, 24... (×2 each time).<br>Rule: Look for multiplication or division.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Find the next number: 5, 10, 20, 40, ?',
+        options: ['60', '80', '50', '100'],
+        correctIndex: 1 // 40 * 2 = 80
+    },
 
-    // Placeholder for next topics (Direction etc.)
+    // PART 2: Squares & Cubes (The Memory Game)
+    {
+        type: 'theory',
+        illustration: '🟦',
+        title: '3. Square Series',
+        content: 'Based on $n^2$.<br>1, 4, 9, 16, 25...<br>Advanced: $n^2 + 1$ (2, 5, 10, 17...).<br>Advanced: $n^2 - 1$ (0, 3, 8, 15...).'
+    },
+    {
+        type: 'theory',
+        illustration: '📦',
+        title: '4. Cube Series',
+        content: 'Based on $n^3$.<br>1, 8, 27, 64, 125...<br>Recognizing 27, 64, 125 instantly is key to solving hard problems.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2',
+        question: 'Complete: 0, 7, 26, 63, ?',
+        options: ['124', '125', '100', '99'],
+        correctIndex: 0 // n^3 - 1 (125 - 1)
+    },
+
+    // PART 3: The "Double Difference" Method
+    {
+        type: 'theory',
+        illustration: '🪜',
+        title: '5. Step Logic',
+        content: 'If you can\'t find a pattern, take the <b>difference</b> between numbers.<br>If that doesn\'t work, take the difference of the difference!<br>Series: 2, 5, 11, 23...<br>Diff: 3, 6, 12... (×2 logic found!).'
+    },
+    {
+        type: 'theory',
+        illustration: '👯',
+        title: '6. Alternating Series',
+        content: 'Two series mixed together.<br>Example: <b>2</b>, 10, <b>4</b>, 15, <b>6</b>, 20...<br>Series A: 2, 4, 6...<br>Series B: 10, 15, 20...'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 3',
+        question: 'Find next: 3, 4, 7, 11, 18, 29, ?',
+        options: ['35', '40', '47', '42'],
+        correctIndex: 2 // 18 + 29 = 47 (Sum of previous two)
+    },
+
+    // PART 4: Prime Numbers (The Trap)
+    {
+        type: 'theory',
+        illustration: '🔢',
+        title: '7. Prime Number Series',
+        content: 'Numbers divisible only by 1 and themselves.<br>2, 3, 5, 7, 11, 13, 17...<br>Trap: Don\'t confuse 9 (odd) with Prime!'
+    },
+    {
+        type: 'quiz',
+        illustration: '⚠️',
+        title: 'Quiz 4',
+        question: 'Find odd one out: 3, 5, 7, 9, 11, 13',
+        options: ['9', '3', '7', '13'],
+        correctIndex: 0 // 9 is divisible by 3
+    },
+
+    // PART 5: Advanced Hybrid Logic
+    {
+        type: 'theory',
+        illustration: '🤖',
+        title: '8. Multiply + Add',
+        content: 'Most common in exams.<br>Example: ×2 + 1<br>5 → 11 (5×2 + 1)<br>11 → 23 (11×2 + 1)<br>Rule: Check if numbers roughly double.'
+    },
+    {
+        type: 'theory',
+        illustration: '🔄',
+        title: '9. Fibonacci Series',
+        content: 'Each number is the sum of the <b>two previous numbers</b>.<br>1, 1, 2, 3, 5, 8, 13...<br>Look for this when numbers grow steadily but not geometrically.'
+    },
+    {
+        type: 'theory',
+        illustration: '📉',
+        title: '10. Half-Pattern (×0.5)',
+        content: 'If a series decreases then increases.<br>Example: 10, 5, 5, 7.5, 15...<br>Logic: ×0.5, ×1, ×1.5, ×2.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'Solve: 4, 9, 19, 39, ?',
+        options: ['79', '89', '69', '59'],
+        correctIndex: 0 // ×2 + 1 logic (39*2 + 1 = 79)
+    }
+],
+
+
     'distance': [
-        { type: 'theory', illustration: '🧭', title: 'Direction', content: 'North, South, East, West.' },
-        { type: 'quiz', illustration: '❓', title: 'Quiz', question: 'Sun rises in?', options: ['West', 'East'], correctIndex: 1 }
-    ]
+    // PART 1: The Compass Basics
+    {
+        type: 'theory',
+        illustration: '🧭',
+        title: '1. The Cardinal Directions',
+        content: 'Remember <b>NEWS</b>:<br><b>N</b>orth (Up)<br><b>E</b>ast (Right)<br><b>W</b>est (Left)<br><b>S</b>outh (Down)<br><i>Note: Always draw a small cross on your paper before starting!</i>'
+    },
+    {
+        type: 'theory',
+        illustration: '✋',
+        title: '2. Left vs Right Turns',
+        content: 'Imagine yourself walking on the line.<br><b>Face North:</b> Left is West, Right is East.<br><b>Face South:</b> Left is East, Right is West (Opposite!).'
+    },
+    {
+        type: 'theory',
+        illustration: '🔄',
+        title: '3. Clockwise vs Anti-Clockwise',
+        content: '<b>Clockwise (CW):</b> Right Turn (Like a clock hands).<br><b>Anti-Clockwise (ACW):</b> Left Turn.<br>Standard turn = <b>90°</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'You face North. You turn 90° Clockwise. Where do you face?',
+        options: ['West', 'South', 'East', 'North-East'],
+        correctIndex: 2 // East
+    },
+
+    // PART 2: Angles & Rotation
+    {
+        type: 'theory',
+        illustration: '📐',
+        title: '4. Degree Movements',
+        content: '<b>45°:</b> Half turn (Face NE, NW, SE, SW).<br><b>180°:</b> Complete U-Turn (Face Opposite).<br><b>360°:</b> Full circle (Face Same).'
+    },
+    {
+        type: 'theory',
+        illustration: '🥨',
+        title: '5. Solving Rotation Problems',
+        content: 'Trick: Add all CW angles and all ACW angles separately.<br>Subtract the smaller from the larger.<br>Turn only once in the final direction.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🤔',
+        title: 'Quiz 2',
+        question: 'Face North. Turn 135° CW, then 45° ACW. Final face?',
+        options: ['East', 'West', 'North', 'South'],
+        correctIndex: 0 // Net: 135 - 45 = 90 CW (North -> East)
+    },
+
+    // PART 3: The Shadow Tricks (Exam Favorite)
+    {
+        type: 'theory',
+        illustration: '☀️',
+        title: '6. Morning Shadows (Sunrise)',
+        content: 'Sun is in <b>East</b>.<br>Shadow falls towards <b>West</b>.<br>If shadow is to your <b>Left</b>, you are facing <b>North</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🌅',
+        title: '7. Evening Shadows (Sunset)',
+        content: 'Sun is in <b>West</b>.<br>Shadow falls towards <b>East</b>.<br>If shadow is to your <b>Left</b>, you are facing <b>South</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🕛',
+        title: '8. Noon Shadow',
+        content: 'At 12:00 PM, the sun is exactly overhead.<br>There is <b>NO shadow</b> (or it is under your feet).<br>Trick question!'
+    },
+    {
+        type: 'quiz',
+        illustration: '👥',
+        title: 'Quiz 3',
+        question: 'Morning: Shadow falls to your Right. You are facing:',
+        options: ['North', 'South', 'East', 'West'],
+        correctIndex: 1 // Sun East -> Shadow West. If West is Right, Face is South.
+    },
+
+    // PART 4: Calculating Distance (Pythagoras)
+    {
+        type: 'theory',
+        illustration: '📏',
+        title: '9. Total Distance vs Displacement',
+        content: '<b>Total Distance:</b> Total path walked (Add everything).<br><b>Displacement:</b> Shortest line from Start to End (Hypotenuse).'
+    },
+    {
+        type: 'theory',
+        illustration: '🔺',
+        title: '10. Pythagoras Theorem',
+        content: 'Used for shortest distance.<br><b>$H^2 = P^2 + B^2$</b><br>Common Triplets: (3, 4, <b>5</b>), (6, 8, <b>10</b>), (5, 12, <b>13</b>).'
+    },
+    {
+        type: 'theory',
+        illustration: '🗺️',
+        title: '11. Direction Reference',
+        content: 'Question: "In which direction is he <b>from the starting point</b>?"<br>Draw an arrow FROM Start TO End.<br>If arrow goes Up-Right, answer is <b>North-East</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🚶',
+        title: 'Quiz 4',
+        question: 'Walk 3km North, then 4km East. How far from start?',
+        options: ['7km', '5km', '1km', '25km'],
+        correctIndex: 1 // Sqrt(3^2 + 4^2) = 5
+    },
+
+    // PART 5: Advanced Logic
+    {
+        type: 'theory',
+        illustration: '🧩',
+        title: '12. Coded Direction',
+        content: 'If "North becomes West"...<br>Logic: N to W is 90° ACW.<br>Apply the <b>same rotation</b> to everything else.<br>East becomes South.'
+    },
+    {
+        type: 'theory',
+        illustration: '🧘',
+        title: '13. Yoga Headstand',
+        content: 'If a person does a headstand facing North:<br>Their <b>Face</b> is North.<br>Their <b>Left Hand</b> will point <b>East</b> (Opposite of normal!).'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'A goes 10m North, turns Right, goes 10m. Direction from Start?',
+        options: ['North', 'East', 'North-East', 'North-West'],
+        correctIndex: 2 // Up and Right -> NE
+    }
+]
+        'mathOps': [
+    // PART 1: The Foundation (BODMAS)
+    {
+        type: 'theory',
+        illustration: '🧱',
+        title: '1. The Golden Rule: BODMAS',
+        content: 'You cannot just calculate left to right!<br><b>B</b>: Brackets ()<br><b>O</b>: Of (Powers/Roots)<br><b>D</b>: Division (÷)<br><b>M</b>: Multiplication (×)<br><b>A</b>: Addition (+)<br><b>S</b>: Subtraction (-)'
+    },
+    {
+        type: 'theory',
+        illustration: '⚠️',
+        title: '2. Why Order Matters',
+        content: 'Solve: <b>$10 - 2 \times 3$</b><br>Wrong: $8 \times 3 = 24$.<br>Right: Multiply first ($2 \times 3 = 6$). Then subtract ($10 - 6 = 4$).'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Solve: 12 ÷ 4 + 2',
+        options: ['2', '5', '6', '3'],
+        correctIndex: 1 // 3 + 2 = 5
+    },
+
+    // PART 2: Coded Operations (Substitution)
+    {
+        type: 'theory',
+        illustration: '🕵️',
+        title: '3. Decoding Symbols',
+        content: 'Question: "If $+$ means $\times$, $-$ means $\div$..."<br><b>Step 1:</b> Don\'t solve in your head.<br><b>Step 2:</b> Re-write the equation with the <i>new</i> real symbols.<br><b>Step 3:</b> Use BODMAS.'
+    },
+    {
+        type: 'theory',
+        illustration: '📝',
+        title: '4. Example',
+        content: 'If $P = \times$, $T = -$.<br>Problem: $4 \ P \ 3 \ T \ 2$.<br>Rewrite: $4 \times 3 - 2$.<br>Solve: $12 - 2 = 10$.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2',
+        question: 'If L=+, M=÷. Solve: 8 M 2 L 5',
+        options: ['9', '4', '13', '16'],
+        correctIndex: 0 // 8/2 + 5 = 4 + 5 = 9
+    },
+
+    // PART 3: The "Division Hack" (Advanced Strategy)
+    {
+        type: 'theory',
+        illustration: '⚡',
+        title: '5. The Division Trick',
+        content: 'In "Find the correct option" questions, check <b>Division (÷)</b> first.<br>If you see $5 \div 2$ (Decimal), but the answer is a whole number (12), that option is <b>Wrong</b>.<br>Eliminate it immediately!'
+    },
+    {
+        type: 'theory',
+        illustration: '🚫',
+        title: '6. Elimination Example',
+        content: 'Target: $= 10$.<br>Option A: $7 \div 2 + \dots$ (Result 3.5? Ignore A).<br>Option B: $8 \div 4 + \dots$ (Result 2? Check B).<br>This saves 90% of your time.'
+    },
+    {
+        type: 'quiz',
+        illustration: '👀',
+        title: 'Quiz 3',
+        question: 'Which is likely WRONG for an integer answer?',
+        options: ['12 ÷ 6', '12 ÷ 4', '12 ÷ 5', '12 ÷ 3'],
+        correctIndex: 2 // 12/5 is 2.4 (Decimal)
+    },
+
+    // PART 4: Interchanging Signs
+    {
+        type: 'theory',
+        illustration: '🔄',
+        title: '7. Interchange Logic',
+        content: 'Question: "Equation is wrong. Which two signs should be swapped to fix it?"<br>Strategy: Look for where Division <b>should</b> be to make numbers smaller or cleaner.'
+    },
+    {
+        type: 'theory',
+        illustration: '⚖️',
+        title: '8. Balancing Equations',
+        content: 'Fill in the blanks: $8 \ \_\ \ 4 \ \_\ \ 2 = 6$.<br>Try Division first: $8 \div 4 = 2$.<br>Then Add/Multiply: $2 + 4$?<br>Correct: $8 \div 4 + 4 = 6$.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 4',
+        question: 'Swap × and ÷: 4 × 2 ÷ 2 = ?',
+        options: ['1', '4', '8', '16'],
+        correctIndex: 1 // Becomes 4 ÷ 2 × 2 -> 2 × 2 -> 4
+    },
+
+    // PART 5: Advanced/Tricky
+    {
+        type: 'theory',
+        illustration: '🤯',
+        title: '9. The Bracket Trap',
+        content: 'Sometimes "Of" is hidden.<br>$10 \div 2(3)$ is TRICKY.<br>It means $10 \div 2 \times 3$.<br>BODMAS: $10 \div 2 = 5$. Then $5 \times 3 = 15$.'
+    },
+    {
+        type: 'theory',
+        illustration: '🔢',
+        title: '10. Number Interchange',
+        content: 'Question: "Swap 3 and 4".<br>Be careful: If the number is <b>34</b>, swapping makes it <b>43</b>.<br>Usually, we only swap standalone digits.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'Solve: 18 ÷ 3 × (4 - 2) + 1',
+        options: ['13', '4', '12', '7'],
+        correctIndex: 0 // Brackets(2) -> Div(6) -> Mult(12) -> Add(13)
+    }
+]
+
+        'ranking': [
+    // PART 1: The Golden Formula (Ranking)
+    {
+        type: 'theory',
+        illustration: '🔢',
+        title: '1. The Golden Rule',
+        content: 'To find the <b>Total</b> number of people in a row:<br><b>Total = (Left Position + Right Position) - 1</b>.<br><i>Why -1? Because you counted the same person twice!</i>'
+    },
+    {
+        type: 'theory',
+        illustration: '↔️',
+        title: '2. Finding Position',
+        content: 'If you know the Total and one side:<br><b>Position = (Total - Other Side) + 1</b>.<br>Example: Total 50. You are 10th from Left.<br>Right Position = (50 - 10) + 1 = <b>41st</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Rohan is 7th from Top and 26th from Bottom. How many total students?',
+        options: ['31', '32', '33', '34'],
+        correctIndex: 1 // 7 + 26 - 1 = 32
+    },
+
+    // PART 2: Swapping Positions (Advanced)
+    {
+        type: 'theory',
+        illustration: '🔄',
+        title: '3. The Interchange Problem',
+        content: 'Scenario: "A is 10th from Left. B is 15th from Right. They swap places. A becomes 20th from Left."<br><b>Trick:</b> New Position of A + Old Position of B - 1.<br>Total = 20 + 15 - 1 = <b>34</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🪜',
+        title: '4. Finding New Position',
+        content: 'In the swap above, what is B\'s new position?<br>A moved 10 spaces (10 to 20).<br>B must also move 10 spaces.<br>15 + 10 = <b>25th</b> from Right.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2',
+        question: 'A is 5th (L). B is 6th (R). Swap: A becomes 15th (L). Total?',
+        options: ['20', '21', '19', '22'],
+        correctIndex: 0 // 15 + 6 - 1 = 20
+    },
+
+    // PART 3: The "Between" Logic
+    {
+        type: 'theory',
+        illustration: '👥',
+        title: '5. Non-Overlapping Case',
+        content: 'When Total > (Left + Right).<br>People Between = <b>Total - (Left + Right)</b>.<br>Everyone stands separately.'
+    },
+    {
+        type: 'theory',
+        illustration: '🥨',
+        title: '6. Overlapping Case (Min/Max)',
+        content: 'When Total < (Left + Right).<br>The lines cross each other!<br>People Between = <b>(Left + Right) - (Total + 2)</b>.<br><i>The "+2" accounts for the two main people.</i>'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 3',
+        question: 'Total 10. A is 8th (L), B is 8th (R). How many between?',
+        options: ['4', '6', '2', '0'],
+        correctIndex: 0 // (8+8) - (10+2) = 16 - 12 = 4
+    },
+
+    // PART 4: Time Sequence & Comparison
+    {
+        type: 'theory',
+        illustration: '📅',
+        title: '7. Date Calculation',
+        content: 'Question: "If 3rd is Friday, what day is 25th?"<br>Gap = 25 - 3 = 22 days.<br>22 ÷ 7 = Remainder <b>1</b>.<br>Friday + 1 = <b>Saturday</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🦁',
+        title: '8. Comparison Logic',
+        content: 'P is taller than Q but shorter than R.<br>Draw it: <b>R > P > Q</b>.<br>Connect multiple sentences to build the full chain.'
+    },
+    {
+        type: 'theory',
+        illustration: '🗓️',
+        title: '9. The Leap Year Trap',
+        content: 'Normal Year: 365 days (1 odd day).<br>Leap Year: 366 days (2 odd days).<br>If Feb 29 is included in the gap, add <b>+1 extra day</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'In a row of boys, if A is 10th from left and B is 9th from right, and they swap...',
+        options: [
+            'We need the new position to find Total.',
+            'Total is 19.',
+            'Total is 18.',
+            'Total is 20.'
+        ],
+        correctIndex: 0 // Cannot calculate Total without knowing the New Position
+    }
+]
+        
+        
         
             
         };
