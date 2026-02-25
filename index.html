@@ -370,835 +370,183 @@ const reasoningTopics = [
         // --- MASTER DATA OBJECT ---
         // Yahan aap naye topics ka data add kar sakte hain
         const allLessons = {
-            
-            // 1. NOUN DATA
-            'noun': [
-    // PART 1: Basics
+
+            'units': [
+    // PART 1: The Foundation
     {
         type: 'theory',
-        illustration: '🐱',
-        title: '1. What is a Noun?',
-        content: 'A Noun is a naming word. It is used to name a <b>Person, Place, Animal, or Thing</b>.'
+        illustration: '📏',
+        title: '1. What is a Physical Quantity?',
+        content: 'Anything that can be <b>measured</b> is a Physical Quantity.<br>It has two parts:<br>1. <b>Magnitude</b> (Number: 5)<br>2. <b>Unit</b> (Standard: kg)<br>Example: "5 kg".'
     },
     {
         type: 'theory',
-        illustration: '👦 🏫',
-        title: '2. Examples',
-        content: '<b>Person:</b> Boy, Rahul, Doctor<br><b>Place:</b> School, Delhi, Park<br><b>Thing:</b> Table, Pen, Car'
+        illustration: '🌍',
+        title: '2. Why do we need Standards?',
+        content: 'In the past, people used "Hand span" or "Foot". This was confusing!<br>Now we use the <b>SI System</b> (International System) so the whole world agrees.'
     },
     {
         type: 'theory',
-        illustration: '👀',
-        title: '3. Look Around',
-        content: 'Everything you can see or touch usually has a name. That name is a <b>Noun</b>.'
+        illustration: '🏛️',
+        title: '3. The 7 Fundamental Units',
+        content: 'These are the "Parents" of all units. They don\'t depend on anything else.<br>1. Length (<b>Meter</b>)<br>2. Mass (<b>Kilogram</b>)<br>3. Time (<b>Second</b>)'
     },
     {
         type: 'quiz',
         illustration: '❓',
         title: 'Quiz 1',
-        question: 'Which of these is a Noun (Thing)?',
-        options: ['Run', 'Blue', 'Chair', 'Quickly'],
-        correctIndex: 2 // Chair
+        question: 'Which is NOT a fundamental quantity?',
+        options: ['Mass', 'Speed', 'Time', 'Length'],
+        correctIndex: 1 // Speed (Derived from Distance/Time)
     },
 
-    // PART 2: Types (Common vs Proper)
-    {
-        type: 'theory',
-        illustration: '🏙️',
-        title: '4. Common Noun',
-        content: 'A general name for something.<br>Example: <i>City, Dog, Boy</i>. It does not start with a capital letter.'
-    },
-    {
-        type: 'theory',
-        illustration: '🗽',
-        title: '5. Proper Noun',
-        content: 'A special, specific name.<br>Example: <i>Mumbai, Tommy, Rahul</i>. It <b>always</b> starts with a Capital Letter.'
-    },
-    {
-        type: 'theory',
-        illustration: 'vs',
-        title: '6. Compare Them',
-        content: 'Boy -> <b>Rahul</b><br>City -> <b>Delhi</b><br>Car -> <b>Honda</b>'
-    },
-    {
-        type: 'quiz',
-        illustration: '🤔',
-        title: 'Quiz 2',
-        question: 'Select the PROPER Noun:',
-        options: ['school', 'London', 'table', 'book'],
-        correctIndex: 1 // London
-    },
-
-    // PART 3: Usage in Sentences
-    {
-        type: 'theory',
-        illustration: '📝',
-        title: '7. Subject of Sentence',
-        content: 'Nouns often come at the start of a sentence as the Subject.<br><i>"<b>Birds</b> fly in the sky."</i>'
-    },
-    {
-        type: 'theory',
-        illustration: '🎯',
-        title: '8. Object of Sentence',
-        content: 'Nouns can also receive action.<br><i>"He kicked the <b>ball</b>."</i> (Ball is the object).'
-    },
-    {
-        type: 'theory',
-        illustration: '🔍',
-        title: '9. Spotting Nouns',
-        content: 'Try to find the nouns here: <br><i>"The <b>cat</b> drinks <b>milk</b>."</i>'
-    },
-    {
-        type: 'quiz',
-        illustration: '🏆',
-        title: 'Final Quiz',
-        question: 'Identify the Noun in this sentence: "She eats an apple."',
-        options: ['She', 'Eats', 'An', 'Apple'],
-        correctIndex: 3 // Apple
-    }
-] ,
-            
-                  
-            'pronoun' : [
-    // PART 1: Basics
-    {
-        type: 'theory',
-        illustration: '🔄',
-        title: '1. What is a Pronoun?',
-        content: 'A Pronoun is a word used <b>in place of a Noun</b>.<br>It stops us from repeating the same name again and again.'
-    },
-    {
-        type: 'theory',
-        illustration: '🗣️',
-        title: '2. Why use it?',
-        content: 'Bad: "Rahul eats. Rahul sleeps."<br>Good: "Rahul eats. <b>He</b> sleeps."'
-    },
-    {
-        type: 'theory',
-        illustration: '📋',
-        title: '3. Common Pronouns',
-        content: '<b>I, You, He, She, It, We, They</b>.<br>These are used for people and things.'
-    },
-    {
-        type: 'quiz',
-        illustration: '❓',
-        title: 'Quiz 1',
-        question: 'Which word can replace "Sara" (a girl)?',
-        options: ['He', 'It', 'She', 'They'],
-        correctIndex: 2 // She
-    },
-
-    // PART 2: Gender & Numbers
-    {
-        type: 'theory',
-        illustration: '👨',
-        title: '4. He vs She',
-        content: '<b>He</b> is used for boys/men.<br><b>She</b> is used for girls/women.<br><b>It</b> is used for animals or objects.'
-    },
-    {
-        type: 'theory',
-        illustration: '👥',
-        title: '5. Singular vs Plural',
-        content: 'One person: <b>I, He, She</b>.<br>Many people: <b>We, They</b>.'
-    },
-    {
-        type: 'theory',
-        illustration: '👉',
-        title: '6. Pointing Out',
-        content: '<b>This / That</b> are also pronouns used to point at things.<br>"<b>This</b> is my car."'
-    },
-    {
-        type: 'quiz',
-        illustration: '🤔',
-        title: 'Quiz 2',
-        question: 'Select the pronoun for "My friends and I":',
-        options: ['They', 'We', 'He', 'You'],
-        correctIndex: 1 // We
-    },
-
-    // PART 3: Sentence Practice
-    {
-        type: 'theory',
-        illustration: '🐕',
-        title: '7. For Animals',
-        content: 'We usually use <b>It</b> for animals.<br>"The dog barks. <b>It</b> is loud."'
-    },
-    {
-        type: 'theory',
-        illustration: '🔄',
-        title: '8. Replacement',
-        content: 'Example:<br><i>"The bag is heavy."</i><br>Can be changed to:<br><i>"<b>It</b> is heavy."</i>'
-    },
-    {
-        type: 'theory',
-        illustration: '🎯',
-        title: '9. Subject Pronouns',
-        content: 'These pronouns do the action:<br><b>She</b> runs.<br><b>They</b> play.<br><b>We</b> dance.'
-    },
-    {
-        type: 'quiz',
-        illustration: '🏆',
-        title: 'Final Quiz',
-        question: 'Replace the bold words: "<b>The boys</b> are playing."',
-        options: ['He', 'We', 'They', 'It'],
-        correctIndex: 2 // They
-    }
-],
-    'adjective' :  [
-    // PART 1: The Basics
-    {
-        type: 'theory',
-        illustration: '🎨',
-        title: '1. What is an Adjective?',
-        content: 'An Adjective is a word that <b>describes a Noun or Pronoun</b>.<br>It tells us more about quality, size, shape, or color.'
-    },
-    {
-        type: 'theory',
-        illustration: '🍎',
-        title: '2. Examples',
-        content: 'Noun: "Apple"<br>With Adjective: "<b>Red</b> apple", "<b>Sweet</b> apple", "<b>Big</b> apple".'
-    },
-    {
-        type: 'theory',
-        illustration: '🕵️',
-        title: '3. Spotting Them',
-        content: 'They usually answer questions like:<br><i>"What kind?"</i> (<b>Blue</b> car)<br><i>"How many?"</i> (<b>Two</b> dogs).'
-    },
-    {
-        type: 'quiz',
-        illustration: '❓',
-        title: 'Quiz 1',
-        question: 'Find the adjective: "The tall man smiled."',
-        options: ['The', 'Tall', 'Man', 'Smiled'],
-        correctIndex: 1 // Tall
-    },
-
-    // PART 2: Types of Adjectives
-    {
-        type: 'theory',
-        illustration: '✨',
-        title: '4. Adjectives of Quality',
-        content: 'These describe the <b>kind or nature</b> of a person or thing.<br>Examples: <b>Honest</b> boy, <b>Heavy</b> box, <b>Beautiful</b> flower.'
-    },
-    {
-        type: 'theory',
-        illustration: '🔢',
-        title: '5. Adjectives of Quantity/Number',
-        content: 'These tell us <b>how much</b> or <b>how many</b>.<br>Examples: <b>Some</b> rice, <b>Enough</b> money, <b>Five</b> fingers.'
-    },
-    {
-        type: 'theory',
-        illustration: '👉',
-        title: '6. Demonstrative Adjectives',
-        content: 'Used to point out specific nouns.<br><b>This</b> book, <b>That</b> star, <b>These</b> shoes.<br><i>Note: They must be followed immediately by a noun.</i>'
-    },
-    {
-        type: 'quiz',
-        illustration: '🧠',
-        title: 'Quiz 2',
-        question: 'Identify the Adjective of Quantity:',
-        options: ['Good', 'This', 'Little', 'Red'],
-        correctIndex: 2 // Little (describes amount)
-    },
-
-    // PART 3: Degrees of Comparison (The 3 Levels)
-    {
-        type: 'theory',
-        illustration: '📈',
-        title: '7. Three Degrees',
-        content: '1. <b>Positive:</b> Big (One thing)<br>2. <b>Comparative:</b> Bigger (Comparing two)<br>3. <b>Superlative:</b> Biggest (Comparing three or more).'
-    },
-    {
-        type: 'theory',
-        illustration: '➕',
-        title: '8. Rule: -er and -est',
-        content: 'For short words, we add <b>-er</b> and <b>-est</b>.<br>Fast → Fast<b>er</b> → Fast<b>est</b>.<br>Tall → Tall<b>er</b> → Tall<b>est</b>.'
-    },
-    {
-        type: 'theory',
-        illustration: '🤔',
-        title: '9. Rule: More and Most',
-        content: 'For longer words (2+ syllables), we use <b>more</b> and <b>most</b>.<br>Beautiful → <b>More</b> beautiful → <b>Most</b> beautiful.'
-    },
-    {
-        type: 'theory',
-        illustration: '🤪',
-        title: '10. Irregular Adjectives',
-        content: 'Some words change completely!<br>Good → <b>Better</b> → <b>Best</b><br>Bad → <b>Worse</b> → <b>Worst</b>.'
-    },
-    {
-        type: 'quiz',
-        illustration: '🏆',
-        title: 'Quiz 3',
-        question: 'Complete: "This puzzle is ___ than the last one."',
-        options: ['Hard', 'Harder', 'Hardest', 'More hard'],
-        correctIndex: 1 // Harder
-    },
-
-    // PART 4: Placement & Advanced Usage
-    {
-        type: 'theory',
-        illustration: '📍',
-        title: '11. Position of Adjectives',
-        content: '<b>Attributive:</b> Before the noun ("A <b>happy</b> baby").<br><b>Predicative:</b> After the verb ("The baby is <b>happy</b>").'
-    },
-    {
-        type: 'theory',
-        illustration: '😲',
-        title: '12. -ED vs -ING Adjectives',
-        content: '<b>-ED</b> describes feelings: "I am <b>bored</b>."<br><b>-ING</b> describes the cause: "The movie is <b>boring</b>."'
-    },
-    {
-        type: 'quiz',
-        illustration: '🎭',
-        title: 'Quiz 4',
-        question: 'Choose the correct form: "The news was very _____."',
-        options: ['Shocked', 'Shocking', 'Shock', 'Shocks'],
-        correctIndex: 1 // Shocking (describing the news, not a feeling)
-    },
-
-    // PART 5: Order of Adjectives
-    {
-        type: 'theory',
-        illustration: '🚂',
-        title: '13. The "Order" Rule',
-        content: 'When using multiple adjectives, follow this order:<br><b>Opinion → Size → Age → Shape → Color → Origin → Material</b>.'
-    },
-    {
-        type: 'theory',
-        illustration: '📝',
-        title: '14. Order Example 1',
-        content: 'Right: "A <b>lovely old red</b> house."<br>(Opinion → Age → Color)<br>Wrong: "A red old lovely house."'
-    },
-    {
-        type: 'theory',
-        illustration: '👜',
-        title: '15. Order Example 2',
-        content: 'Right: "A <b>small Italian leather</b> bag."<br>(Size → Origin → Material).'
-    },
-    {
-        type: 'quiz',
-        illustration: '🧩',
-        title: 'Quiz 5',
-        question: 'Which order is correct?',
-        options: [
-            'A fat black scary cat',
-            'A scary fat black cat',
-            'A black fat scary cat',
-            'A fat scary black cat'
-        ],
-        correctIndex: 1 // Opinion (scary) -> Size (fat) -> Color (black)
-    },
-
-    // PART 6: Special Cases
-    {
-        type: 'theory',
-        illustration: '👬',
-        title: '16. Nouns as Adjectives',
-        content: 'Sometimes a noun acts like an adjective to describe another noun.<br>Examples: <b>Race</b> car, <b>Shoe</b> lace, <b>History</b> teacher.'
-    },
-    {
-        type: 'theory',
-        illustration: '⚖️',
-        title: '17. "As... As" Comparisons',
-        content: 'Used to show two things are equal.<br>"He is <b>as tall as</b> his brother."<br>"This room is <b>as cold as</b> ice."'
-    },
-    {
-        type: 'theory',
-        illustration: '🔍',
-        title: '18. Few vs A Few',
-        content: '<b>Few:</b> Not many (Negative tone). "I have few friends."<br><b>A Few:</b> Some (Positive tone). "I have a few friends."'
-    },
-    {
-        type: 'theory',
-        illustration: '🔚',
-        title: '19. Little vs A Little',
-        content: 'Same rule, but for uncountable things.<br><b>Little:</b> Hardly any water.<br><b>A Little:</b> Some water.'
-    },
-    {
-        type: 'quiz',
-        illustration: '🎓',
-        title: 'Final Mastery Quiz',
-        question: 'Complete: "She has ___ patience left for his excuses."',
-        options: ['Few', 'Many', 'Little', 'A few'],
-        correctIndex: 2 // Little (Uncountable noun 'patience', negative context)
-        }
-    ],
-
-            // 4. ADVERB DATA (Placeholder)
-            'adverb': [
-    // PART 1: The Basics
+    // PART 2: The 7 Pillars (SI Base Units)
     {
         type: 'theory',
         illustration: '⚡',
-        title: '1. What is an Adverb?',
-        content: 'An adverb adds meaning to a <b>Verb</b>, an <b>Adjective</b>, or another <b>Adverb</b>.<br>It tells us <i>how, when, where,</i> or <i>how much</i>.'
+        title: '4. The Other 4 Fundamentals',
+        content: '4. Electric Current: <b>Ampere (A)</b><br>5. Temperature: <b>Kelvin (K)</b> (Not Celsius!)<br>6. Amount of Substance: <b>Mole (mol)</b><br>7. Luminous Intensity: <b>Candela (cd)</b>'
     },
     {
         type: 'theory',
-        illustration: '🏃',
-        title: '2. Modifying Verbs',
-        content: 'Most common use: describing an action.<br>"He runs." (Basic)<br>"He runs <b>quickly</b>." (Adverb added).'
+        illustration: '🧱',
+        title: '5. Derived Units',
+        content: 'These are made by mixing Fundamental units.<br><b>Area:</b> Length × Width = $m^2$<br><b>Speed:</b> Distance ÷ Time = $m/s$<br><b>Density:</b> Mass ÷ Volume = $kg/m^3$'
     },
     {
         type: 'theory',
-        illustration: '🌡️',
-        title: '3. Modifying Adjectives',
-        content: 'Adverbs can make adjectives stronger or weaker.<br>"The tea is <b>very</b> hot."<br>"The movie was <b>quite</b> boring."'
-    },
-    {
-        type: 'quiz',
-        illustration: '❓',
-        title: 'Quiz 1',
-        question: 'Identify the adverb: "She sings beautifully."',
-        options: ['She', 'Sings', 'Beautifully', 'Music'],
-        correctIndex: 2 // Beautifully
-    },
-
-    // PART 2: The 5 Main Types
-    {
-        type: 'theory',
-        illustration: '🎨',
-        title: '4. Adverbs of Manner',
-        content: 'Answers: <b>How?</b><br>Usually ends in <b>-ly</b>.<br>Examples: Slowly, Happily, Loudly, Carefully.'
-    },
-    {
-        type: 'theory',
-        illustration: '🗺️',
-        title: '5. Adverbs of Place',
-        content: 'Answers: <b>Where?</b><br>Examples: Here, There, Everywhere, Inside, Upstairs.<br>"Please come <b>here</b>."'
-    },
-    {
-        type: 'theory',
-        illustration: '⏰',
-        title: '6. Adverbs of Time',
-        content: 'Answers: <b>When?</b><br>Examples: Now, Yesterday, Soon, Later, Tonight.<br>"I will call you <b>later</b>."'
+        illustration: '🏋️',
+        title: '6. Special Names (Newton/Joule)',
+        content: 'Some derived units get famous names.<br>Force = $kg \cdot m/s^2$ → <b>Newton (N)</b>.<br>Energy = Force × Dist → <b>Joule (J)</b>.<br>Power = Energy ÷ Time → <b>Watt (W)</b>.'
     },
     {
         type: 'quiz',
         illustration: '🤔',
         title: 'Quiz 2',
-        question: 'What type is "Upstairs"?',
-        options: ['Time', 'Place', 'Manner', 'Frequency'],
-        correctIndex: 1 // Place
+        question: 'What is the SI unit of Temperature?',
+        options: ['Celsius', 'Fahrenheit', 'Kelvin', 'Degree'],
+        correctIndex: 2 // Kelvin
     },
 
-    // PART 3: Frequency & Placement (Advanced)
+    // PART 3: The Power of 10 (Prefixes)
     {
         type: 'theory',
-        illustration: '📅',
-        title: '7. Adverbs of Frequency',
-        content: 'Answers: <b>How often?</b><br>Scale: Always (100%) → Often → Sometimes → Rarely → Never (0%).'
+        illustration: '🔬',
+        title: '7. Small Prefixes (Micro/Nano)',
+        content: '<b>Milli (m):</b> $10^{-3}$ (0.001)<br><b>Micro ($\mu$):</b> $10^{-6}$ (Millionth)<br><b>Nano (n):</b> $10^{-9}$ (Billionth)<br>"Nanotechnology is super small!"'
     },
     {
         type: 'theory',
-        illustration: '📍',
-        title: '8. Placement Rule 1',
-        content: 'Frequency adverbs go <b>before</b> the main verb.<br>Right: "I <b>always</b> drink coffee."<br>Wrong: "I drink always coffee."'
+        illustration: '🔭',
+        title: '8. Big Prefixes (Kilo/Giga)',
+        content: '<b>Kilo (k):</b> $10^3$ (1,000)<br><b>Mega (M):</b> $10^6$ (Million)<br><b>Giga (G):</b> $10^9$ (Billion)<br>"1 Gigabyte = 1 Billion bytes."'
     },
     {
         type: 'theory',
-        illustration: '🛑',
-        title: '9. Placement Rule 2',
-        content: 'BUT, they go <b>after</b> the verb "To Be" (is, am, are).<br>Right: "She <b>is always</b> late."<br>Wrong: "She always is late."'
+        illustration: '🔄',
+        title: '9. Conversion Trick',
+        content: '<b>Big to Small:</b> Multiply (Run 5km → 5000m).<br><b>Small to Big:</b> Divide (5000m → 5km).<br><i>"King Henry Died By Drinking Chocolate Milk"</i> (Kilo, Hecto, Deca, Base, Deci, Centi, Milli).'
     },
     {
         type: 'quiz',
         illustration: '🧩',
         title: 'Quiz 3',
-        question: 'Choose the correct sentence:',
-        options: [
-            'He often is happy.',
-            'He is often happy.',
-            'He is happy often.',
-            'Often he is happy.'
-        ],
-        correctIndex: 1 // After "is"
+        question: 'How many meters in 1 micrometer?',
+        options: ['$10^{-3}$', '$10^{-6}$', '$10^{-9}$', '$10^6$'],
+        correctIndex: 1 // Micro = 10^-6
     },
 
-    // PART 4: Formation & Irregulars
+    // PART 4: Accuracy, Precision & Errors
     {
         type: 'theory',
-        illustration: '🔨',
-        title: '10. The -ly Rule',
-        content: 'Usually: Adjective + <b>ly</b> = Adverb.<br>Quick → Quickly.<br>Loud → Loudly.<br>Happy → Happily (y changes to i).'
-    },
-    {
-        type: 'theory',
-        illustration: '🤪',
-        title: '11. Irregular Adverbs',
-        content: 'Some don\'t change!<br>Fast (Adj) → <b>Fast</b> (Adv).<br>Hard (Adj) → <b>Hard</b> (Adv).<br>Good (Adj) → <b>Well</b> (Adv).'
+        illustration: '🎯',
+        title: '10. Accuracy vs Precision',
+        content: '<b>Accuracy:</b> How close to the "True Value". (Hitting the Bullseye).<br><b>Precision:</b> How detailed/close the measurements are to <i>each other</i>. (Hitting the same spot 5 times, even if wrong).'
     },
     {
         type: 'theory',
         illustration: '⚠️',
-        title: '12. Good vs Well',
-        content: '<b>Good</b> describes a noun. "He is a good driver."<br><b>Well</b> describes a verb. "He drives well."'
+        title: '11. Types of Errors',
+        content: '<b>Systematic Error:</b> Faulty machine (Zero error). Always wrong by the same amount.<br><b>Random Error:</b> Human mistake, temperature change. Can be reduced by taking the <i>Average</i>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🤏',
+        title: '12. Least Count',
+        content: 'The <b>smallest</b> value a tool can measure.<br>Ruler: 1mm (0.1cm).<br>Vernier Caliper: 0.1mm (0.01cm).<br>Smaller Least Count = More Precise.'
     },
     {
         type: 'quiz',
-        illustration: '🎭',
-        title: 'Quiz 4',
-        question: 'Complete: "He speaks English very ____."',
-        options: ['Good', 'Best', 'Well', 'Nice'],
-        correctIndex: 2 // Well (modifies 'speaks')
-    },
-
-    // PART 5: Confusing Pairs (High Level)
-    {
-        type: 'theory',
-        illustration: '🧱',
-        title: '13. Hard vs Hardly',
-        content: '<b>Hard:</b> With effort. "He works hard."<br><b>Hardly:</b> Almost not. "He hardly works." (He is lazy!).'
-    },
-    {
-        type: 'theory',
-        illustration: '⏳',
-        title: '14. Late vs Lately',
-        content: '<b>Late:</b> Not on time. "He arrived late."<br><b>Lately:</b> Recently. "Have you seen him lately?"'
-    },
-    {
-        type: 'theory',
-        illustration: '⚖️',
-        title: '15. Too vs Very',
-        content: '<b>Very:</b> A lot (Fact). "It is very hot."<br><b>Too:</b> More than needed (Negative). "It is too hot to drink."'
-    },
-    {
-        type: 'theory',
         illustration: '📏',
-        title: '16. "Enough" Position',
-        content: '<b>Enough</b> goes AFTER the adjective.<br>Right: "He is <b>old enough</b>."<br>Wrong: "He is enough old."'
-    },
-    {
-        type: 'quiz',
-        illustration: '🎓',
-        title: 'Final Mastery Quiz',
-        question: 'Complete: "I have studied ____ for the exam."',
-        options: ['Hardly', 'Hard', 'Lately', 'Too'],
-        correctIndex: 1 // Hard (with effort)
-    } 
-            ],
-            'conjunction': [
-    // PART 1: The Basics (The Glue)
-    {
-        type: 'theory',
-        illustration: '🔗',
-        title: '1. What is a Conjunction?',
-        content: 'A Conjunction is a "glue" word.<br>It connects words, phrases, or clauses together.<br>Without them, sentences would be short and choppy.'
-    },
-    {
-        type: 'theory',
-        illustration: '☕',
-        title: '2. Simple Example',
-        content: 'Without: "I like tea. I like coffee."<br>With: "I like tea <b>and</b> coffee."<br>The word <b>and</b> is the conjunction.'
-    },
-    {
-        type: 'quiz',
-        illustration: '❓',
-        title: 'Quiz 1',
-        question: 'Find the conjunction: "He is poor but happy."',
-        options: ['He', 'Is', 'But', 'Happy'],
-        correctIndex: 2 // But
+        title: 'Quiz 4',
+        question: 'A scale reads 10.2g, 10.1g, 10.2g. The true weight is 15g.',
+        options: [
+            'High Accuracy, Low Precision',
+            'High Precision, Low Accuracy',
+            'High Accuracy, High Precision',
+            'Low Accuracy, Low Precision'
+        ],
+        correctIndex: 1 // Precise (values are close) but Inaccurate (far from 15)
     },
 
-    // PART 2: Coordinating Conjunctions (FANBOYS)
+    // PART 5: Significant Figures (Crucial for Exams)
     {
         type: 'theory',
-        illustration: '🔑',
-        title: '3. The FANBOYS Rule',
-        content: 'There are only 7 main coordinating conjunctions.<br>Remember the name <b>FANBOYS</b>:<br><b>F</b>or, <b>A</b>nd, <b>N</b>or, <b>B</b>ut, <b>O</b>r, <b>Y</b>et, <b>S</b>o.'
-    },
-    {
-        type: 'theory',
-        illustration: '🆚',
-        title: '4. And, But, Or',
-        content: '<b>And:</b> Adds information. "Red <b>and</b> Blue."<br><b>But:</b> Shows contrast. "Small <b>but</b> strong."<br><b>Or:</b> Shows a choice. "Tea <b>or</b> Coffee?"'
+        illustration: '🔢',
+        title: '13. Significant Figures (Sig Figs)',
+        content: 'These tell us how "trustworthy" a number is.<br>Rule 1: All non-zero digits count (456 → 3 sig figs).<br>Rule 2: Zeros <b>between</b> numbers count (406 → 3 sig figs).'
     },
     {
         type: 'theory',
-        illustration: '🤔',
-        title: '5. So vs For',
-        content: '<b>So:</b> Shows a result. "It rained, <b>so</b> I stayed home."<br><b>For:</b> Shows a reason (formal). "I stayed home, <b>for</b> it rained."'
-    },
-    {
-        type: 'theory',
-        illustration: '🔄',
-        title: '6. Yet',
-        content: '<b>Yet:</b> Similar to "But", usually for surprising contrasts.<br>"He is old, <b>yet</b> he runs fast."'
-    },
-    {
-        type: 'quiz',
-        illustration: '🧠',
-        title: 'Quiz 2',
-        question: 'Choose the best word: "Study hard, ___ you will fail."',
-        options: ['And', 'Or', 'But', 'So'],
-        correctIndex: 1 // Or (choice/consequence)
-    },
-
-    // PART 3: Subordinating Conjunctions (Complex Sentences)
-    {
-        type: 'theory',
-        illustration: '⤵️',
-        title: '7. Subordinating Conjunctions',
-        content: 'These join a dependent clause to a main clause.<br>They show a relationship like time, reason, or condition.<br>Examples: <b>Because, If, When, Although</b>.'
-    },
-    {
-        type: 'theory',
-        illustration: '⏰',
-        title: '8. Time Connectors',
-        content: '<b>When:</b> At that time.<br><b>While:</b> At the same time.<br><b>After / Before:</b> Sequence.<br>"Call me <b>when</b> you arrive."'
-    },
-    {
-        type: 'theory',
-        illustration: '💡',
-        title: '9. Reason & Cause',
-        content: '<b>Because / Since / As:</b> explain <i>why</i>.<br>"I am happy <b>because</b> I passed."<br>"<b>Since</b> you are here, let\'s eat."'
-    },
-    {
-        type: 'theory',
-        illustration: '🚧',
-        title: '10. Conditionals (If/Unless)',
-        content: '<b>If:</b> "<b>If</b> it rains, I will cancel."<br><b>Unless:</b> Means "If not".<br>"I won\'t go <b>unless</b> you go." (I won\'t go if you don\'t go).'
-    },
-    {
-        type: 'quiz',
-        illustration: '🧩',
-        title: 'Quiz 3',
-        question: 'Which word shows a contrast?',
-        options: ['Because', 'Although', 'If', 'Since'],
-        correctIndex: 1 // Although
-    },
-
-    // PART 4: Correlative Conjunctions (Pairs)
-    {
-        type: 'theory',
-        illustration: '👯',
-        title: '11. Correlative Pairs',
-        content: 'These conjunctions always work in pairs.<br>You must use both parts in the sentence.'
-    },
-    {
-        type: 'theory',
-        illustration: '👉',
-        title: '12. Either... Or',
-        content: 'Used for a positive choice between two.<br>"You can have <b>either</b> tea <b>or</b> coffee." (Pick one).'
-    },
-    {
-        type: 'theory',
-        illustration: '🙅',
-        title: '13. Neither... Nor',
-        content: 'Used for a negative choice.<br>"I want <b>neither</b> tea <b>nor</b> coffee." (I want nothing).'
+        illustration: '0️⃣',
+        title: '14. The Trailing Zero Rule',
+        content: '<b>With Decimal:</b> Trailing zeros count (2.50 → 3 sig figs).<br><b>No Decimal:</b> Trailing zeros DO NOT count (2500 → 2 sig figs).<br>Leading zeros <i>never</i> count (0.005 → 1 sig fig).'
     },
     {
         type: 'theory',
         illustration: '➕',
-        title: '14. Not Only... But Also',
-        content: 'Adds emphasis.<br>"He is <b>not only</b> smart <b>but also</b> kind." (He is both).'
+        title: '15. Calculation Rules',
+        content: '<b>Multiplying/Dividing:</b> Answer must have the <i>least</i> sig figs of the inputs.<br>2.0 (2 sigs) × 3.00 (3 sigs) = 6.0 (keep 2 sigs).'
     },
     {
         type: 'quiz',
-        illustration: '⚖️',
-        title: 'Quiz 4',
-        question: 'Complete: "Neither John ___ his brother came."',
-        options: ['Or', 'Nor', 'And', 'But'],
-        correctIndex: 1 // Nor
+        illustration: '📝',
+        title: 'Quiz 5',
+        question: 'How many Sig Figs in 0.004050?',
+        options: ['6', '5', '4', '3'],
+        correctIndex: 2 // 4, 0, 5, 0 (Leading don't count, Trailing with decimal do)
     },
 
-    // PART 5: Advanced Usage & Punctuation
+    // PART 6: Dimensional Analysis (Advanced)
     {
         type: 'theory',
-        illustration: '✒️',
-        title: '15. The Comma Rule',
-        content: 'When using FANBOYS to join two complete sentences, put a comma <b>before</b> the conjunction.<br>"I like him<b>, but</b> he is annoying."'
+        illustration: '📦',
+        title: '16. Dimensions [M L T]',
+        content: 'We use brackets to show nature, not value.<br><b>[M]</b> Mass, <b>[L]</b> Length, <b>[T]</b> Time.<br>Velocity = Distance/Time = $L/T$ = $[LT^{-1}]$.'
     },
-    {
-        type: 'theory',
-        illustration: '🎩',
-        title: '16. Conjunctive Adverbs',
-        content: 'Formal transition words (However, Therefore, Meanwhile).<br>They usually need a semicolon (;).<br>"I tried hard<b>; however,</b> I failed."'
-    },
-    {
-        type: 'theory',
-        illustration: '🔚',
-        title: '17. "That" as a Connector',
-        content: 'Often used to connect ideas.<br>"He told me <b>that</b> he was tired."<br>(In spoken English, we often drop "that").'
-    },
-    {
-        type: 'quiz',
-        illustration: '🎓',
-        title: 'Final Mastery Quiz',
-        question: 'Choose the correct punctuation:',
-        options: [
-            'It was cold so I put on a coat.',
-            'It was cold, so I put on a coat.',
-            'It was cold so, I put on a coat.',
-            'It was cold, so, I put on a coat.'
-        ],
-        correctIndex: 1 // Comma before "so"
-    }
-],
-            'modals': [
-    // PART 1: The Golden Rules
-    {
-        type: 'theory',
-        illustration: '👑',
-        title: '1. What are Modals?',
-        content: 'Modals are special "helping verbs".<br>They express <b>mood</b>: Ability, Permission, Advice, or Obligation.'
-    },
-    {
-        type: 'theory',
-        illustration: '🚫',
-        title: '2. The "No-S" Rule',
-        content: 'Modals <b>never</b> change form.<br>Right: "He <b>can</b> swim."<br>Wrong: "He <b>cans</b> swim." (Never add -s, -ed, or -ing).'
-    },
-    {
-        type: 'theory',
-        illustration: '🤝',
-        title: '3. The "Bare Infinitive" Rule',
-        content: 'After a modal, always use the <b>base form</b> of the verb.<br>Right: "I must <b>go</b>."<br>Wrong: "I must <b>to go</b>."'
-    },
-    {
-        type: 'quiz',
-        illustration: '❓',
-        title: 'Quiz 1',
-        question: 'Which sentence is correct?',
-        options: [
-            'She cans drive.',
-            'She can drives.',
-            'She can drive.',
-            'She can to drive.'
-        ],
-        correctIndex: 2 // She can drive
-    },
-
-    // PART 2: Ability & Permission
     {
         type: 'theory',
         illustration: '💪',
-        title: '4. Can vs Could (Ability)',
-        content: '<b>Can:</b> Ability <i>now</i>. "I <b>can</b> speak English."<br><b>Could:</b> Ability in the <i>past</i>. "I <b>could</b> run fast when I was young."'
+        title: '17. Dimension of Force',
+        content: 'Force = Mass × Acceleration.<br>Mass = $[M]$.<br>Acceleration = $[LT^{-2}]$.<br>Force = $[MLT^{-2}]$. (Memorize this!).'
     },
     {
         type: 'theory',
-        illustration: '🚪',
-        title: '5. Can vs May (Permission)',
-        content: '<b>Can:</b> Informal. "<b>Can</b> I open the window?" (Friendly)<br><b>May:</b> Formal/Polite. "<b>May</b> I come in, Sir?" (Respectful)'
-    },
-    {
-        type: 'theory',
-        illustration: '🤷',
-        title: '6. Be Able To',
-        content: 'Use "Be able to" when "Can" is not possible.<br>"I <b>will be able to</b> help you tomorrow." (Future ability).'
-    },
-    {
-        type: 'quiz',
-        illustration: '🎩',
-        title: 'Quiz 2',
-        question: 'Choose the most polite option:',
-        options: ['Can I sit?', 'May I sit?', 'Must I sit?', 'Will I sit?'],
-        correctIndex: 1 // May (Formal)
-    },
-
-    // PART 3: Advice & Obligation
-    {
-        type: 'theory',
-        illustration: '💡',
-        title: '7. Should (Advice)',
-        content: 'Use <b>Should</b> to give a suggestion.<br>"You look tired. You <b>should</b> sleep."<br>(It is a good idea, but not forced).'
-    },
-    {
-        type: 'theory',
-        illustration: '👮',
-        title: '8. Must (Strong Necessity)',
-        content: 'Use <b>Must</b> for strict rules or internal feelings.<br>"I <b>must</b> study hard." (I feel it is important).<br>"You <b>must</b> stop at red lights."'
-    },
-    {
-        type: 'theory',
-        illustration: '📜',
-        title: '9. Have To (External Rule)',
-        content: 'Similar to Must, but for <b>external facts/laws</b>.<br>"I <b>have to</b> wear a uniform at work." (The boss says so).'
-    },
-    {
-        type: 'theory',
-        illustration: '🙅',
-        title: '10. Mustn\'t vs Don\'t Have To',
-        content: '<b>Mustn\'t:</b> Forbidden! "You <b>mustn\'t</b> smoke here."<br><b>Don\'t have to:</b> Not necessary. "You <b>don\'t have to</b> come." (It is your choice).'
-    },
-    {
-        type: 'quiz',
-        illustration: '🚦',
-        title: 'Quiz 3',
-        question: 'Which means "It is forbidden"?',
-        options: ['You don\'t have to go.', 'You shouldn\'t go.', 'You mustn\'t go.', 'You couldn\'t go.'],
-        correctIndex: 2 // Mustn't
-    },
-
-    // PART 4: Possibility & Probability
-    {
-        type: 'theory',
-        illustration: '🎲',
-        title: '11. Might / May / Could',
-        content: 'These express possibility (approx 50%).<br>"It <b>might</b> rain later."<br>"She <b>could</b> be at home."'
-    },
-    {
-        type: 'theory',
-        illustration: '💯',
-        title: '12. Must Be (Logical Conclusion)',
-        content: 'When you are 99% sure something is true.<br>"He has a Ferrari. He <b>must be</b> rich!"'
-    },
-    {
-        type: 'theory',
-        illustration: '🤔',
-        title: '13. Can\'t Be (Impossible)',
-        content: 'When you are sure something is <i>not</i> true.<br>"It <b>can\'t be</b> 5 PM already. We just started!"'
-    },
-    {
-        type: 'quiz',
-        illustration: '🕵️',
-        title: 'Quiz 4',
-        question: 'Someone knocks. You expect Pizza. You say:',
-        options: [
-            'That must be the pizza!',
-            'That can be the pizza!',
-            'That should be the pizza!',
-            'That might the pizza!'
-        ],
-        correctIndex: 0 // Must be (High certainty)
-    },
-
-    // PART 5: Past Modals (Advanced)
-    {
-        type: 'theory',
-        illustration: '🔙',
-        title: '14. Should Have (Regret)',
-        content: '<b>Should have + V3:</b> A past mistake.<br>"I <b>should have studied</b>." (But I didn\'t, and now I failed).'
-    },
-    {
-        type: 'theory',
-        illustration: '🕵️‍♀️',
-        title: '15. Must Have (Past Certainty)',
-        content: '<b>Must have + V3:</b> A logical guess about the past.<br>"The road is wet. It <b>must have rained</b> last night."'
-    },
-    {
-        type: 'theory',
-        illustration: '🤷‍♂️',
-        title: '16. Could Have (Missed Chance)',
-        content: '<b>Could have + V3:</b> Something was possible, but didn\'t happen.<br>"I <b>could have won</b>, but I slipped."'
+        illustration: '⚖️',
+        title: '18. Principle of Homogeneity',
+        content: 'You can only add/subtract things with the <b>same dimensions</b>.<br>In $v = u + at$:<br>$[v]$ must equal $[u]$ and $[at]$.<br>You cannot add Time to Mass!'
     },
     {
         type: 'quiz',
         illustration: '🎓',
         title: 'Final Mastery Quiz',
-        question: 'Meaning: "He should have called."',
-        options: [
-            'He called and it was good.',
-            'He didn\'t call, and that was a mistake.',
-            'He might call later.',
-            'He is calling now.'
-        ],
-        correctIndex: 1 // Past regret
+        question: 'Identify the dimensions of Volume:',
+        options: ['$[L^2]$', '$[L^3]$', '$[MLT]$', '$[M^3]$'],
+        correctIndex: 1 // Length × Breadth × Height = L × L × L = L^3
     }
 ], 
-            'ratio': [
+            
+      'ratio': [
     // PART 1: The Concept
     {
         type: 'theory',
