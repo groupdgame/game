@@ -311,8 +311,8 @@
     </div>
 
     <div id="bottom-nav">
-    <div class="nav-item active" id="nav-english" onclick="switchSubject('english')">
-        <span class="nav-icon">📖</span><span>English</span>
+    <div class="nav-item active" id="nav-science" onclick="switchSubject('science')">
+        <span class="nav-icon">📖</span><span>Science</span>
     </div>
     <div class="nav-item" id="nav-math" onclick="switchSubject('math')">
         <span class="nav-icon">➗</span><span>Maths</span>
@@ -335,16 +335,18 @@
     
     // --- 1. DEFINE TOPICS SEPARATELY ---
 
-const englishTopics = [
-    { id: 'noun', name: 'Noun', icon: '📦', locked: false },
-    { id: 'pronoun', name: 'Pronoun', icon: '👈', locked: true },
-    { id: 'adjective', name: 'Adjective', icon: '✨', locked: true },
-    { id: 'adverb', name: 'Adverb', icon: '🚀', locked: true },
-    { id: 'conjunction', name: 'Conjunct', icon: '🔗', locked: true },
-    { id: 'models', name: 'Models', icon: '🛠️', locked: true }, // 'modals' ID match honi chahiye
-    { id: 'clauses', name: 'Clauses', icon: '📝', locked: true },
-    { id: 'grammar1', name: 'Grammar 1', icon: '🏆', locked: true }
+
+// --- 1. TOPIC LISTS ---
+
+// English hata kar Science laye hain
+const scienceTopics = [
+    { id: 'units', name: 'Units', icon: '📏', locked: false }, // 1. Center
+    { id: 'vitamins', name: 'Vitamins', icon: '💊', locked: true }, // 2. Center
+    { id: 'periodic', name: 'Periodic T.', icon: '⚛️', locked: true }, // 3. Left
+    { id: 'newton', name: 'Newton', icon: '🍎', locked: true }, // 4. Center
+    { id: 'body', name: 'Human Body', icon: '🫀', locked: true } // 5. Right
 ];
+
 
 const mathTopics = [
     { id: 'ratio', name: 'Ratio', icon: '⚖️', locked: false },
@@ -1711,8 +1713,8 @@ const reasoningTopics = [
             
         };
 
-         let currentSubject = 'english'; // Default subject
-    let currentTopics = englishTopics; // Jo abhi screen par dikhana hai
+         let currentSubject = 'science'; // Default subject
+    let currentTopics = scienceTopics; // Jo abhi screen par dikhana hai
     
     // Baaki purane variables wahi rahenge
     let currentTopicIndex = 0;
@@ -1738,8 +1740,8 @@ const reasoningTopics = [
     document.getElementById(`nav-${subject}`).classList.add('active'); // Quotes fix kiye
 
     // Logic
-    if (subject === 'english') {
-        currentTopics = englishTopics;
+    if (subject === 'science') {
+        currentTopics = scienceTopics;
     } else if (subject === 'math') {
         currentTopics = mathTopics;
     } else if (subject === 'reasoning') {
