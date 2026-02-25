@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gamified Learning App</title>
+    <style>
+        :root {
+            --primary: #58cc02;
+            --primary-dark: #46a302;
+            --secondary: #ffc107;
+            --gray: #e5e5e5;
+            --gray-dark: #afafaf;
+            --text: #3c3c3c;
+            --bg: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- TOP BAR --- */
+        #top-bar {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            justify-content: space-between;
+            visibility: hidden;
+        }
+
+        .progress-track {
+            flex-grow: 1;
+            height: 12px;
+            background-color: var(--gray);
+            border-radius: 10px;
+            margin: 0 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .close-icon {
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray-dark);
+        }
+
+        /* --- MAIN AREA --- */
+        #main-container {
+            flex-grow: 1;
+            overflow-y: auto;
+            position: relative;
+            padding-bottom: 80px;
+        }
+
+        /* --- GAME MAP (Grid Layout) --- */
+        #path-view {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr; /* 3 Columns */
+            row-gap: 60px;
+            padding: 40px 20px;
+            background: url('https://www.transparenttextures.com/patterns/cubes.png');
+            justify-items: center;
+        }
+
+        .level-node {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 5px 0 #d4a005;
+            cursor: pointer;
+            transition: transform 0.1s;
+            z-index: 5;
+        }
+
+        .level-node:active { transform: translateY(4px); box-shadow: 0 2px 0 #d4a005; }
+        .level-node.locked { background-color: var(--gray); box-shadow: 0 5px 0 var(--gray-dark); cursor: not-allowed; }
+        .level-icon { font-size: 28px; color: white; }
+
+        /* LABEL STYLING (Background to hide line) */
+        .level-label {
+            position: absolute;
+            bottom: -30px;
+            font-size: 13px;
+            font-weight: bold;
+            color: var(--gray-dark);
+            white-space: nowrap;
+            text-align: center;
+            background-color: var(--bg);
+            padding: 2px 8px;
+            border-radius: 12px;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .level-node:not(.locked) .level-label { color: var(--text); }
+
+        /* CONNECTING LINES */
+        .path-line {
+            width: 6px;
+            height: 70px;
+            background-color: var(--gray);
+            position: absolute;
+            bottom: -65px;
+            z-index: 1;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Positioning Logic (Grid Placement) */
+        .level-node:nth-child(1) { grid-column: 2; } /* Noun */
+        .level-node:nth-child(2) { grid-column: 2; } /* Pronoun */
+        .level-node:nth-child(3) { grid-column: 1; } /* Adjective (Left) */
+        .level-node:nth-child(4) { grid-column: 2; } /* Adverb (Center) */
+        .level-node:nth-child(5) { grid-column: 3; } /* Conjunction (Right) */
+        .level-node:nth-child(6) { grid-column: 1; } /* Models */
+        .level-node:nth-child(7) { grid-column: 2; } /* Clauses */
+        .level-node:nth-child(8) { grid-column: 3; } /* Grammar 1 */
+
+        /* Hide line for last row items */
+        .level-node:nth-child(6) .path-line,
+        .level-node:nth-child(7) .path-line,
+        .level-node:nth-child(8) .path-line { display: none; }
+
+        /* --- LESSON CARD VIEW --- */
+        #lesson-view {
+            display: none;
+            height: 100%;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+            align-items: center;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 400px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .illustration {
+            font-size: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1));
+        }
+
+        .theory-text {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .quiz-option {
+            background: white;
+            border: 2px solid var(--gray);
+            border-radius: 12px;
+            padding: 15px;
+            width: 100%;
+            margin: 8px 0;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .quiz-option.selected {
+            border-color: var(--primary);
+            background-color: #e6fffa;
+            color: var(--primary-dark);
+        }
+
+        .quiz-option.error {
+            border-color: #ff4b4b;
+            background-color: #ffe5e5;
+            animation: shake 0.4s;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); } 25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); } 75% { transform: translateX(-5px); } 100% { transform: translateX(0); }
+        }
+
+        .lesson-footer {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 20px;
+        }
+
+        .btn {
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .btn-next {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 0 var(--primary-dark);
+            width: 70%;
+        }
+        .btn-next:disabled {
+            background-color: var(--gray);
+            box-shadow: none;
+            color: var(--gray-dark);
+            cursor: default;
+        }
+        .btn-back {
+            background: none;
+            color: var(--gray-dark);
+            width: 20%;
+            padding: 10px;
+        }
+
+        /* --- BOTTOM NAV --- */
+        #bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 70px;
+            background: white;
+            border-top: 1px solid var(--gray);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--gray-dark);
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .nav-item.active { color: var(--primary); }
+        .nav-icon { font-size: 24px; margin-bottom: 4px; }
+
+        /* --- CONGRATS --- */
+        #congrats-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: none;
+            justify-content: center; align-items: center; flex-direction: column;
+            z-index: 200; color: white; text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="sound-applause" src="https://www.soundjay.com/human/sounds/applause-01.mp3"></audio>
+    <audio id="sound-correct" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
+    <audio id="sound-wrong" src="https://www.soundjay.com/buttons/sounds/button-10.mp3"></audio>
+
+    <div id="top-bar">
+        <span class="close-icon" onclick="exitLesson()">✕</span>
+        <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+
+    <div id="main-container">
+        
+        <div id="path-view">
+            </div>
+
+        <div id="lesson-view">
+            <div id="card-container" class="card"></div>
+            <div class="lesson-footer">
+                <button class="btn btn-back" onclick="prevCard()">
+                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <button class="btn btn-next" id="next-btn" onclick="nextCard()">Check</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="bottom-nav">
+    <div class="nav-item active" id="nav-english" onclick="switchSubject('english')">
+        <span class="nav-icon">📖</span><span>English</span>
+    </div>
+    <div class="nav-item" id="nav-math" onclick="switchSubject('math')">
+        <span class="nav-icon">➗</span><span>Maths</span>
+    </div>
+    <div class="nav-item" id="nav-reasoning" onclick="switchSubject('reasoning')">
+        <span class="nav-icon">🧠</span><span>Reasoning</span>
+    </div>
+</div>
+
+
+    <div id="congrats-overlay">
+        <h1>AWESOME!</h1>
+        <div style="font-size: 80px;">🏆</div>
+        <p>Topic Completed!</p>
+        <button class="btn btn-next" style="margin-top: 20px;" onclick="closeCongrats()">CONTINUE</button>
+    </div>
+
+    <script>
+        // --- 1. DEFINE TOPICS SEPARATELY ---
+    
+    // --- 1. DEFINE TOPICS SEPARATELY ---
+
+const englishTopics = [
+    { id: 'noun', name: 'Noun', icon: '📦', locked: false },
+    { id: 'pronoun', name: 'Pronoun', icon: '👈', locked: true },
+    { id: 'adjective', name: 'Adjective', icon: '✨', locked: true },
+    { id: 'adverb', name: 'Adverb', icon: '🚀', locked: true },
+    { id: 'conjunction', name: 'Conjunct', icon: '🔗', locked: true },
+    { id: 'models', name: 'Models', icon: '🛠️', locked: true }, // 'modals' ID match honi chahiye
+    { id: 'clauses', name: 'Clauses', icon: '📝', locked: true },
+    { id: 'grammar1', name: 'Grammar 1', icon: '🏆', locked: true }
+];
+
+const mathTopics = [
+    { id: 'ratio', name: 'Ratio', icon: '⚖️', locked: false },
+    { id: 'average', name: 'Average', icon: '📊', locked: true },
+    { id: 'lcm', name: 'LCM/HCF', icon: '🔢', locked: true },
+    { id: 'profit', name: 'Profit', icon: '💰', locked: true },
+    { id: 'speed', name: 'Speed', icon: '⏱️', locked: true },
+    { id: 'percentage', name: 'Percent', icon: '%', locked: true }
+];
+
+const reasoningTopics = [
+    { id: 'numSeries', name: 'Num Series', icon: '🔢', locked: false },
+    { id: 'distance', name: 'Direction', icon: '🧭', locked: true },
+    { id: 'mathOps', name: 'Operations', icon: '➕', locked: true },
+    { id: 'ranking', name: 'Ranking', icon: '🥇', locked: true },
+    { id: 'artValues', name: 'Art. Values', icon: '🎭', locked: true },
+    { id: 'insertSign', name: 'Insert Sign', icon: '❓', locked: true }
+];
+
+        
+        // --- MASTER DATA OBJECT ---
+        // Yahan aap naye topics ka data add kar sakte hain
+        const allLessons = {
+            
+            // 1. NOUN DATA
+            'noun': [
+    // PART 1: Basics
+    {
+        type: 'theory',
+        illustration: '🐱',
+        title: '1. What is a Noun?',
+        content: 'A Noun is a naming word. It is used to name a <b>Person, Place, Animal, or Thing</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '👦 🏫',
+        title: '2. Examples',
+        content: '<b>Person:</b> Boy, Rahul, Doctor<br><b>Place:</b> School, Delhi, Park<br><b>Thing:</b> Table, Pen, Car'
+    },
+    {
+        type: 'theory',
+        illustration: '👀',
+        title: '3. Look Around',
+        content: 'Everything you can see or touch usually has a name. That name is a <b>Noun</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Which of these is a Noun (Thing)?',
+        options: ['Run', 'Blue', 'Chair', 'Quickly'],
+        correctIndex: 2 // Chair
+    },
+
+    // PART 2: Types (Common vs Proper)
+    {
+        type: 'theory',
+        illustration: '🏙️',
+        title: '4. Common Noun',
+        content: 'A general name for something.<br>Example: <i>City, Dog, Boy</i>. It does not start with a capital letter.'
+    },
+    {
+        type: 'theory',
+        illustration: '🗽',
+        title: '5. Proper Noun',
+        content: 'A special, specific name.<br>Example: <i>Mumbai, Tommy, Rahul</i>. It <b>always</b> starts with a Capital Letter.'
+    },
+    {
+        type: 'theory',
+        illustration: 'vs',
+        title: '6. Compare Them',
+        content: 'Boy -> <b>Rahul</b><br>City -> <b>Delhi</b><br>Car -> <b>Honda</b>'
+    },
+    {
+        type: 'quiz',
+        illustration: '🤔',
+        title: 'Quiz 2',
+        question: 'Select the PROPER Noun:',
+        options: ['school', 'London', 'table', 'book'],
+        correctIndex: 1 // London
+    },
+
+    // PART 3: Usage in Sentences
+    {
+        type: 'theory',
+        illustration: '📝',
+        title: '7. Subject of Sentence',
+        content: 'Nouns often come at the start of a sentence as the Subject.<br><i>"<b>Birds</b> fly in the sky."</i>'
+    },
+    {
+        type: 'theory',
+        illustration: '🎯',
+        title: '8. Object of Sentence',
+        content: 'Nouns can also receive action.<br><i>"He kicked the <b>ball</b>."</i> (Ball is the object).'
+    },
+    {
+        type: 'theory',
+        illustration: '🔍',
+        title: '9. Spotting Nouns',
+        content: 'Try to find the nouns here: <br><i>"The <b>cat</b> drinks <b>milk</b>."</i>'
+    },
+    {
+        type: 'quiz',
+        illustration: '🏆',
+        title: 'Final Quiz',
+        question: 'Identify the Noun in this sentence: "She eats an apple."',
+        options: ['She', 'Eats', 'An', 'Apple'],
+        correctIndex: 3 // Apple
+    }
+] ,
+            
+                  
+            'pronoun' : [
+    // PART 1: Basics
+    {
+        type: 'theory',
+        illustration: '🔄',
+        title: '1. What is a Pronoun?',
+        content: 'A Pronoun is a word used <b>in place of a Noun</b>.<br>It stops us from repeating the same name again and again.'
+    },
+    {
+        type: 'theory',
+        illustration: '🗣️',
+        title: '2. Why use it?',
+        content: 'Bad: "Rahul eats. Rahul sleeps."<br>Good: "Rahul eats. <b>He</b> sleeps."'
+    },
+    {
+        type: 'theory',
+        illustration: '📋',
+        title: '3. Common Pronouns',
+        content: '<b>I, You, He, She, It, We, They</b>.<br>These are used for people and things.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Which word can replace "Sara" (a girl)?',
+        options: ['He', 'It', 'She', 'They'],
+        correctIndex: 2 // She
+    },
+
+    // PART 2: Gender & Numbers
+    {
+        type: 'theory',
+        illustration: '👨',
+        title: '4. He vs She',
+        content: '<b>He</b> is used for boys/men.<br><b>She</b> is used for girls/women.<br><b>It</b> is used for animals or objects.'
+    },
+    {
+        type: 'theory',
+        illustration: '👥',
+        title: '5. Singular vs Plural',
+        content: 'One person: <b>I, He, She</b>.<br>Many people: <b>We, They</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '👉',
+        title: '6. Pointing Out',
+        content: '<b>This / That</b> are also pronouns used to point at things.<br>"<b>This</b> is my car."'
+    },
+    {
+        type: 'quiz',
+        illustration: '🤔',
+        title: 'Quiz 2',
+        question: 'Select the pronoun for "My friends and I":',
+        options: ['They', 'We', 'He', 'You'],
+        correctIndex: 1 // We
+    },
+
+    // PART 3: Sentence Practice
+    {
+        type: 'theory',
+        illustration: '🐕',
+        title: '7. For Animals',
+        content: 'We usually use <b>It</b> for animals.<br>"The dog barks. <b>It</b> is loud."'
+    },
+    {
+        type: 'theory',
+        illustration: '🔄',
+        title: '8. Replacement',
+        content: 'Example:<br><i>"The bag is heavy."</i><br>Can be changed to:<br><i>"<b>It</b> is heavy."</i>'
+    },
+    {
+        type: 'theory',
+        illustration: '🎯',
+        title: '9. Subject Pronouns',
+        content: 'These pronouns do the action:<br><b>She</b> runs.<br><b>They</b> play.<br><b>We</b> dance.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🏆',
+        title: 'Final Quiz',
+        question: 'Replace the bold words: "<b>The boys</b> are playing."',
+        options: ['He', 'We', 'They', 'It'],
+        correctIndex: 2 // They
+    }
+],
+    'adjective' :  [
+    // PART 1: The Basics
+    {
+        type: 'theory',
+        illustration: '🎨',
+        title: '1. What is an Adjective?',
+        content: 'An Adjective is a word that <b>describes a Noun or Pronoun</b>.<br>It tells us more about quality, size, shape, or color.'
+    },
+    {
+        type: 'theory',
+        illustration: '🍎',
+        title: '2. Examples',
+        content: 'Noun: "Apple"<br>With Adjective: "<b>Red</b> apple", "<b>Sweet</b> apple", "<b>Big</b> apple".'
+    },
+    {
+        type: 'theory',
+        illustration: '🕵️',
+        title: '3. Spotting Them',
+        content: 'They usually answer questions like:<br><i>"What kind?"</i> (<b>Blue</b> car)<br><i>"How many?"</i> (<b>Two</b> dogs).'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Find the adjective: "The tall man smiled."',
+        options: ['The', 'Tall', 'Man', 'Smiled'],
+        correctIndex: 1 // Tall
+    },
+
+    // PART 2: Types of Adjectives
+    {
+        type: 'theory',
+        illustration: '✨',
+        title: '4. Adjectives of Quality',
+        content: 'These describe the <b>kind or nature</b> of a person or thing.<br>Examples: <b>Honest</b> boy, <b>Heavy</b> box, <b>Beautiful</b> flower.'
+    },
+    {
+        type: 'theory',
+        illustration: '🔢',
+        title: '5. Adjectives of Quantity/Number',
+        content: 'These tell us <b>how much</b> or <b>how many</b>.<br>Examples: <b>Some</b> rice, <b>Enough</b> money, <b>Five</b> fingers.'
+    },
+    {
+        type: 'theory',
+        illustration: '👉',
+        title: '6. Demonstrative Adjectives',
+        content: 'Used to point out specific nouns.<br><b>This</b> book, <b>That</b> star, <b>These</b> shoes.<br><i>Note: They must be followed immediately by a noun.</i>'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2',
+        question: 'Identify the Adjective of Quantity:',
+        options: ['Good', 'This', 'Little', 'Red'],
+        correctIndex: 2 // Little (describes amount)
+    },
+
+    // PART 3: Degrees of Comparison (The 3 Levels)
+    {
+        type: 'theory',
+        illustration: '📈',
+        title: '7. Three Degrees',
+        content: '1. <b>Positive:</b> Big (One thing)<br>2. <b>Comparative:</b> Bigger (Comparing two)<br>3. <b>Superlative:</b> Biggest (Comparing three or more).'
+    },
+    {
+        type: 'theory',
+        illustration: '➕',
+        title: '8. Rule: -er and -est',
+        content: 'For short words, we add <b>-er</b> and <b>-est</b>.<br>Fast → Fast<b>er</b> → Fast<b>est</b>.<br>Tall → Tall<b>er</b> → Tall<b>est</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🤔',
+        title: '9. Rule: More and Most',
+        content: 'For longer words (2+ syllables), we use <b>more</b> and <b>most</b>.<br>Beautiful → <b>More</b> beautiful → <b>Most</b> beautiful.'
+    },
+    {
+        type: 'theory',
+        illustration: '🤪',
+        title: '10. Irregular Adjectives',
+        content: 'Some words change completely!<br>Good → <b>Better</b> → <b>Best</b><br>Bad → <b>Worse</b> → <b>Worst</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🏆',
+        title: 'Quiz 3',
+        question: 'Complete: "This puzzle is ___ than the last one."',
+        options: ['Hard', 'Harder', 'Hardest', 'More hard'],
+        correctIndex: 1 // Harder
+    },
+
+    // PART 4: Placement & Advanced Usage
+    {
+        type: 'theory',
+        illustration: '📍',
+        title: '11. Position of Adjectives',
+        content: '<b>Attributive:</b> Before the noun ("A <b>happy</b> baby").<br><b>Predicative:</b> After the verb ("The baby is <b>happy</b>").'
+    },
+    {
+        type: 'theory',
+        illustration: '😲',
+        title: '12. -ED vs -ING Adjectives',
+        content: '<b>-ED</b> describes feelings: "I am <b>bored</b>."<br><b>-ING</b> describes the cause: "The movie is <b>boring</b>."'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎭',
+        title: 'Quiz 4',
+        question: 'Choose the correct form: "The news was very _____."',
+        options: ['Shocked', 'Shocking', 'Shock', 'Shocks'],
+        correctIndex: 1 // Shocking (describing the news, not a feeling)
+    },
+
+    // PART 5: Order of Adjectives
+    {
+        type: 'theory',
+        illustration: '🚂',
+        title: '13. The "Order" Rule',
+        content: 'When using multiple adjectives, follow this order:<br><b>Opinion → Size → Age → Shape → Color → Origin → Material</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '📝',
+        title: '14. Order Example 1',
+        content: 'Right: "A <b>lovely old red</b> house."<br>(Opinion → Age → Color)<br>Wrong: "A red old lovely house."'
+    },
+    {
+        type: 'theory',
+        illustration: '👜',
+        title: '15. Order Example 2',
+        content: 'Right: "A <b>small Italian leather</b> bag."<br>(Size → Origin → Material).'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 5',
+        question: 'Which order is correct?',
+        options: [
+            'A fat black scary cat',
+            'A scary fat black cat',
+            'A black fat scary cat',
+            'A fat scary black cat'
+        ],
+        correctIndex: 1 // Opinion (scary) -> Size (fat) -> Color (black)
+    },
+
+    // PART 6: Special Cases
+    {
+        type: 'theory',
+        illustration: '👬',
+        title: '16. Nouns as Adjectives',
+        content: 'Sometimes a noun acts like an adjective to describe another noun.<br>Examples: <b>Race</b> car, <b>Shoe</b> lace, <b>History</b> teacher.'
+    },
+    {
+        type: 'theory',
+        illustration: '⚖️',
+        title: '17. "As... As" Comparisons',
+        content: 'Used to show two things are equal.<br>"He is <b>as tall as</b> his brother."<br>"This room is <b>as cold as</b> ice."'
+    },
+    {
+        type: 'theory',
+        illustration: '🔍',
+        title: '18. Few vs A Few',
+        content: '<b>Few:</b> Not many (Negative tone). "I have few friends."<br><b>A Few:</b> Some (Positive tone). "I have a few friends."'
+    },
+    {
+        type: 'theory',
+        illustration: '🔚',
+        title: '19. Little vs A Little',
+        content: 'Same rule, but for uncountable things.<br><b>Little:</b> Hardly any water.<br><b>A Little:</b> Some water.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'Complete: "She has ___ patience left for his excuses."',
+        options: ['Few', 'Many', 'Little', 'A few'],
+        correctIndex: 2 // Little (Uncountable noun 'patience', negative context)
+        }
+    ],
+
+            // 4. ADVERB DATA (Placeholder)
+            'adverb': [
+    // PART 1: The Basics
+    {
+        type: 'theory',
+        illustration: '⚡',
+        title: '1. What is an Adverb?',
+        content: 'An adverb adds meaning to a <b>Verb</b>, an <b>Adjective</b>, or another <b>Adverb</b>.<br>It tells us <i>how, when, where,</i> or <i>how much</i>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🏃',
+        title: '2. Modifying Verbs',
+        content: 'Most common use: describing an action.<br>"He runs." (Basic)<br>"He runs <b>quickly</b>." (Adverb added).'
+    },
+    {
+        type: 'theory',
+        illustration: '🌡️',
+        title: '3. Modifying Adjectives',
+        content: 'Adverbs can make adjectives stronger or weaker.<br>"The tea is <b>very</b> hot."<br>"The movie was <b>quite</b> boring."'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Identify the adverb: "She sings beautifully."',
+        options: ['She', 'Sings', 'Beautifully', 'Music'],
+        correctIndex: 2 // Beautifully
+    },
+
+    // PART 2: The 5 Main Types
+    {
+        type: 'theory',
+        illustration: '🎨',
+        title: '4. Adverbs of Manner',
+        content: 'Answers: <b>How?</b><br>Usually ends in <b>-ly</b>.<br>Examples: Slowly, Happily, Loudly, Carefully.'
+    },
+    {
+        type: 'theory',
+        illustration: '🗺️',
+        title: '5. Adverbs of Place',
+        content: 'Answers: <b>Where?</b><br>Examples: Here, There, Everywhere, Inside, Upstairs.<br>"Please come <b>here</b>."'
+    },
+    {
+        type: 'theory',
+        illustration: '⏰',
+        title: '6. Adverbs of Time',
+        content: 'Answers: <b>When?</b><br>Examples: Now, Yesterday, Soon, Later, Tonight.<br>"I will call you <b>later</b>."'
+    },
+    {
+        type: 'quiz',
+        illustration: '🤔',
+        title: 'Quiz 2',
+        question: 'What type is "Upstairs"?',
+        options: ['Time', 'Place', 'Manner', 'Frequency'],
+        correctIndex: 1 // Place
+    },
+
+    // PART 3: Frequency & Placement (Advanced)
+    {
+        type: 'theory',
+        illustration: '📅',
+        title: '7. Adverbs of Frequency',
+        content: 'Answers: <b>How often?</b><br>Scale: Always (100%) → Often → Sometimes → Rarely → Never (0%).'
+    },
+    {
+        type: 'theory',
+        illustration: '📍',
+        title: '8. Placement Rule 1',
+        content: 'Frequency adverbs go <b>before</b> the main verb.<br>Right: "I <b>always</b> drink coffee."<br>Wrong: "I drink always coffee."'
+    },
+    {
+        type: 'theory',
+        illustration: '🛑',
+        title: '9. Placement Rule 2',
+        content: 'BUT, they go <b>after</b> the verb "To Be" (is, am, are).<br>Right: "She <b>is always</b> late."<br>Wrong: "She always is late."'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 3',
+        question: 'Choose the correct sentence:',
+        options: [
+            'He often is happy.',
+            'He is often happy.',
+            'He is happy often.',
+            'Often he is happy.'
+        ],
+        correctIndex: 1 // After "is"
+    },
+
+    // PART 4: Formation & Irregulars
+    {
+        type: 'theory',
+        illustration: '🔨',
+        title: '10. The -ly Rule',
+        content: 'Usually: Adjective + <b>ly</b> = Adverb.<br>Quick → Quickly.<br>Loud → Loudly.<br>Happy → Happily (y changes to i).'
+    },
+    {
+        type: 'theory',
+        illustration: '🤪',
+        title: '11. Irregular Adverbs',
+        content: 'Some don\'t change!<br>Fast (Adj) → <b>Fast</b> (Adv).<br>Hard (Adj) → <b>Hard</b> (Adv).<br>Good (Adj) → <b>Well</b> (Adv).'
+    },
+    {
+        type: 'theory',
+        illustration: '⚠️',
+        title: '12. Good vs Well',
+        content: '<b>Good</b> describes a noun. "He is a good driver."<br><b>Well</b> describes a verb. "He drives well."'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎭',
+        title: 'Quiz 4',
+        question: 'Complete: "He speaks English very ____."',
+        options: ['Good', 'Best', 'Well', 'Nice'],
+        correctIndex: 2 // Well (modifies 'speaks')
+    },
+
+    // PART 5: Confusing Pairs (High Level)
+    {
+        type: 'theory',
+        illustration: '🧱',
+        title: '13. Hard vs Hardly',
+        content: '<b>Hard:</b> With effort. "He works hard."<br><b>Hardly:</b> Almost not. "He hardly works." (He is lazy!).'
+    },
+    {
+        type: 'theory',
+        illustration: '⏳',
+        title: '14. Late vs Lately',
+        content: '<b>Late:</b> Not on time. "He arrived late."<br><b>Lately:</b> Recently. "Have you seen him lately?"'
+    },
+    {
+        type: 'theory',
+        illustration: '⚖️',
+        title: '15. Too vs Very',
+        content: '<b>Very:</b> A lot (Fact). "It is very hot."<br><b>Too:</b> More than needed (Negative). "It is too hot to drink."'
+    },
+    {
+        type: 'theory',
+        illustration: '📏',
+        title: '16. "Enough" Position',
+        content: '<b>Enough</b> goes AFTER the adjective.<br>Right: "He is <b>old enough</b>."<br>Wrong: "He is enough old."'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'Complete: "I have studied ____ for the exam."',
+        options: ['Hardly', 'Hard', 'Lately', 'Too'],
+        correctIndex: 1 // Hard (with effort)
+    } 
+            ],
+            'conjunction': [
+    // PART 1: The Basics (The Glue)
+    {
+        type: 'theory',
+        illustration: '🔗',
+        title: '1. What is a Conjunction?',
+        content: 'A Conjunction is a "glue" word.<br>It connects words, phrases, or clauses together.<br>Without them, sentences would be short and choppy.'
+    },
+    {
+        type: 'theory',
+        illustration: '☕',
+        title: '2. Simple Example',
+        content: 'Without: "I like tea. I like coffee."<br>With: "I like tea <b>and</b> coffee."<br>The word <b>and</b> is the conjunction.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Find the conjunction: "He is poor but happy."',
+        options: ['He', 'Is', 'But', 'Happy'],
+        correctIndex: 2 // But
+    },
+
+    // PART 2: Coordinating Conjunctions (FANBOYS)
+    {
+        type: 'theory',
+        illustration: '🔑',
+        title: '3. The FANBOYS Rule',
+        content: 'There are only 7 main coordinating conjunctions.<br>Remember the name <b>FANBOYS</b>:<br><b>F</b>or, <b>A</b>nd, <b>N</b>or, <b>B</b>ut, <b>O</b>r, <b>Y</b>et, <b>S</b>o.'
+    },
+    {
+        type: 'theory',
+        illustration: '🆚',
+        title: '4. And, But, Or',
+        content: '<b>And:</b> Adds information. "Red <b>and</b> Blue."<br><b>But:</b> Shows contrast. "Small <b>but</b> strong."<br><b>Or:</b> Shows a choice. "Tea <b>or</b> Coffee?"'
+    },
+    {
+        type: 'theory',
+        illustration: '🤔',
+        title: '5. So vs For',
+        content: '<b>So:</b> Shows a result. "It rained, <b>so</b> I stayed home."<br><b>For:</b> Shows a reason (formal). "I stayed home, <b>for</b> it rained."'
+    },
+    {
+        type: 'theory',
+        illustration: '🔄',
+        title: '6. Yet',
+        content: '<b>Yet:</b> Similar to "But", usually for surprising contrasts.<br>"He is old, <b>yet</b> he runs fast."'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2',
+        question: 'Choose the best word: "Study hard, ___ you will fail."',
+        options: ['And', 'Or', 'But', 'So'],
+        correctIndex: 1 // Or (choice/consequence)
+    },
+
+    // PART 3: Subordinating Conjunctions (Complex Sentences)
+    {
+        type: 'theory',
+        illustration: '⤵️',
+        title: '7. Subordinating Conjunctions',
+        content: 'These join a dependent clause to a main clause.<br>They show a relationship like time, reason, or condition.<br>Examples: <b>Because, If, When, Although</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '⏰',
+        title: '8. Time Connectors',
+        content: '<b>When:</b> At that time.<br><b>While:</b> At the same time.<br><b>After / Before:</b> Sequence.<br>"Call me <b>when</b> you arrive."'
+    },
+    {
+        type: 'theory',
+        illustration: '💡',
+        title: '9. Reason & Cause',
+        content: '<b>Because / Since / As:</b> explain <i>why</i>.<br>"I am happy <b>because</b> I passed."<br>"<b>Since</b> you are here, let\'s eat."'
+    },
+    {
+        type: 'theory',
+        illustration: '🚧',
+        title: '10. Conditionals (If/Unless)',
+        content: '<b>If:</b> "<b>If</b> it rains, I will cancel."<br><b>Unless:</b> Means "If not".<br>"I won\'t go <b>unless</b> you go." (I won\'t go if you don\'t go).'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 3',
+        question: 'Which word shows a contrast?',
+        options: ['Because', 'Although', 'If', 'Since'],
+        correctIndex: 1 // Although
+    },
+
+    // PART 4: Correlative Conjunctions (Pairs)
+    {
+        type: 'theory',
+        illustration: '👯',
+        title: '11. Correlative Pairs',
+        content: 'These conjunctions always work in pairs.<br>You must use both parts in the sentence.'
+    },
+    {
+        type: 'theory',
+        illustration: '👉',
+        title: '12. Either... Or',
+        content: 'Used for a positive choice between two.<br>"You can have <b>either</b> tea <b>or</b> coffee." (Pick one).'
+    },
+    {
+        type: 'theory',
+        illustration: '🙅',
+        title: '13. Neither... Nor',
+        content: 'Used for a negative choice.<br>"I want <b>neither</b> tea <b>nor</b> coffee." (I want nothing).'
+    },
+    {
+        type: 'theory',
+        illustration: '➕',
+        title: '14. Not Only... But Also',
+        content: 'Adds emphasis.<br>"He is <b>not only</b> smart <b>but also</b> kind." (He is both).'
+    },
+    {
+        type: 'quiz',
+        illustration: '⚖️',
+        title: 'Quiz 4',
+        question: 'Complete: "Neither John ___ his brother came."',
+        options: ['Or', 'Nor', 'And', 'But'],
+        correctIndex: 1 // Nor
+    },
+
+    // PART 5: Advanced Usage & Punctuation
+    {
+        type: 'theory',
+        illustration: '✒️',
+        title: '15. The Comma Rule',
+        content: 'When using FANBOYS to join two complete sentences, put a comma <b>before</b> the conjunction.<br>"I like him<b>, but</b> he is annoying."'
+    },
+    {
+        type: 'theory',
+        illustration: '🎩',
+        title: '16. Conjunctive Adverbs',
+        content: 'Formal transition words (However, Therefore, Meanwhile).<br>They usually need a semicolon (;).<br>"I tried hard<b>; however,</b> I failed."'
+    },
+    {
+        type: 'theory',
+        illustration: '🔚',
+        title: '17. "That" as a Connector',
+        content: 'Often used to connect ideas.<br>"He told me <b>that</b> he was tired."<br>(In spoken English, we often drop "that").'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'Choose the correct punctuation:',
+        options: [
+            'It was cold so I put on a coat.',
+            'It was cold, so I put on a coat.',
+            'It was cold so, I put on a coat.',
+            'It was cold, so, I put on a coat.'
+        ],
+        correctIndex: 1 // Comma before "so"
+    }
+],
+            'modals': [
+    // PART 1: The Golden Rules
+    {
+        type: 'theory',
+        illustration: '👑',
+        title: '1. What are Modals?',
+        content: 'Modals are special "helping verbs".<br>They express <b>mood</b>: Ability, Permission, Advice, or Obligation.'
+    },
+    {
+        type: 'theory',
+        illustration: '🚫',
+        title: '2. The "No-S" Rule',
+        content: 'Modals <b>never</b> change form.<br>Right: "He <b>can</b> swim."<br>Wrong: "He <b>cans</b> swim." (Never add -s, -ed, or -ing).'
+    },
+    {
+        type: 'theory',
+        illustration: '🤝',
+        title: '3. The "Bare Infinitive" Rule',
+        content: 'After a modal, always use the <b>base form</b> of the verb.<br>Right: "I must <b>go</b>."<br>Wrong: "I must <b>to go</b>."'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Which sentence is correct?',
+        options: [
+            'She cans drive.',
+            'She can drives.',
+            'She can drive.',
+            'She can to drive.'
+        ],
+        correctIndex: 2 // She can drive
+    },
+
+    // PART 2: Ability & Permission
+    {
+        type: 'theory',
+        illustration: '💪',
+        title: '4. Can vs Could (Ability)',
+        content: '<b>Can:</b> Ability <i>now</i>. "I <b>can</b> speak English."<br><b>Could:</b> Ability in the <i>past</i>. "I <b>could</b> run fast when I was young."'
+    },
+    {
+        type: 'theory',
+        illustration: '🚪',
+        title: '5. Can vs May (Permission)',
+        content: '<b>Can:</b> Informal. "<b>Can</b> I open the window?" (Friendly)<br><b>May:</b> Formal/Polite. "<b>May</b> I come in, Sir?" (Respectful)'
+    },
+    {
+        type: 'theory',
+        illustration: '🤷',
+        title: '6. Be Able To',
+        content: 'Use "Be able to" when "Can" is not possible.<br>"I <b>will be able to</b> help you tomorrow." (Future ability).'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎩',
+        title: 'Quiz 2',
+        question: 'Choose the most polite option:',
+        options: ['Can I sit?', 'May I sit?', 'Must I sit?', 'Will I sit?'],
+        correctIndex: 1 // May (Formal)
+    },
+
+    // PART 3: Advice & Obligation
+    {
+        type: 'theory',
+        illustration: '💡',
+        title: '7. Should (Advice)',
+        content: 'Use <b>Should</b> to give a suggestion.<br>"You look tired. You <b>should</b> sleep."<br>(It is a good idea, but not forced).'
+    },
+    {
+        type: 'theory',
+        illustration: '👮',
+        title: '8. Must (Strong Necessity)',
+        content: 'Use <b>Must</b> for strict rules or internal feelings.<br>"I <b>must</b> study hard." (I feel it is important).<br>"You <b>must</b> stop at red lights."'
+    },
+    {
+        type: 'theory',
+        illustration: '📜',
+        title: '9. Have To (External Rule)',
+        content: 'Similar to Must, but for <b>external facts/laws</b>.<br>"I <b>have to</b> wear a uniform at work." (The boss says so).'
+    },
+    {
+        type: 'theory',
+        illustration: '🙅',
+        title: '10. Mustn\'t vs Don\'t Have To',
+        content: '<b>Mustn\'t:</b> Forbidden! "You <b>mustn\'t</b> smoke here."<br><b>Don\'t have to:</b> Not necessary. "You <b>don\'t have to</b> come." (It is your choice).'
+    },
+    {
+        type: 'quiz',
+        illustration: '🚦',
+        title: 'Quiz 3',
+        question: 'Which means "It is forbidden"?',
+        options: ['You don\'t have to go.', 'You shouldn\'t go.', 'You mustn\'t go.', 'You couldn\'t go.'],
+        correctIndex: 2 // Mustn't
+    },
+
+    // PART 4: Possibility & Probability
+    {
+        type: 'theory',
+        illustration: '🎲',
+        title: '11. Might / May / Could',
+        content: 'These express possibility (approx 50%).<br>"It <b>might</b> rain later."<br>"She <b>could</b> be at home."'
+    },
+    {
+        type: 'theory',
+        illustration: '💯',
+        title: '12. Must Be (Logical Conclusion)',
+        content: 'When you are 99% sure something is true.<br>"He has a Ferrari. He <b>must be</b> rich!"'
+    },
+    {
+        type: 'theory',
+        illustration: '🤔',
+        title: '13. Can\'t Be (Impossible)',
+        content: 'When you are sure something is <i>not</i> true.<br>"It <b>can\'t be</b> 5 PM already. We just started!"'
+    },
+    {
+        type: 'quiz',
+        illustration: '🕵️',
+        title: 'Quiz 4',
+        question: 'Someone knocks. You expect Pizza. You say:',
+        options: [
+            'That must be the pizza!',
+            'That can be the pizza!',
+            'That should be the pizza!',
+            'That might the pizza!'
+        ],
+        correctIndex: 0 // Must be (High certainty)
+    },
+
+    // PART 5: Past Modals (Advanced)
+    {
+        type: 'theory',
+        illustration: '🔙',
+        title: '14. Should Have (Regret)',
+        content: '<b>Should have + V3:</b> A past mistake.<br>"I <b>should have studied</b>." (But I didn\'t, and now I failed).'
+    },
+    {
+        type: 'theory',
+        illustration: '🕵️‍♀️',
+        title: '15. Must Have (Past Certainty)',
+        content: '<b>Must have + V3:</b> A logical guess about the past.<br>"The road is wet. It <b>must have rained</b> last night."'
+    },
+    {
+        type: 'theory',
+        illustration: '🤷‍♂️',
+        title: '16. Could Have (Missed Chance)',
+        content: '<b>Could have + V3:</b> Something was possible, but didn\'t happen.<br>"I <b>could have won</b>, but I slipped."'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'Meaning: "He should have called."',
+        options: [
+            'He called and it was good.',
+            'He didn\'t call, and that was a mistake.',
+            'He might call later.',
+            'He is calling now.'
+        ],
+        correctIndex: 1 // Past regret
+    }
+], 
+            'ratio': [
+    // PART 1: The Concept
+    {
+        type: 'theory',
+        illustration: '⚖️',
+        title: '1. What is a Ratio?',
+        content: 'A Ratio compares <b>two quantities</b>.<br>It tells us how much of one thing there is compared to another.'
+    },
+    {
+        type: 'theory',
+        illustration: '🍎',
+        title: '2. Visual Example',
+        content: 'Imagine a bowl with <b>2 apples</b> and <b>3 oranges</b>.<br>The ratio of Apples to Oranges is <b>2 : 3</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '📝',
+        title: '3. Three Ways to Write',
+        content: 'You can write ratios in three ways:<br>1. With a colon: <b>1 : 2</b><br>2. As a fraction: <b>1 / 2</b><br>3. With words: <b>1 to 2</b>'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'If there are 4 cats and 1 dog, what is the ratio of Dogs to Cats?',
+        options: ['4 : 1', '1 : 4', '1 to 5', '4 / 1'],
+        correctIndex: 1 // 1 : 4 (Order matters!)
+    },
+
+    // PART 2: Simplifying Ratios
+    {
+        type: 'theory',
+        illustration: '✂️',
+        title: '4. Simplifying Ratios',
+        content: 'Just like fractions, ratios can be simplified.<br>Divide both sides by the <b>same number</b> (Highest Common Factor).'
+    },
+    {
+        type: 'theory',
+        illustration: '🔢',
+        title: '5. Simplify Example',
+        content: 'Ratio: <b>10 : 15</b><br>Both can be divided by 5.<br>10 ÷ 5 = <b>2</b><br>15 ÷ 5 = <b>3</b><br>Simplified Ratio: <b>2 : 3</b>'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2',
+        question: 'Simplify the ratio 8 : 12',
+        options: ['4 : 6', '2 : 3', '8 : 12', '1 : 2'],
+        correctIndex: 1 // Divide by 4 -> 2:3
+    },
+
+    // PART 3: The Unit Trap
+    {
+        type: 'theory',
+        illustration: '⚠️',
+        title: '6. The Golden Rule of Units',
+        content: 'To compare two things, they must have the <b>Same Units</b>.<br>You cannot compare cm to meters directly!'
+    },
+    {
+        type: 'theory',
+        illustration: '📏',
+        title: '7. Unit Conversion Example',
+        content: 'Ratio of <b>20 cm</b> to <b>1 meter</b>.<br>1. Change 1m to 100cm.<br>2. Ratio is 20 : 100.<br>3. Simplify (÷20) → <b>1 : 5</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🤔',
+        title: 'Quiz 3',
+        question: 'Find ratio of 1 minute to 30 seconds:',
+        options: ['1 : 30', '2 : 1', '1 : 2', '30 : 1'],
+        correctIndex: 1 // 60s : 30s -> 2 : 1
+    },
+
+    // PART 4: Sharing in a Ratio (The "Parts" Method)
+    {
+        type: 'theory',
+        illustration: '🍰',
+        title: '8. Sharing Amounts',
+        content: 'To share a total in a ratio (e.g., 2:3):<br>1. Add the parts (2 + 3 = <b>5 parts</b>).<br>2. Divide Total by parts (Find value of 1 part).<br>3. Multiply.'
+    },
+    {
+        type: 'theory',
+        illustration: '💰',
+        title: '9. Sharing Example',
+        content: 'Share <b>$50</b> in ratio <b>2:3</b>.<br>Total parts: 5.<br>Value of 1 part: $50 ÷ 5 = <b>$10</b>.<br>Person A (2 parts): 2 × $10 = <b>$20</b>.<br>Person B (3 parts): 3 × $10 = <b>$30</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🍬',
+        title: 'Quiz 4',
+        question: 'Share 20 candies in ratio 1:4',
+        options: ['5 and 15', '4 and 16', '2 and 8', '10 and 10'],
+        correctIndex: 1 // 1+4=5 parts. 20/5=4. (1x4) and (4x4) -> 4 and 16
+    },
+
+    // PART 5: Advanced Concepts
+    {
+        type: 'theory',
+        illustration: '🗺️',
+        title: '10. Scale Drawings',
+        content: 'Maps use ratios! Scale <b>1 : 1000</b>.<br>This means 1 cm on the map equals 1000 cm (10m) in real life.'
+    },
+    {
+        type: 'theory',
+        illustration: '🔗',
+        title: '11. Proportions',
+        content: 'A Proportion says two ratios are equal.<br><b>1 : 2 = 5 : 10</b><br>You can cross-multiply to solve for missing numbers.'
+    },
+    {
+        type: 'theory',
+        illustration: '📐',
+        title: '12. Three-Part Ratios',
+        content: 'You can compare three things!<br>Recipe: 1 part sugar, 2 parts flour, 3 parts milk.<br>Ratio: <b>1 : 2 : 3</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🏆',
+        title: 'Final Mastery Quiz',
+        question: 'If A:B is 2:3 and B:C is 3:5, what is A:B:C?',
+        options: ['2 : 3 : 5', '2 : 6 : 5', '5 : 3 : 2', '2 : 5 : 3'],
+        correctIndex: 0 // Since B is 3 in both, we can merge directly -> 2:3:5
+    }
+], 
+            'average': [
+    // PART 1: The Foundation
+    {
+        type: 'theory',
+        illustration: '📊',
+        title: '1. What is an Average?',
+        content: 'An Average (or Mean) is a single number that represents a <b>group of numbers</b>.<br>It is the "central" value.'
+    },
+    {
+        type: 'theory',
+        illustration: '🧮',
+        title: '2. The Golden Formula',
+        content: '<b>Average = Sum of Numbers ÷ Count of Numbers</b>.<br>Memorize this! It is the key to solving everything.'
+    },
+    {
+        type: 'theory',
+        illustration: '🍎',
+        title: '3. Simple Example',
+        content: 'Data: 2, 4, 6.<br>1. Sum: 2 + 4 + 6 = <b>12</b>.<br>2. Count: There are <b>3</b> numbers.<br>3. Average: 12 ÷ 3 = <b>4</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Find the average of 10, 20, and 30.',
+        options: ['15', '20', '25', '60'],
+        correctIndex: 1 // Sum=60, Count=3, Avg=20
+    },
+
+    // PART 2: The "Zero" Trap
+    {
+        type: 'theory',
+        illustration: '⚠️',
+        title: '4. Does Zero Count?',
+        content: '<b>YES!</b> If a number is 0, you must include it in the sum <b>and</b> the count.<br>Example: 5, 5, 0.'
+    },
+    {
+        type: 'theory',
+        illustration: '📉',
+        title: '5. Zero Example',
+        content: 'Data: 10, 10, 10, 0.<br>Sum: 30.<br>Count: <b>4</b> (Not 3!).<br>Average: 30 ÷ 4 = <b>7.5</b>.<br>(See how the 0 pulls the average down?)'
+    },
+    {
+        type: 'quiz',
+        illustration: '🤔',
+        title: 'Quiz 2',
+        question: 'Average of 4, 4, 4, and 0 is:',
+        options: ['4', '3', '12', '16'],
+        correctIndex: 1 // Sum=12, Count=4, Avg=3
+    },
+
+    // PART 3: Reverse Engineering (Advanced)
+    {
+        type: 'theory',
+        illustration: '🔄',
+        title: '6. Finding the Total',
+        content: 'If you know the Average and the Count, you can find the Total.<br><b>Total = Average × Count</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🕵️',
+        title: '7. Missing Number Problem',
+        content: 'Example: "Average of 3 numbers is 10. Two are 8 and 9. Find the third."<br>1. Total needed: 10 × 3 = <b>30</b>.<br>2. Current sum: 8 + 9 = <b>17</b>.<br>3. Missing: 30 - 17 = <b>13</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '👥',
+        title: '8. Adding a Person',
+        content: 'Logic: "Average age of 4 people is 20. A new person joins, average becomes 21."<br>Old Total: 4×20=80.<br>New Total: 5×21=105.<br>New Person Age: 105-80=<b>25</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 3',
+        question: 'Average of 3 numbers is 5. Total sum is:',
+        options: ['15', '5', '3', '8'],
+        correctIndex: 0 // 3 * 5 = 15
+    },
+
+    // PART 4: Special Cases & Tricks
+    {
+        type: 'theory',
+        illustration: '🚗',
+        title: '9. Average Speed Trap',
+        content: 'Warning! Average Speed is <b>NOT</b> (Speed 1 + Speed 2) ÷ 2.<br>Formula: <b>Total Distance ÷ Total Time</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🔢',
+        title: '10. Consecutive Numbers Trick',
+        content: 'For a list like 2, 4, 6, 8, 10 (evenly spaced).<br>The average is just the <b>middle number</b> (6) OR (First + Last) ÷ 2.'
+    },
+    {
+        type: 'theory',
+        illustration: '⚖️',
+        title: '11. Weighted Average',
+        content: 'When some numbers are more important.<br>Example: Exam (60%) vs Homework (40%).<br>You multiply each score by its weight, then add.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🏆',
+        title: 'Final Mastery Quiz',
+        question: 'Find the average of 2, 4, 6, 8, ..., 100.',
+        options: ['50', '51', '52', '49'],
+        correctIndex: 1 // (2 + 100) / 2 = 51
+    }
+] ,
+            'lcm': [
+    // PART 1: The Building Blocks
+    {
+        type: 'theory',
+        illustration: '🧱',
+        title: '1. What is a Factor?',
+        content: 'A Factor is a number that <b>divides</b> another number perfectly.<br>Factors are usually <b>smaller</b> than the number.<br>Factors of 10: 1, 2, 5, 10.'
+    },
+    {
+        type: 'theory',
+        illustration: '🚀',
+        title: '2. What is a Multiple?',
+        content: 'A Multiple is the result of <b>multiplying</b> a number.<br>Multiples are usually <b>bigger</b> than the number.<br>Multiples of 3: 3, 6, 9, 12, 15...'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Which is a Multiple of 5?',
+        options: ['1', '2', '10', '3'],
+        correctIndex: 2 // 10 (5x2)
+    },
+
+    // PART 2: HCF (Highest Common Factor)
+    {
+        type: 'theory',
+        illustration: '🏆',
+        title: '3. Understanding HCF',
+        content: '<b>HCF</b> (or GCD) is the <b>largest</b> number that divides two or more numbers perfectly.'
+    },
+    {
+        type: 'theory',
+        illustration: '✂️',
+        title: '4. HCF Example',
+        content: 'Find HCF of 8 and 12.<br>Factors of 8: 1, 2, <b>4</b>, 8.<br>Factors of 12: 1, 2, 3, <b>4</b>, 6, 12.<br>The largest common number is <b>4</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🎁',
+        title: '5. When to use HCF?',
+        content: 'Use HCF for <b>splitting</b> things into equal groups.<br>Keywords: "Maximum size", "Greatest number", "Cutting equal pieces".'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2',
+        question: 'Find HCF of 10 and 15:',
+        options: ['5', '10', '2', '30'],
+        correctIndex: 0 // 5 divides both
+    },
+
+    // PART 3: LCM (Least Common Multiple)
+    {
+        type: 'theory',
+        illustration: '🤝',
+        title: '6. Understanding LCM',
+        content: '<b>LCM</b> is the <b>smallest</b> number that appears in the times tables of both numbers.'
+    },
+    {
+        type: 'theory',
+        illustration: '📅',
+        title: '7. LCM Example',
+        content: 'Find LCM of 4 and 6.<br>Multiples of 4: 4, 8, <b>12</b>, 16...<br>Multiples of 6: 6, <b>12</b>, 18...<br>The first match is <b>12</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🔔',
+        title: '8. When to use LCM?',
+        content: 'Use LCM for <b>repeating events</b>.<br>Keywords: "Next time together", "Minimum distance", "Bells ringing together".'
+    },
+    {
+        type: 'quiz',
+        illustration: '🏃',
+        title: 'Quiz 3',
+        question: 'One runner takes 3 mins, another 4 mins. When do they meet?',
+        options: ['7 mins', '1 min', '12 mins', '6 mins'],
+        correctIndex: 2 // LCM of 3 and 4 is 12
+    },
+
+    // PART 4: The Golden Rule & Tricks
+    {
+        type: 'theory',
+        illustration: '✨',
+        title: '9. The Golden Formula',
+        content: 'For any two numbers (A and B):<br><b>HCF × LCM = A × B</b><br>This connects everything!'
+    },
+    {
+        type: 'theory',
+        illustration: '🔢',
+        title: '10. Formula Example',
+        content: 'Numbers: 6 and 8.<br>HCF = 2.<br>LCM = 24.<br>Check: 2 × 24 = <b>48</b>.<br>Product: 6 × 8 = <b>48</b>. (It works!)'
+    },
+    {
+        type: 'theory',
+        illustration: '👻',
+        title: '11. Prime Numbers Trick',
+        content: 'If two numbers are Prime (like 3 and 5):<br><b>HCF is always 1.</b><br><b>LCM is just their Product (3×5=15).</b>'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 4',
+        question: 'If HCF is 2 and Product is 20, what is the LCM?',
+        options: ['40', '10', '18', '22'],
+        correctIndex: 1 // LCM = Product / HCF = 20 / 2 = 10
+    },
+
+    // PART 5: Advanced/Fractional
+    {
+        type: 'theory',
+        illustration: '🍰',
+        title: '12. HCF of Fractions',
+        content: 'Yes, fractions have HCF too!<br>Formula: <b>HCF of Numerators ÷ LCM of Denominators</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '📏',
+        title: '13. Remainder Problems',
+        content: 'Word Problem: "Find number that divides 20 and 30 leaving remainder 2."<br>Step 1: Subtract remainder (20-2=18, 30-2=28).<br>Step 2: Find HCF of 18 and 28.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'Identify the HCF of 3, 6, and 9:',
+        options: ['1', '3', '6', '9'],
+        correctIndex: 1 // 3 divides all of them
+    }
+],
+            'profit': [
+    // PART 1: The Shopkeeper's Dictionary
+    {
+        type: 'theory',
+        illustration: '🏷️',
+        title: '1. Key Terms',
+        content: '<b>CP (Cost Price):</b> Money paid to buy/make it.<br><b>SP (Selling Price):</b> Money received from selling it.<br><b>MP (Marked Price):</b> The price tag (Sticker price).'
+    },
+    {
+        type: 'theory',
+        illustration: '💰',
+        title: '2. Profit vs Loss',
+        content: '<b>Profit:</b> SP > CP (You made money!).<br><i>Formula: SP - CP</i><br><b>Loss:</b> CP > SP (You lost money!).<br><i>Formula: CP - SP</i>'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'CP = $100, SP = $80. What is the result?',
+        options: ['Profit of $20', 'Loss of $20', 'No Profit No Loss', 'Loss of $80'],
+        correctIndex: 1 // Loss of 20
+    },
+
+    // PART 2: The Golden Rule of Percentages
+    {
+        type: 'theory',
+        illustration: '🥇',
+        title: '3. The Golden Rule',
+        content: 'Profit % and Loss % are <b>ALWAYS calculated on CP</b> (Cost Price).<br>Never calculate them on SP unless told to!'
+    },
+    {
+        type: 'theory',
+        illustration: '➗',
+        title: '4. The Formula',
+        content: '<b>Profit % = (Profit / CP) × 100</b><br><b>Loss % = (Loss / CP) × 100</b><br>Memorize this fraction!'
+    },
+    {
+        type: 'theory',
+        illustration: '🧮',
+        title: '5. Example Calculation',
+        content: 'Buy for $50, Sell for $60.<br>Profit = $10.<br>Profit % = ($10 / $50) × 100 = <b>20%</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2',
+        question: 'Bought for 200, Sold for 250. Profit %?',
+        options: ['20%', '25%', '50%', '10%'],
+        correctIndex: 1 // 50/200 = 1/4 = 25%
+    },
+
+    // PART 3: Advanced Calculations (Finding SP & CP)
+    {
+        type: 'theory',
+        illustration: '🚀',
+        title: '6. The Multiplier Method',
+        content: 'To add 20% Profit, just multiply CP by <b>1.20</b>.<br>To have 20% Loss, multiply CP by <b>0.80</b>.<br><b>SP = CP × Multiplier</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🔄',
+        title: '7. Reverse Gear (Finding CP)',
+        content: 'If you know SP and Profit %, divide to go back.<br><b>CP = SP ÷ Multiplier</b>.<br>Ex: Sold for 120 (with 20% gain).<br>CP = 120 ÷ 1.2 = 100.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🤔',
+        title: 'Quiz 3',
+        question: 'Sold for $110 at 10% profit. What was the Cost?',
+        options: ['$100', '$99', '$121', '$105'],
+        correctIndex: 0 // 110 / 1.1 = 100
+    },
+
+    // PART 4: Discount & Marked Price
+    {
+        type: 'theory',
+        illustration: '🔖',
+        title: '8. The Discount Trap',
+        content: 'Discount is <b>ALWAYS calculated on MP</b> (Marked Price).<br><b>SP = MP - Discount</b>.<br>Shopkeeper logic: Buy (CP) → Mark Up (MP) → Discount → Sell (SP).'
+    },
+    {
+        type: 'theory',
+        illustration: '📉',
+        title: '9. Successive Discounts',
+        content: 'Store says "50% + 50% OFF".<br>This is NOT 100% off!<br>100 → (-50%) → 50.<br>50 → (-50%) → 25.<br>Total you pay is 25. Total discount is <b>75%</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🛒',
+        title: 'Quiz 4',
+        question: 'MP = 100. Discount = 10%. What is SP?',
+        options: ['110', '90', '100', '10'],
+        correctIndex: 1 // 100 - 10 = 90
+    },
+
+    // PART 5: High Level Concepts
+    {
+        type: 'theory',
+        illustration: '⚖️',
+        title: '10. Dishonest Dealer (False Weight)',
+        content: 'If a seller uses a 900g weight instead of 1kg:<br>He pays for 900g but charges you for 1000g.<br><b>Profit % = (Error / True Weight) × 100</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🎁',
+        title: '11. Buy 1 Get 1 Free',
+        content: 'What is the discount %?<br>You get 2 items, pay for 1.<br>Discount = 1/2 = <b>50%</b>.<br>(Formula: Free Items / Total Items).'
+    },
+    {
+        type: 'theory',
+        illustration: '📊',
+        title: '12. Margin vs Markup',
+        content: '<b>Markup:</b> % added to Cost.<br><b>Margin:</b> % of the final Selling Price.<br>Business people often speak in "Margins"!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🏆',
+        title: 'Final Mastery Quiz',
+        question: 'Buy 2 Get 1 Free. Calculate Discount %.',
+        options: ['50%', '33.33%', '25%', '66%'],
+        correctIndex: 1 // 1 Free / 3 Total = 1/3 = 33.33%
+    }
+], 
+            
+            'numSeries': [
+        {
+            type: 'theory',
+            illustration: '1️⃣ 2️⃣ 3️⃣',
+            title: 'What is Number Series?',
+            content: 'In this test, you have to find the missing number in a logical sequence.<br>Example: 2, 4, 6, 8, <b>?</b><br>Answer: 10 (+2 pattern).'
+        },
+        {
+            type: 'theory',
+            illustration: '📈',
+            title: 'Difference Pattern',
+            content: 'Check the gap between numbers.<br>5, 10, 15, 20.<br>The gap is 5. Next number is 25.'
+        },
+        {
+            type: 'quiz',
+            illustration: '❓',
+            title: 'Quiz 1',
+            question: 'Find the next number: 10, 20, 30, 40, __',
+            options: ['45', '50', '60', '55'],
+            correctIndex: 1 // 50
+        }
+    ],
+
+    // Placeholder for next topics (Direction etc.)
+    'distance': [
+        { type: 'theory', illustration: '🧭', title: 'Direction', content: 'North, South, East, West.' },
+        { type: 'quiz', illustration: '❓', title: 'Quiz', question: 'Sun rises in?', options: ['West', 'East'], correctIndex: 1 }
+    ]
+        
+            
+        };
+
+         let currentSubject = 'english'; // Default subject
+    let currentTopics = englishTopics; // Jo abhi screen par dikhana hai
+    
+    // Baaki purane variables wahi rahenge
+    let currentTopicIndex = 0;
+    let currentCardIndex = 0;
+    let isLessonActive = false;
+    let quizAnswered = false;
+
+        // --- INIT ---
+        window.onload = function() {
+            try {
+                renderPath();
+            } catch (e) {
+                alert("Error loading app: " + e.message);
+            }
+        };
+
+        // --- 3. SWITCH SUBJECT FUNCTION (New) ---
+    function switchSubject(subject) {
+    currentSubject = subject;
+    
+    // Buttons Highlight
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+    document.getElementById(`nav-${subject}`).classList.add('active'); // Quotes fix kiye
+
+    // Logic
+    if (subject === 'english') {
+        currentTopics = englishTopics;
+    } else if (subject === 'math') {
+        currentTopics = mathTopics;
+    } else if (subject === 'reasoning') {
+        currentTopics = reasoningTopics; // Space hataya
+    }
+    
+    renderPath();
+}
+
+
+        
+        // --- 4. UPDATED RENDER PATH (Use currentTopics) ---
+    function renderPath() {
+        const container = document.getElementById('path-view');
+        container.innerHTML = '';
+
+        // Yahan 'topics' ki jagah 'currentTopics' use hoga
+        currentTopics.forEach((topic, index) => {
+            const node = document.createElement('div');
+            node.className = `level-node ${topic.locked ? 'locked' : ''}`;
+            node.innerHTML = `
+                <span class="level-icon">${topic.locked ? '🔒' : topic.icon}</span>
+                <span class="level-label">${topic.name}</span>
+                <div class="path-line"></div>
+            `;
+            
+            if (!topic.locked) {
+                node.onclick = () => startLesson(index);
+            }
+            container.appendChild(node);
+        });
+    }
+
+        // --- LESSON LOGIC ---
+         // --- 5. UPDATED LESSON LOGIC (Use currentTopics) ---
+    function startLesson(index) {
+        const topic = currentTopics[index]; // Changed to currentTopics
+        if (topic.locked) return;
+        
+        if (!allLessons[topic.id]) {
+            alert("Content for " + topic.name + " is being created!");
+            return;
+        }
+
+        currentTopicIndex = index;
+        currentCardIndex = 0;
+        isLessonActive = true;
+        
+        document.getElementById('path-view').style.display = 'none';
+        document.getElementById('lesson-view').style.display = 'flex';
+        document.getElementById('bottom-nav').style.display = 'none';
+        document.getElementById('top-bar').style.visibility = 'visible';
+        
+        renderCard();
+    }
+
+        function renderCard() {
+        const topicId = currentTopics[currentTopicIndex].id; // Changed
+        const dataList = allLessons[topicId];
+        
+        // Safety Check
+        if (!dataList) { alert("Data missing!"); exitLesson(); return; }
+
+        const data = dataList[currentCardIndex];
+        const container = document.getElementById('card-container');
+        const nextBtn = document.getElementById('next-btn');
+
+        const progress = ((currentCardIndex) / dataList.length) * 100;
+        document.getElementById('progress-fill').style.width = `${progress}%`;
+
+        quizAnswered = false;
+        nextBtn.innerHTML = data.type === 'quiz' ? 'Check' : 'Keep Going';
+
+        // ... (Render Logic same as before) ...
+        if (data.type === 'theory') {
+            container.innerHTML = `
+                <div class="illustration">${data.illustration}</div>
+                <h2>${data.title}</h2>
+                <div class="theory-text">${data.content}</div>
+            `;
+            nextBtn.disabled = false;
+        } else if (data.type === 'quiz') {
+            let opts = '';
+            data.options.forEach((opt, i) => {
+                opts += `<div class="quiz-option" onclick="checkAnswer(this, ${i}, ${data.correctIndex})">${opt}</div>`;
+            });
+            container.innerHTML = `
+                <div class="illustration">${data.illustration}</div>
+                <h2>${data.title}</h2>
+                <p>${data.question}</p>
+                <div style="width:100%">${opts}</div>
+            `;
+            nextBtn.disabled = true;
+        }
+    }
+
+        function checkAnswer(el, idx, correct) {
+            if (quizAnswered) return;
+            const nextBtn = document.getElementById('next-btn');
+            
+            if (idx === correct) {
+                el.classList.add('selected');
+                document.getElementById('sound-correct').play().catch(e => console.log('Audio error', e));
+                quizAnswered = true;
+                nextBtn.disabled = false;
+                nextBtn.innerHTML = "Continue";
+            } else {
+                el.classList.add('error');
+                document.getElementById('sound-wrong').play().catch(e => console.log('Audio error', e));
+                setTimeout(() => el.classList.remove('error'), 500);
+            }
+        }
+
+         function nextCard() {
+        const topicId = currentTopics[currentTopicIndex].id; // Changed
+        const total = allLessons[topicId].length;
+
+        if (currentCardIndex < total - 1) {
+            currentCardIndex++;
+            renderCard();
+        } else {
+            finishLesson();
+        }
+         }
+
+        function prevCard() {
+            if (currentCardIndex > 0) {
+                currentCardIndex--;
+                renderCard();
+            }
+        }
+
+        function finishLesson() {
+        document.getElementById('sound-applause').play().catch(e => {});
+        document.getElementById('progress-fill').style.width = '100%';
+        
+        // Unlock next in CURRENT list
+        if (currentTopicIndex + 1 < currentTopics.length) {
+            currentTopics[currentTopicIndex + 1].locked = false;
+        }
+        
+        document.getElementById('congrats-overlay').style.display = 'flex';
+        }
+        function closeCongrats() {
+            document.getElementById('congrats-overlay').style.display = 'none';
+            exitLesson();
+        }
+
+        function exitLesson() {
+            isLessonActive = false;
+            // IMPORTANT: Switch back to Grid
+            document.getElementById('path-view').style.display = 'grid';
+            document.getElementById('lesson-view').style.display = 'none';
+            document.getElementById('bottom-nav').style.display = 'flex';
+            document.getElementById('top-bar').style.visibility = 'hidden';
+            renderPath();
+        }
+    </script>
+</body>
+    </html>
+    
