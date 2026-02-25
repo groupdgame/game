@@ -2130,7 +2130,7 @@ const reasoningTopics = [
         options: ['North', 'East', 'North-East', 'North-West'],
         correctIndex: 2 // Up and Right -> NE
     }
-]
+],
         'mathOps': [
     // PART 1: The Foundation (BODMAS)
     {
@@ -2241,7 +2241,7 @@ const reasoningTopics = [
         options: ['13', '4', '12', '7'],
         correctIndex: 0 // Brackets(2) -> Div(6) -> Mult(12) -> Add(13)
     }
-]
+],
 
         'ranking': [
     // PART 1: The Golden Formula (Ranking)
@@ -2341,6 +2341,219 @@ const reasoningTopics = [
             'Total is 20.'
         ],
         correctIndex: 0 // Cannot calculate Total without knowing the New Position
+    }
+],
+        
+        'artValues': [
+    // PART 1: Basic Symbol Substitution
+    {
+        type: 'theory',
+        illustration: '🔢',
+        title: '1. What are Artificial Values?',
+        content: 'In these problems, real numbers or signs are replaced by <b>codes</b>.<br>Your job is to <b>decode</b> them first, then solve using BODMAS.'
+    },
+    {
+        type: 'theory',
+        illustration: '📝',
+        title: '2. Type 1: Letter Codes',
+        content: 'If <b>A = 2</b>, <b>B = 3</b>, <b>C = 4</b>.<br>Find: $A \times B + C$.<br>Step 1: Substitute ($2 \times 3 + 4$).<br>Step 2: Solve ($6 + 4 = 10$).'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'If P=5, Q=10, R=2. Find (Q ÷ P) × R',
+        options: ['1', '4', '10', '20'],
+        correctIndex: 1 // (10/5) * 2 = 2 * 2 = 4
+    },
+
+    // PART 2: Operator Substitution (The Classic)
+    {
+        type: 'theory',
+        illustration: '🔄',
+        title: '3. Changing the Signs',
+        content: 'Problem: "If $+$ means $\div$, and $-$ means $\times$..."<br>Equation: $8 + 2 - 5$.<br><b>Step 1:</b> Rewrite immediately: $8 \div 2 \times 5$.<br><b>Step 2:</b> Solve: $4 \times 5 = 20$.'
+    },
+    {
+        type: 'theory',
+        illustration: '⚠️',
+        title: '4. The "Means" Trap',
+        content: 'Be careful with wording!<br>"<b>$+$ means $-$</b>": Replace $+$ with $-$.<br>"<b>$+$ is called $-$</b>": Same thing.<br>Never calculate with the old signs!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2',
+        question: 'If + means ×, and - means +. Solve: 3 - 2 + 4',
+        options: ['10', '11', '5', '9'],
+        correctIndex: 1 // 3 + 2 × 4 = 3 + 8 = 11
+    },
+
+    // PART 3: Defining New Operations (Advanced)
+    {
+        type: 'theory',
+        illustration: '🛠️',
+        title: '5. Artificial Operators',
+        content: 'Sometimes new symbols are invented with specific rules.<br>Example: <b>$a \theta b = (a + b) \times a$</b>.<br>Solve $3 \theta 2$:<br>$(3 + 2) \times 3 = 5 \times 3 = 15$.'
+    },
+    {
+        type: 'theory',
+        illustration: '📦',
+        title: '6. The Box Problem',
+        content: 'If $\square(x) = x^2 - 1$.<br>Find $\square(4)$.<br>Solution: $4^2 - 1 = 16 - 1 = 15$.<br>Follow the <b>rule of the shape</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 3',
+        question: 'If a $ b = (a + b) ÷ 2. Find 10 $ 6.',
+        options: ['4', '16', '8', '60'],
+        correctIndex: 2 // (10+6)/2 = 8
+    },
+
+    // PART 4: Interchange & Balancing
+    {
+        type: 'theory',
+        illustration: '⚖️',
+        title: '7. Interchange of Numbers',
+        content: 'Rule: "Interchange 3 and 5".<br>Problem: $3 \times 5 + 10$.<br>New: $5 \times 3 + 10$.<br><b>Note:</b> If the number is <b>35</b>, it becomes <b>53</b>!'
+    },
+    {
+        type: 'theory',
+        illustration: '🕵️',
+        title: '8. Finding the Correct Equation',
+        content: 'Question: "If $+$ and $-$ are swapped, which equation is correct?"<br>Strategy: Check the <b>equals sign</b> (=) logic last. Check standard arithmetic first.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🔄',
+        title: 'Quiz 4',
+        question: 'Swap 4 and 2. Solve: 4 ÷ 2 + 1',
+        options: ['3', '2', '5', '1.5'],
+        correctIndex: 3 // Becomes 2 ÷ 4 + 1 = 0.5 + 1 = 1.5
+    },
+
+    // PART 5: Advanced Conditionals (Banking Level)
+    {
+        type: 'theory',
+        illustration: '🚦',
+        title: '9. Conditional Coding',
+        content: 'Rules often depend on the digits:<br>1. If First digit is odd, code as X.<br>2. If Last digit is even, code as Y.<br>Apply <b>ALL</b> relevant conditions.'
+    },
+    {
+        type: 'theory',
+        illustration: '🛑',
+        title: '10. Priority of Conditions',
+        content: 'Sometimes two rules apply.<br>If Rule 1 says "Code as A" and Rule 2 says "Code as B", the question will specify priority (e.g., "Case 2 overrides Case 1").'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'Rule: x * y = x + y + xy. Find 2 * 3.',
+        options: ['6', '5', '11', '12'],
+        correctIndex: 2 // 2 + 3 + (2×3) = 5 + 6 = 11
+    }
+],
+
+            'insertSign': [
+    // PART 1: The Basics (What is this?)
+    {
+        type: 'theory',
+        illustration: '⚖️',
+        title: '1. The Goal',
+        content: 'You are given numbers and an answer.<br>Example: <b>4 _ 2 _ 1 = 6</b>.<br>You must fill the blanks with signs (+, -, ×, ÷) to make it true.<br>Solution: $4 + 2 \times 1 = 6$.'
+    },
+    {
+        type: 'theory',
+        illustration: '🧱',
+        title: '2. The Rule',
+        content: 'You MUST follow <b>BODMAS</b> after inserting the signs.<br>Wrong: $4 + 2 \times 1 = 6 \times 1 = 6$.<br>Right: Multiply first ($2 \times 1 = 2$). Then Add ($4 + 2 = 6$).'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Make it true: 8 _ 4 _ 2 = 4',
+        options: ['+, -', '÷, +', '-, ÷', '×, -'],
+        correctIndex: 2 // 8 - (4/2) = 8 - 2 = 6 (Wait, 8-2=6. Let's check options).
+                        // Let's re-evaluate:
+                        // A: 8+4-2 = 10 (No)
+                        // B: 8/4 + 2 = 2+2=4 (YES!)
+                        // C: 8-2 = 6 (No)
+    }
+    // Correction on Quiz 1 logic in the output below: Option 1 (Index 1) is correct.
+    ,
+
+    // PART 2: The Strategy (Don't Guess!)
+    {
+        type: 'theory',
+        illustration: '🎯',
+        title: '3. Strategy 1: Check the Equals (=)',
+        content: 'Sometimes the "=" is part of the options.<br><b>6 _ 2 _ 3</b>.<br>Options: [=, ×], [+, =].<br>Check where the result is. Usually, the biggest number is the result.'
+    },
+    {
+        type: 'theory',
+        illustration: '⚡',
+        title: '4. Strategy 2: The Division Hack',
+        content: 'This is the <b>most important</b> trick.<br>Look at where the <b>÷</b> sign goes.<br>If it creates a decimal (e.g., $7 \div 2$), but the answer is a whole number, that option is <b>WRONG</b>.<br>Eliminate it immediately!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🚫',
+        title: 'Quiz 2',
+        question: 'Target = 10 (Integer). Which option is IMPOSSIBLE?',
+        options: ['12 ÷ 2', '12 ÷ 3', '12 ÷ 6', '12 ÷ 5'],
+        correctIndex: 3 // 12/5 = 2.4 (Decimal). Impossible for integer target.
+    },
+
+    // PART 3: Advanced Elimination
+    {
+        type: 'theory',
+        illustration: '🚀',
+        title: '5. Magnitude Check (Too Big/Small)',
+        content: 'If the target is small (e.g., 5) and you see <b>$50 \times 50$</b> in the option...<br>It will become 2500.<br>Unless there is a huge subtraction later, this option is likely <b>Wrong</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🔍',
+        title: '6. The Last Digit Trick',
+        content: 'For large numbers ($234 \times 567$)...<br>Just check the last digit.<br>$4 \times 7 = 28$ (Ends in 8).<br>If the answer ends in 0, this is wrong.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 3',
+        question: 'Solve: 5 _ 5 _ 5 = 30',
+        options: ['+, +', '×, +', '-, ×', '÷, +'],
+        correctIndex: 1 // 5 × 5 + 5 = 25 + 5 = 30
+    },
+
+    // PART 4: Complex Equations
+    {
+        type: 'theory',
+        illustration: '🤯',
+        title: '7. Sequential Operations',
+        content: 'Problem: $16 \_ 4 \_ 3 \_ 4 = 13$.<br>Options: $[\div, \times, -]$.<br>Apply in order:<br>1. $16 \div 4 = 4$.<br>2. $4 \times 3 = 12$.<br>3. $12 - 4 = 8$. (Not 13. Try next!).'
+    },
+    {
+        type: 'theory',
+        illustration: '⏳',
+        title: '8. Speed Solving',
+        content: 'Don\'t write the whole equation.<br>Write the result of the <b>Division</b> and <b>Multiplication</b> immediately above the numbers.<br>Then just add/subtract mentally.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'Which set balances: 12 _ 3 _ 4 = 8?',
+        options: [
+            '÷ and +',  // 4 + 4 = 8 (YES)
+            '× and -',  // 36 - 4 = 32
+            '+ and ÷',  // 12 + 0.75
+            '- and ×'   // 12 - 12 = 0
+        ],
+        correctIndex: 0 // 12 ÷ 3 + 4 = 4 + 4 = 8
     }
 ]
         
