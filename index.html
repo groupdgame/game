@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gamified Learning App</title>
+    <style>
+        :root {
+            --primary: #58cc02;
+            --primary-dark: #46a302;
+            --secondary: #ffc107;
+            --gray: #e5e5e5;
+            --gray-dark: #afafaf;
+            --text: #3c3c3c;
+            --bg: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- LOGIN SCREEN --- */
+        #login-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: white; z-index: 9999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        
+        #google-login-btn {
+            background: #4285F4; color: white; border: none; padding: 15px 30px;
+            font-size: 18px; border-radius: 30px; cursor: pointer; font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: transform 0.1s;
+        }
+        #google-login-btn:active { transform: scale(0.95); }
+
+        /* --- USER PROFILE (Top Left) --- */
+        #user-profile {
+            position: fixed; top: 10px; left: 15px; z-index: 1001;
+            display: none; align-items: center; background: rgba(255,255,255,0.9);
+            padding: 5px 10px; border-radius: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        #user-pic { width: 32px; height: 32px; border-radius: 50%; border: 2px solid white; }
+        #user-name { margin-left: 8px; font-weight: bold; font-size: 14px; color: var(--text); }
+        #logout-btn {
+            margin-left: 10px; padding: 4px 8px; font-size: 11px;
+            background: #ff4b4b; color: white; border: none; border-radius: 6px; cursor: pointer;
+        }
+
+        /* --- TOP BAR --- */
+        #top-bar {
+            height: 50px; display: flex; align-items: center; padding: 0 20px;
+            justify-content: space-between; visibility: hidden;
+        }
+
+        .progress-track {
+            flex-grow: 1; height: 12px; background-color: var(--gray);
+            border-radius: 10px; margin: 0 10px; overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%; background-color: var(--primary); width: 0%; transition: width 0.5s ease;
+        }
+
+        .close-icon { font-size: 24px; cursor: pointer; color: var(--gray-dark); }
+
+        /* --- MAIN AREA --- */
+        #main-container { flex-grow: 1; overflow-y: auto; position: relative; padding-bottom: 80px; }
+
+        /* --- GAME MAP --- */
+        #path-view {
+            display: grid; grid-template-columns: 1fr 1fr 1fr; row-gap: 60px;
+            padding: 60px 20px 40px; 
+            background: url('https://www.transparenttextures.com/patterns/cubes.png');
+            justify-items: center;
+        }
+
+        .level-node {
+            width: 70px; height: 70px; border-radius: 50%; background-color: var(--secondary);
+            display: flex; justify-content: center; align-items: center; position: relative;
+            box-shadow: 0 5px 0 #d4a005; cursor: pointer; transition: transform 0.1s; z-index: 5;
+        }
+        .level-node:active { transform: translateY(4px); box-shadow: 0 2px 0 #d4a005; }
+        .level-node.locked { background-color: var(--gray); box-shadow: 0 5px 0 var(--gray-dark); cursor: not-allowed; }
+        .level-icon { font-size: 28px; color: white; }
+
+        .level-label {
+            position: absolute; bottom: -30px; font-size: 13px; font-weight: bold;
+            color: var(--gray-dark); white-space: nowrap; text-align: center;
+            background-color: var(--bg); padding: 2px 8px; border-radius: 12px;
+            z-index: 10; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .level-node:not(.locked) .level-label { color: var(--text); }
+
+        .path-line {
+            width: 6px; height: 70px; background-color: var(--gray); position: absolute;
+            bottom: -65px; z-index: 1; left: 50%; transform: translateX(-50%);
+        }
+
+        /* Grid Placement */
+        .level-node:nth-child(1) { grid-column: 2; } 
+        .level-node:nth-child(2) { grid-column: 2; } 
+        .level-node:nth-child(3) { grid-column: 1; } 
+        .level-node:nth-child(4) { grid-column: 2; } 
+        .level-node:nth-child(5) { grid-column: 3; } 
+        .level-node:nth-child(6) { grid-column: 1; } 
+        .level-node:nth-child(7) { grid-column: 2; } 
+        .level-node:nth-child(8) { grid-column: 3; } 
+        .level-node:nth-child(6) .path-line, .level-node:nth-child(7) .path-line, .level-node:nth-child(8) .path-line { display: none; }
+
+        /* --- LESSON VIEW --- */
+        #lesson-view {
+            display: none; height: 100%; flex-direction: column; padding: 20px;
+            box-sizing: border-box; align-items: center;
+        }
+        .card {
+            width: 100%; max-width: 400px; flex-grow: 1; display: flex;
+            flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn { from { transform: translateX(50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        
+        .illustration { font-size: 80px; margin-bottom: 20px; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1)); }
+        .theory-text { font-size: 18px; line-height: 1.6; color: #444; margin-bottom: 20px; }
+        
+        .quiz-option {
+            background: white; border: 2px solid var(--gray); border-radius: 12px;
+            padding: 15px; width: 100%; margin: 8px 0; cursor: pointer; font-weight: bold; transition: all 0.2s;
+        }
+        .quiz-option.selected { border-color: var(--primary); background-color: #e6fffa; color: var(--primary-dark); }
+        .quiz-option.error { border-color: #ff4b4b; background-color: #ffe5e5; animation: shake 0.4s; }
+        @keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-5px); } 100% { transform: translateX(0); } }
+
+        .lesson-footer {
+            width: 100%; max-width: 400px; display: flex; justify-content: space-between;
+            align-items: center; margin-top: auto; padding-top: 20px;
+        }
+        .btn { border: none; padding: 12px 24px; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        .btn-next { background-color: var(--primary); color: white; box-shadow: 0 4px 0 var(--primary-dark); width: 70%; }
+        .btn-next:disabled { background-color: var(--gray); box-shadow: none; color: var(--gray-dark); cursor: default; }
+        .btn-back { background: none; color: var(--gray-dark); width: 20%; padding: 10px; }
+
+        /* --- BOTTOM NAV --- */
+        #bottom-nav {
+            position: fixed; bottom: 0; width: 100%; height: 70px; background: white;
+            border-top: 1px solid var(--gray); display: flex; justify-content: space-around;
+            align-items: center; z-index: 100;
+        }
+        .nav-item { display: flex; flex-direction: column; align-items: center; color: var(--gray-dark); font-size: 12px; cursor: pointer; }
+        .nav-item.active { color: var(--primary); }
+        .nav-icon { font-size: 24px; margin-bottom: 4px; }
+
+        /* --- CONGRATS --- */
+        #congrats-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); display: none; justify-content: center;
+            align-items: center; flex-direction: column; z-index: 200; color: white; text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="sound-applause" src="https://www.soundjay.com/human/sounds/applause-01.mp3"></audio>
+    <audio id="sound-correct" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
+    <audio id="sound-wrong" src="https://www.soundjay.com/buttons/sounds/button-10.mp3"></audio>
+
+    <div id="login-overlay">
+        <h1 style="color:#58cc02; font-size:40px; margin-bottom:10px;">Science App</h1>
+        <p style="margin-bottom: 30px; color: #777;">Sign in to save your progress!</p>
+        <button id="google-login-btn">Login with Google</button>
+        <p id="loading-text" style="display:none; margin-top:20px; color: #58cc02; font-weight: bold;">Loading your progress...</p>
+    </div>
+
+    <div id="user-profile">
+        <img id="user-pic" src="" alt="User">
+        <span id="user-name">Player</span>
+        <button id="logout-btn">Logout</button>
+    </div>
+
+    <div id="top-bar">
+        <span class="close-icon" onclick="exitLesson()">✕</span>
+        <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+
+    <div id="main-container">
+        <div id="path-view"></div>
+        <div id="lesson-view">
+            <div id="card-container" class="card"></div>
+            <div class="lesson-footer">
+                <button class="btn btn-back" onclick="prevCard()">
+                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <button class="btn btn-next" id="next-btn" onclick="nextCard()">Check</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="bottom-nav">
+        <div class="nav-item active" id="nav-science" onclick="switchSubject('science')">
+            <span class="nav-icon">🧬</span><span>Science</span>
+        </div>
+        <div class="nav-item" id="nav-math" onclick="switchSubject('math')">
+            <span class="nav-icon">➗</span><span>Maths</span>
+        </div>
+        <div class="nav-item" id="nav-reasoning" onclick="switchSubject('reasoning')">
+            <span class="nav-icon">🧠</span><span>Reasoning</span>
+        </div>
+    </div>
+
+    <div id="congrats-overlay">
+        <h1>AWESOME!</h1>
+        <div style="font-size: 80px;">🏆</div>
+        <p>Topic Completed!</p>
+        <button class="btn btn-next" style="margin-top: 20px;" onclick="closeCongrats()">CONTINUE</button>
+    </div>
+
+    <script type="module">
+        // --- 1. FIREBASE SETUP ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // YOUR API KEY HERE
+        const firebaseConfig = {
+            apiKey: "AIzaSyCp_VA0SxlUS9lzEZBPvdJnwBW3Vvx7MJU",
+            authDomain: "group-d-game.firebaseapp.com",
+            projectId: "group-d-game",
+            storageBucket: "group-d-game.firebasestorage.app",
+            messagingSenderId: "385712455189",
+            appId: "1:385712455189:web:166bbd19a8bef2a4c9d81c",
+            measurementId: "G-P4DGL2L76K"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const provider = new GoogleAuthProvider();
+        
+        let currentUser = null;
+
+        // --- 2. TOPICS DEFINITIONS ---
+        // Make variables global (window.) so HTML can see them
+        window.scienceTopics = [
+            { id: 'units', name: 'Units', icon: '📏', locked: false },
+            { id: 'vitamins', name: 'Vitamins', icon: '💊', locked: true },
+            { id: 'periodic', name: 'Periodic T.', icon: '⚛️', locked: true },
+            { id: 'newton', name: 'Newton', icon: '🍎', locked: true },
+            { id: 'body', name: 'Human Body', icon: '🫀', locked: true }
+        ];
+
+        window.mathTopics = [
+            { id: 'ratio', name: 'Ratio', icon: '⚖️', locked: false }, // Math unlocked initially for testing
+            { id: 'average', name: 'Average', icon: '📊', locked: true },
+            { id: 'lcm', name: 'LCM/HCF', icon: '🔢', locked: true },
+            { id: 'profit', name: 'Profit', icon: '💰', locked: true },
+            { id: 'speed', name: 'Speed', icon: '⏱️', locked: true },
+            { id: 'percentage', name: 'Percent', icon: '%', locked: true }
+        ];
+
+        window.reasoningTopics = [
+            { id: 'numSeries', name: 'Num Series', icon: '🔢', locked: false }, // Reasoning unlocked initially
+            { id: 'distance', name: 'Direction', icon: '🧭', locked: true },
+            { id: 'mathOps', name: 'Operations', icon: '➕', locked: true },
+            { id: 'ranking', name: 'Ranking', icon: '🥇', locked: true },
+            { id: 'artValues', name: 'Art. Values', icon: '🎭', locked: true },
+            { id: 'insertSign', name: 'Insert Sign', icon: '❓', locked: true }
+        ];
+
+        // --- 3. LESSON CONTENT ---
+        window.allLessons = {
+            // SCIENCE
+            'units': [
+                { type: 'theory', illustration: '📏', title: '1. What is a Unit?', content: 'A unit is a standard quantity used to measure something.<br>Example: We measure length in <b>Meters (m)</b>.' },
+                { type: 'theory', illustration: '⚖️', title: '2. SI Units', content: 'Length -> <b>Meter (m)</b><br>Mass -> <b>Kilogram (kg)</b><br>Time -> <b>Second (s)</b>' },
+                { type: 'quiz', illustration: '❓', title: 'Quiz 1', question: 'What is the SI unit of Mass?', options: ['Gram', 'Pound', 'Kilogram', 'Ton'], correctIndex: 2 },
+                { type: 'theory', illustration: '⚡', title: '3. Derived Units', content: 'Speed = Distance / Time.<br>Unit of Speed = <b>m/s</b>.' },
+                { type: 'quiz', illustration: '🏆', title: 'Final Quiz', question: 'Unit of Force is?', options: ['Joule', 'Newton', 'Watt', 'Pascal'], correctIndex: 1 }
+            ],
+            'vitamins': [ { type: 'theory', illustration: '🥕', title: 'Vitamin A', content: 'Good for Eyes. Source: Carrots.' }, { type: 'quiz', illustration: '❓', title: 'Quiz', question: 'Deficiency of Vit C causes?', options: ['Scurvy', 'Rickets'], correctIndex: 0 } ],
+            'periodic': [ { type: 'theory', illustration: 'H', title: 'Hydrogen', content: 'First element. Atomic Number 1.' }, { type: 'quiz', illustration: '❓', title: 'Quiz', question: 'Symbol for Oxygen?', options: ['O', 'Ox'], correctIndex: 0 } ],
+            'newton': [ { type: 'theory', illustration: '🚀', title: '3rd Law', content: 'Action and Reaction are equal and opposite.' }, { type: 'quiz', illustration: '❓', title: 'Quiz', question: 'F = m x ?', options: ['a', 'v'], correctIndex: 0 } ],
+            'body': [ { type: 'theory', illustration: '🫀', title: 'Heart', content: 'Pumps blood to the body.' }, { type: 'quiz', illustration: '❓', title: 'Quiz', question: 'Largest organ?', options: ['Liver', 'Skin'], correctIndex: 1 } ],
+
+            // MATH
+            'ratio': [ { type: 'theory', illustration: '⚖️', title: 'Ratio', content: 'Compares two quantities. 2:3' }, { type: 'quiz', illustration: '❓', title: 'Quiz', question: 'Ratio of 4 to 2?', options: ['2:1', '1:2'], correctIndex: 0 } ],
+            
+            // REASONING
+            'numSeries': [ { type: 'theory', illustration: '1️⃣', title: 'Series', content: 'Find missing number: 2, 4, 6...' }, { type: 'quiz', illustration: '❓', title: 'Quiz', question: 'Next: 10, 20, 30, __', options: ['40', '50'], correctIndex: 0 } ]
+        };
+
+        // --- 4. GLOBAL STATE ---
+        window.currentSubject = 'science';
+        window.currentTopics = window.scienceTopics;
+        window.currentTopicIndex = 0;
+        window.currentCardIndex = 0;
+        window.isLessonActive = false;
+        window.quizAnswered = false;
+
+        // --- 5. AUTH LOGIC ---
+        document.getElementById('google-login-btn').addEventListener('click', () => {
+            signInWithPopup(auth, provider)
+                .catch((error) => alert("Login Error: " + error.message));
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            signOut(auth).then(() => location.reload());
+        });
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // User Logged In
+                currentUser = user;
+                document.getElementById('loading-text').style.display = 'block';
+                document.getElementById('google-login-btn').style.display = 'none';
+
+                // Update Profile UI
+                if(user.photoURL) document.getElementById('user-pic').src = user.photoURL;
+                if(user.displayName) document.getElementById('user-name').innerText = user.displayName.split(' ')[0];
+                document.getElementById('user-profile').style.display = 'flex';
+
+                // Load Data
+                await loadUserProgress(user.uid);
+
+                // Show App
+                document.getElementById('login-overlay').style.display = 'none';
+                renderPath();
+            } else {
+                // User Logged Out
+                document.getElementById('login-overlay').style.display = 'flex';
+                document.getElementById('google-login-btn').style.display = 'block';
+                document.getElementById('loading-text').style.display = 'none';
+                document.getElementById('user-profile').style.display = 'none';
+            }
+        });
+
+        // --- 6. DATABASE LOGIC ---
+        async function loadUserProgress(uid) {
+            try {
+                const docRef = doc(db, "users", uid);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    const unlockedList = data.unlockedTopics || [];
+                    console.log("Loaded Progress:", unlockedList);
+
+                    // Unlock local topics based on DB data
+                    const unlockInList = (list) => {
+                        list.forEach(topic => {
+                            if (unlockedList.includes(topic.id)) topic.locked = false;
+                        });
+                    };
+                    unlockInList(window.scienceTopics);
+                    unlockInList(window.mathTopics);
+                    unlockInList(window.reasoningTopics);
+                } else {
+                    // Create new user doc
+                    await setDoc(docRef, { unlockedTopics: ['units', 'ratio', 'numSeries'] }); 
+                }
+            } catch (e) {
+                console.error("Error loading data:", e);
+            }
+        }
+
+        async function saveTopicUnlock(topicId) {
+            if (!currentUser) return;
+            try {
+                const userRef = doc(db, "users", currentUser.uid);
+                await setDoc(userRef, {
+                    unlockedTopics: arrayUnion(topicId)
+                }, { merge: true });
+                console.log("Saved unlock:", topicId);
+            } catch (e) {
+                console.error("Error saving:", e);
+            }
+        }
+
+                  // --- 7. APP FUNCTIONS (FIXED SYNTAX) ---
+        
+        window.switchSubject = function(subject) {
+            window.currentSubject = subject;
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.getElementById(`nav-${subject}`).classList.add('active');
+
+            if (subject === 'science') window.currentTopics = window.scienceTopics;
+            else if (subject === 'math') window.currentTopics = window.mathTopics;
+            else if (subject === 'reasoning') window.currentTopics = window.reasoningTopics;
+            
+            renderPath();
+        };
+
+        window.renderPath = function() {
+            const container = document.getElementById('path-view');
+            container.innerHTML = '';
+
+            window.currentTopics.forEach((topic, index) => {
+                const node = document.createElement('div');
+                node.className = `level-node ${topic.locked ? 'locked' : ''}`;
+                node.innerHTML = `
+                    <span class="level-icon">${topic.locked ? '🔒' : topic.icon}</span>
+                    <span class="level-label">${topic.name}</span>
+                    <div class="path-line"></div>
+                `;
+                if (!topic.locked) {
+                    node.onclick = () => startLesson(index);
+                }
+                container.appendChild(node);
+            });
+        };
+
+        window.startLesson = function(index) {
+            const topic = window.currentTopics[index];
+            if (topic.locked) return;
+            
+            if (!window.allLessons[topic.id]) {
+                alert("Content coming soon!"); return;
+            }
+
+            window.currentTopicIndex = index;
+            window.currentCardIndex = 0;
+            
+            document.getElementById('path-view').style.display = 'none';
+            document.getElementById('lesson-view').style.display = 'flex';
+            document.getElementById('bottom-nav').style.display = 'none';
+            document.getElementById('top-bar').style.visibility = 'visible';
+            
+            renderCard();
+        };
+
+        window.renderCard = function() {
+            const topicId = window.currentTopics[window.currentTopicIndex].id;
+            const dataList = window.allLessons[topicId];
+            const data = dataList[window.currentCardIndex];
+            
+            const container = document.getElementById('card-container');
+            const nextBtn = document.getElementById('next-btn');
+            document.getElementById('progress-fill').style.width = `${((window.currentCardIndex) / dataList.length) * 100}%`;
+
+            window.quizAnswered = false;
+            nextBtn.innerHTML = data.type === 'quiz' ? 'Check' : 'Keep Going';
+
+            if (data.type === 'theory') {
+                container.innerHTML = `
+                    <div class="illustration">${data.illustration}</div>
+                    <h2>${data.title}</h2>
+                    <div class="theory-text">${data.content}</div>
+                `;
+                nextBtn.disabled = false;
+                nextBtn.onclick = nextCard; 
+            } else if (data.type === 'quiz') {
+                let opts = '';
+                data.options.forEach((opt, i) => {
+                    opts += `<div class="quiz-option" id="opt-${i}" onclick="window.checkAnswer('opt-${i}', ${i}, ${data.correctIndex})">${opt}</div>`;
+                });
+                container.innerHTML = `
+                    <div class="illustration">${data.illustration}</div>
+                    <h2>${data.title}</h2>
+                    <p>${data.question}</p>
+                    <div style="width:100%">${opts}</div>
+                `;
+                nextBtn.disabled = true;
+                nextBtn.onclick = nextCard;
+            }
+        };
+
+        window.checkAnswer = function(elementId, idx, correct) {
+            if (window.quizAnswered) return;
+            const el = document.getElementById(elementId);
+            const nextBtn = document.getElementById('next-btn');
+            
+            if (idx === correct) {
+                el.classList.add('selected');
+                document.getElementById('sound-correct').play().catch(e=>{});
+                window.quizAnswered = true;
+                nextBtn.disabled = false;
+                nextBtn.innerHTML = "Continue";
+            } else {
+                el.classList.add('error');
+                document.getElementById('sound-wrong').play().catch(e=>{});
+                setTimeout(() => el.classList.remove('error'), 500);
+            }
+        };
+
+        window.nextCard = function() {
+            const topicId = window.currentTopics[window.currentTopicIndex].id;
+            const total = window.allLessons[topicId].length;
+
+            if (window.currentCardIndex < total - 1) {
+                window.currentCardIndex++;
+                renderCard();
+            } else {
+                finishLesson();
+            }
+        };
+
+        window.prevCard = function() {
+            if (window.currentCardIndex > 0) {
+                window.currentCardIndex--;
+                renderCard();
+            }
+        };
+
+        window.finishLesson = function() {
+            document.getElementById('sound-applause').play().catch(e=>{});
+            document.getElementById('progress-fill').style.width = '100%';
+            
+            // Unlock Next Level Logic
+            if (window.currentTopicIndex + 1 < window.currentTopics.length) {
+                const nextTopic = window.currentTopics[window.currentTopicIndex + 1];
+                nextTopic.locked = false;
+                
+                // Save to Database
+                saveTopicUnlock(nextTopic.id);
+            }
+            
+            document.getElementById('congrats-overlay').style.display = 'flex';
+        };
+
+        window.closeCongrats = function() {
+            document.getElementById('congrats-overlay').style.display = 'none';
+            exitLesson();
+        };
+
+        window.exitLesson = function() {
+            document.getElementById('path-view').style.display = 'grid';
+            document.getElementById('lesson-view').style.display = 'none';
+            document.getElementById('bottom-nav').style.display = 'flex';
+            document.getElementById('top-bar').style.visibility = 'hidden';
+            renderPath();
+        };
+
+    </script>
+</body>
+</html>
