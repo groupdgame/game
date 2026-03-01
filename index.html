@@ -349,13 +349,20 @@
         let currentUser = null;
 
         // --- 2. TOPICS DEFINITIONS ---
+              // --- 2. TOPICS DEFINITIONS ---
         // Make variables global (window.) so HTML can see them
         window.scienceTopics = [
             { id: 'units', name: 'Units', icon: '📏', locked: false },
             { id: 'vitamins', name: 'Vitamins', icon: '💊', locked: true },
             { id: 'periodic', name: 'Periodic T.', icon: '⚛️', locked: true },
             { id: 'newton', name: 'Newton', icon: '🍎', locked: true },
-            { id: 'body', name: 'Human Body', icon: '🫀', locked: true }
+            { id: 'body', name: 'Human Body', icon: '🫀', locked: true },
+            // Naye Science Topics:
+            { id: 'light', name: 'Light', icon: '💡', locked: true },
+            { id: 'electricity', name: 'Electricity', icon: '⚡', locked: true },
+            { id: 'workEnergy', name: 'Work/Energy', icon: '⚙️', locked: true },
+            { id: 'acidBase', name: 'Acid/Base', icon: '🧪', locked: true },
+            { id: 'disease', name: 'Diseases', icon: '🦠', locked: true }
         ];
 
         window.mathTopics = [
@@ -364,7 +371,12 @@
             { id: 'lcm', name: 'LCM/HCF', icon: '🔢', locked: true },
             { id: 'profit', name: 'Profit', icon: '💰', locked: true },
             { id: 'speed', name: 'Speed', icon: '⏱️', locked: true },
-            { id: 'percentage', name: 'Percent', icon: '%', locked: true }
+            { id: 'percentage', name: 'Percent', icon: '%', locked: true },
+            // Naye Maths Topics:
+            { id: 'numSystem', name: 'Num System', icon: '🧮', locked: true },
+            { id: 'timeWork', name: 'Time/Work', icon: '⏳', locked: true },
+            { id: 'interest', name: 'SI & CI', icon: '📈', locked: true },
+            { id: 'mensuration', name: 'Mensuration', icon: '📐', locked: true }
         ];
 
         window.reasoningTopics = [
@@ -373,8 +385,14 @@
             { id: 'mathOps', name: 'Operations', icon: '➕', locked: true },
             { id: 'ranking', name: 'Ranking', icon: '🥇', locked: true },
             { id: 'artValues', name: 'Art. Values', icon: '🎭', locked: true },
-            { id: 'insertSign', name: 'Insert Sign', icon: '❓', locked: true }
+            { id: 'insertSign', name: 'Insert Sign', icon: '❓', locked: true },
+            // Naye Reasoning Topics:
+            { id: 'coding', name: 'Coding', icon: '🕵️', locked: true },
+            { id: 'bloodRel', name: 'Blood Rel.', icon: '👨‍👩‍👧', locked: true },
+            { id: 'syllogism', name: 'Syllogism', icon: '🤔', locked: true },
+            { id: 'calendarClock', name: 'Cal/Clock', icon: '📅', locked: true }
         ];
+
 
         // --- 3. LESSON CONTENT ---
         window.allLessons = {
@@ -1170,6 +1188,728 @@
         correctIndex: 2 // Sodium influx causes depolarization
     }
 ],
+
+            'light': [
+    // LEVEL 1: Meet the Hero
+    {
+        type: 'theory',
+        illustration: '🦸‍♂️',
+        title: '1. Enter: Superhero Light!',
+        content: 'Welcome to the Light Quest! 🎮<br>Light is the fastest superhero in the universe. It helps us see everything around us. Without our hero, it would be pitch black!'
+    },
+    {
+        type: 'theory',
+        illustration: '📏',
+        title: '2. The Straight Line Rule',
+        content: 'Superhero Light loves to run fast, and it ONLY runs in a <b>perfectly straight line</b>.<br>Think of a laser beam—pew! pew! No curves allowed.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1: Speed Test',
+        question: 'How does our hero, Light, like to travel?',
+        options: ['In zig-zags', 'In a straight line', 'In circles', 'By taking a bus'],
+        correctIndex: 1 // Straight line
+    },
+
+    // LEVEL 2: The Bouncing Game (Reflection)
+    {
+        type: 'theory',
+        illustration: '🏀',
+        title: '3. Level 2: Reflection!',
+        content: 'What happens when you throw a bouncy ball at a wall? It bounces back! 💥<br>Light does the exact same thing when it hits something shiny. We call this <b>Reflection</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🪞',
+        title: '4. The Ultimate Bouncer',
+        content: '<b>Mirrors</b> are the best bouncers.<br>Because they are super smooth and shiny, they bounce the light right back to your eyes. That is how you see yourself!'
+    },
+    {
+        type: 'theory',
+        illustration: '📐',
+        title: '5. The Perfect Bounce Rule',
+        content: 'Light plays fair!<br>The angle it hits the mirror is the EXACT same angle it bounces off.<br><i>In-game rule: Hit at 45 degrees, bounce at 45 degrees!</i>'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2: The Bounce',
+        question: 'What do we call it when light bounces off a mirror?',
+        options: ['Refraction', 'Absorption', 'Reflection', 'Disappearing'],
+        correctIndex: 2 // Reflection
+    },
+
+    // LEVEL 3: Funhouse Mirrors
+    {
+        type: 'theory',
+        illustration: '🥄',
+        title: '6. The Magic Spoon Trick',
+        content: 'Go grab a shiny spoon! 🥄<br>Look at the inside (the bowl part). You are upside down! This is a <b>Concave</b> mirror. It caves in like a cave.'
+    },
+    {
+        type: 'theory',
+        illustration: '🎈',
+        title: '7. The Bulging Mirror',
+        content: 'Now flip the spoon over and look at the back.<br>You look stretched out! This is a <b>Convex</b> mirror. It bulges out like a balloon.'
+    },
+    {
+        type: 'theory',
+        illustration: '🚗',
+        title: '8. Real World Mirrors',
+        content: 'Cars use Convex (bulging) mirrors on the sides so the driver can see a wider view of the road behind them. "Objects in mirror are closer than they appear!"'
+    },
+    {
+        type: 'quiz',
+        illustration: '🃏',
+        title: 'Quiz 3: Spoon Magic',
+        question: 'Which mirror shape caves inward like a bowl?',
+        options: ['Convex', 'Concave', 'Flat', 'Square'],
+        correctIndex: 1 // Concave
+    },
+
+    // LEVEL 4: The Bending Magic (Refraction)
+    {
+        type: 'theory',
+        illustration: '🪄',
+        title: '9. Level 4: Refraction!',
+        content: 'Sometimes light does not bounce. Sometimes it goes THROUGH things, like water or glass.<br>But it does a magic trick: <b>It Bends!</b> This is called <b>Refraction</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🐢',
+        title: '10. Why Does it Bend?',
+        content: 'Imagine running on grass, then suddenly running in thick mud. You slow down, right? 🏃‍♂️<br>Light slows down when it goes from air into water. This speed change makes it bend!'
+    },
+    {
+        type: 'theory',
+        illustration: '✏️',
+        title: '11. Try This Mini-Game!',
+        content: 'Put a pencil in a glass half-full of water.<br>Look at it from the side. The pencil looks broken in half! 😲<br>It is not really broken; the bending light is tricking your eyes.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🌊',
+        title: 'Quiz 4: The Mud Trap',
+        question: 'Why does light bend (refract) when it enters water?',
+        options: ['It gets tired', 'It speeds up', 'It slows down', 'It likes swimming'],
+        correctIndex: 2 // It slows down
+    },
+
+    // LEVEL 5: Boss Items (Lenses & Rainbows)
+    {
+        type: 'theory',
+        illustration: '🔍',
+        title: '12. Magic Glass (Lenses)',
+        content: 'A magnifying glass is a special curved piece of glass called a <b>Lens</b>.<br>It bends the light to make tiny things (like a bug) look HUGE! 🐜'
+    },
+    {
+        type: 'theory',
+        illustration: '🌈',
+        title: '13. The Ultimate Reward: Rainbows',
+        content: 'Did you know white light is hiding all the colors of the rainbow? 🎨<br>When sunlight shines through raindrops, the water bends (refracts) the light, splitting it into beautiful colors!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🏆',
+        title: 'Final Boss Quiz',
+        question: 'What makes a rainbow in the sky?',
+        options: [
+            'Paint in the clouds',
+            'Light bouncing off a giant mirror',
+            'Raindrops bending (refracting) sunlight',
+            'The sun wearing sunglasses'
+        ],
+        correctIndex: 2 // Raindrops refracting
+    }
+],
+
+        'electricity': [
+    // LEVEL 1: Meet the Tiny Workers
+    {
+        type: 'theory',
+        illustration: '⚡',
+        title: '1. The Invisible Magic',
+        content: 'Welcome to the Electricity Quest! 🎮<br>Electricity is like invisible magic that powers our world. It turns on the TV, lights up your room, and even charges your tablet!'
+    },
+    {
+        type: 'theory',
+        illustration: '🐜',
+        title: '2. Meet the Electrons',
+        content: 'Electricity is actually made of millions of tiny, invisible workers called <b>Electrons</b>.<br>They are so small you cannot see them, but they have LOTS of energy!'
+    },
+    {
+        type: 'theory',
+        illustration: '🌊',
+        title: '3. The Energy River',
+        content: 'When these tiny electrons all hold hands and run together in the same direction, they create an <b>Electric Current</b>.<br>Think of it like a super-fast river of energy!'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1: The Tiny Workers',
+        question: 'What are the tiny, invisible workers that make electricity called?',
+        options: ['Protons', 'Neutrons', 'Electrons', 'Megatrons'],
+        correctIndex: 2 // Electrons
+    },
+
+    // LEVEL 2: The VIP Pass & The Blockers
+    {
+        type: 'theory',
+        illustration: '🏎️',
+        title: '4. Level 2: Conductors',
+        content: 'Electrons love to run through certain materials. We call these <b>Conductors</b>.<br>Metals like copper and iron give electrons a "VIP Pass" to zoom through super fast!'
+    },
+    {
+        type: 'theory',
+        illustration: '🧱',
+        title: '5. The Blockers (Insulators)',
+        content: 'Some materials say, "STOP! No running here!" We call these <b>Insulators</b>.<br>Things like rubber, wood, and plastic block the electrons from moving.'
+    },
+    {
+        type: 'theory',
+        illustration: '🛡️',
+        title: '6. The Shield',
+        content: 'Look at a charger cable. The inside is <b>metal</b> (Conductor) so the electricity can run. The outside is <b>rubber</b> (Insulator) to protect your hands like a superhero shield! 🦸‍♂️'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2: The Fast Lane',
+        question: 'Which of these gives electricity a "VIP Pass" to run fast?',
+        options: ['A rubber duck', 'A metal copper wire', 'A wooden stick', 'A plastic toy'],
+        correctIndex: 1 // Metal copper wire
+    },
+
+    // LEVEL 3: The Ultimate Racetrack
+    {
+        type: 'theory',
+        illustration: '🏁',
+        title: '7. Level 3: Circuits',
+        content: 'Electrons only run if they have a complete, unbroken racetrack to travel on. We call this racetrack an <b>Electric Circuit</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🍩',
+        title: '8. The Closed Loop',
+        content: 'A circuit must be a full circle (like a donut). If the racetrack is perfectly connected, we call it a <b>Closed Circuit</b>, and the lights turn ON! 💡'
+    },
+    {
+        type: 'theory',
+        illustration: '🌉',
+        title: '9. The Broken Bridge',
+        content: 'If there is even a tiny gap in the racetrack, the electrons are too scared to jump! This is an <b>Open Circuit</b>, and the lights turn OFF. 🌑'
+    },
+    {
+        type: 'quiz',
+        illustration: '🃏',
+        title: 'Quiz 3: The Racetrack',
+        question: 'What happens if the racetrack (circuit) has a gap or is broken?',
+        options: ['The electrons run faster', 'The electrons jump over it', 'The electricity stops moving', 'The lights get brighter'],
+        correctIndex: 2 // The electricity stops
+    },
+
+    // LEVEL 4: Gadgets & Gizmos
+    {
+        type: 'theory',
+        illustration: '🕹️',
+        title: '10. The Switch (Drawbridge)',
+        content: 'How do we turn lights on and off? With a <b>Switch</b>!<br>A switch acts like a drawbridge. Flip it ON: the bridge lowers (Closed Circuit). Flip it OFF: the bridge goes up (Open Circuit).'
+    },
+    {
+        type: 'theory',
+        illustration: '🔋',
+        title: '11. The Power Factory',
+        content: 'Electrons need a push to start running! A <b>Battery</b> is like a tiny energy factory that pumps the electrons onto the racetrack.'
+    },
+    {
+        type: 'theory',
+        illustration: '🚪',
+        title: '12. Plus and Minus Doors',
+        content: 'Batteries have two doors: Positive (+) and Negative (-).<br>Electrons run out of the negative door, do their job (like lighting a bulb), and go back into the positive door to rest.'
+    },
+    {
+        type: 'quiz',
+        illustration: '💡',
+        title: 'Quiz 4: The Drawbridge',
+        question: 'Which device acts like a drawbridge to open and close the racetrack?',
+        options: ['The Battery', 'The Switch', 'The Wire', 'The Lightbulb'],
+        correctIndex: 1 // The Switch
+    },
+
+    // BOSS LEVEL: Safety First
+    {
+        type: 'theory',
+        illustration: '🐉',
+        title: '13. Boss Level: Safety!',
+        content: 'Electricity is a friendly helper, but it is also VERY powerful. It is like a sleeping dragon. We must respect it!'
+    },
+    {
+        type: 'theory',
+        illustration: '💦',
+        title: '14. Water is the Enemy',
+        content: 'Water is a conductor! NEVER touch electrical plugs or switches with wet hands, or the electricity might try to run through the water to you!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🏆',
+        title: 'Final Boss Quiz',
+        question: 'What is the most important rule when playing the Electricity game in real life?',
+        options: [
+            'Only use wet hands',
+            'Stick toys into the wall outlets',
+            'Never play with plugs and keep water away',
+            'Cut the wires to see the electrons'
+        ],
+        correctIndex: 2 // Never play with plugs
+    }
+],
+             'workEnergy': [
+    // LEVEL 1: The Stamina Bar (Energy)
+    {
+        type: 'theory',
+        illustration: '🔋',
+        title: '1. The Stamina Bar',
+        content: 'Welcome to the Physics Quest! 🎮<br>To do anything in a video game—like running, jumping, or casting a spell—you need Stamina. In real life, we call this stamina <b>Energy</b>!'
+    },
+    {
+        type: 'theory',
+        illustration: '🪙',
+        title: '2. The Energy Coins',
+        content: 'Energy is what makes things happen. Scientists measure energy in tiny coins called <b>Joules</b>.<br>Eating an apple gives you Joules of energy so you can go out and play!'
+    },
+    {
+        type: 'theory',
+        illustration: '♻️',
+        title: '3. The Magic Rule',
+        content: 'The most important rule in the universe: <b>Energy cannot be destroyed!</b><br>It only changes its shape, like transforming from a battery into the light of a flashlight.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1: Stamina Check',
+        question: 'What do scientists call the "Stamina" needed to make things happen?',
+        options: ['Magic', 'Energy', 'Gravity', 'Sleep'],
+        correctIndex: 1 // Energy
+    },
+
+    // LEVEL 2: Moving the Block (Work)
+    {
+        type: 'theory',
+        illustration: '📦',
+        title: '4. Level 2: Doing "Work"',
+        content: 'In science, "Work" does not mean doing your homework! 📝<br>Work only happens when you <b>push or pull</b> something AND it <b>moves</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🏰',
+        title: '5. The Castle Wall Trap',
+        content: 'Imagine pushing a giant castle wall with all your might. You get super tired and sweaty.<br>Did you do any Science Work? <b>NO!</b> Because the wall didn\'t move!'
+    },
+    {
+        type: 'theory',
+        illustration: '📏',
+        title: '6. The Work Recipe',
+        content: 'To score Work points, you need two things:<br>1. <b>Force</b> (A big push or pull)<br>2. <b>Distance</b> (It has to travel from point A to point B).'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2: The Big Push',
+        question: 'If you push a heavy boulder all day but it NEVER moves, how much Science Work did you do?',
+        options: ['Zero Work', 'A million Work', 'Half the Work', 'Super Work'],
+        correctIndex: 0 // Zero Work
+    },
+
+    // LEVEL 3: Two Types of Magic (Kinetic & Potential)
+    {
+        type: 'theory',
+        illustration: '🏃',
+        title: '7. Level 3: Moving Magic',
+        content: 'When you are running fast or a ball is rolling down a hill, it has <b>Kinetic Energy</b>.<br>"Kinetic" is just a fancy science word for <b>Movement</b>! 🏎️'
+    },
+    {
+        type: 'theory',
+        illustration: '🏹',
+        title: '8. The Waiting Magic',
+        content: 'If you pull back a bow and arrow and wait... the arrow has <b>Potential Energy</b>.<br>It is stored-up energy, just waiting to be unleashed!'
+    },
+    {
+        type: 'theory',
+        illustration: '🎢',
+        title: '9. The Rollercoaster Ride',
+        content: 'At the very top of a rollercoaster, you have max <b>Potential Energy</b> (waiting to fall).<br>When you zoom down to the bottom, it turns into max <b>Kinetic Energy</b> (moving fast)!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎯',
+        title: 'Quiz 3: Energy Types',
+        question: 'What type of energy does a zooming, flying racecar have?',
+        options: ['Lazy Energy', 'Potential Energy', 'Kinetic Energy', 'Sleeping Energy'],
+        correctIndex: 2 // Kinetic (Movement)
+    },
+
+    // LEVEL 4: The Speedrun (Power)
+    {
+        type: 'theory',
+        illustration: '⏱️',
+        title: '10. Level 4: Super Power!',
+        content: 'What is <b>Power</b>? Power is a timer! It tells us how FAST you can use your energy to do work.<br>More Power = Doing the job faster!'
+    },
+    {
+        type: 'theory',
+        illustration: '🧗',
+        title: '11. The Staircase Race',
+        content: 'You and a friend climb the same stairs. You both do the EXACT same amount of Work.<br>But if you run and beat your friend, you used more <b>Power</b>!'
+    },
+    {
+        type: 'theory',
+        illustration: '💡',
+        title: '12. Measuring Power',
+        content: 'We measure Power in <b>Watts</b>.<br>Have you ever seen "60 Watts" on a lightbulb? That tells you how fast the bulb is using energy to glow! 🌟'
+    },
+    {
+        type: 'quiz',
+        illustration: '🚀',
+        title: 'Quiz 4: The Speedrun',
+        question: 'If you finish your chores super fast, what did you use more of?',
+        options: ['Power', 'Distance', 'Friction', 'Time'],
+        correctIndex: 0 // Power
+    },
+
+    // BOSS LEVEL: The Ultimate World Rules
+    {
+        type: 'theory',
+        illustration: '🍔',
+        title: '13. Boss Level: Food Fuel',
+        content: 'Where do YOU get your energy? From food!<br>Food holds <b>Chemical Energy</b> in its tummy. Your body breaks it down to let you play and grow.'
+    },
+    {
+        type: 'theory',
+        illustration: '🔥',
+        title: '14. The Heat Tax',
+        content: 'Whenever energy changes shape, some of it always turns into <b>Heat</b>.<br>Rub your hands together really fast! The movement (Kinetic) turned into Heat (Thermal)! 👐'
+    },
+    {
+        type: 'theory',
+        illustration: '⚙️',
+        title: '15. Cheat Codes (Machines)',
+        content: 'Scientists invented <b>Simple Machines</b> (like wheels, ramps, and pulleys) to act like cheat codes.<br>They don\'t change the amount of work, but they make it FEEL much easier to do!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🏆',
+        title: 'Final Boss Quiz',
+        question: 'When you rub your hands together, what does the kinetic (moving) energy turn into?',
+        options: [
+            'Light Energy',
+            'Sound Energy',
+            'Heat (Thermal) Energy',
+            'Electrical Energy'
+        ],
+        correctIndex: 2 // Heat Energy
+    }
+],
+           'acidBase': [
+    // LEVEL 1: Choose Your Team
+    {
+        type: 'theory',
+        illustration: '🏟️',
+        title: '1. The Chemistry Arena',
+        content: 'Welcome to the Chemistry Arena! 🎮<br>Today, we are going to meet two rival teams that rule the world of liquids: <b>Team Acid</b> and <b>Team Base</b>!'
+    },
+    {
+        type: 'theory',
+        illustration: '🍋',
+        title: '2. Team Acid (The Sour Squad)',
+        content: 'Members of Team Acid have a superpower: they are <b>SOUR</b>!<br>Lemons, oranges, and vinegar are all part of Team Acid. They make your face pucker up! 😖'
+    },
+    {
+        type: 'theory',
+        illustration: '🧼',
+        title: '3. Team Base (The Slippery Squad)',
+        content: 'Members of Team Base are completely different. They taste <b>BITTER</b> and feel super <b>SLIPPERY</b> or soapy.<br>Baking soda and hand soap are proud members of Team Base! 🫧'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1: Taste Test',
+        question: 'If you bite into a lemon and it tastes SUPER sour, which team does it belong to?',
+        options: ['Team Base', 'Team Acid', 'Team Sweet', 'Team Salty'],
+        correctIndex: 1 // Team Acid
+    },
+
+    // LEVEL 2: The Magic Detectives
+    {
+        type: 'theory',
+        illustration: '🛑',
+        title: '4. The Golden Rule',
+        content: 'In the science lab, there is one ultimate rule: <b>NEVER taste things to find out what they are!</b><br>Some acids and bases are too strong and can hurt you. So, how do we tell them apart?'
+    },
+    {
+        type: 'theory',
+        illustration: '🕵️‍♂️',
+        title: '5. Level 2: The Magic Spies',
+        content: 'We use magic spies called <b>Indicators</b>!<br>These are special potions or papers that change color to reveal if a liquid is an Acid or a Base.'
+    },
+    {
+        type: 'theory',
+        illustration: '📄',
+        title: '6. The Litmus Paper Trick',
+        content: 'Our favorite spy is <b>Litmus Paper</b>. It comes in Red and Blue.<br><b>Acids</b> are dangerous, so they turn blue paper <b>RED</b>! 🔴<br><b>Bases</b> are cool, so they turn red paper <b>BLUE</b>! 🔵'
+    },
+    {
+        type: 'theory',
+        illustration: '🍛',
+        title: '7. Kitchen Magic (Turmeric)',
+        content: 'You can do magic at home! Turmeric (the yellow powder in curry) is a spy too.<br>If you put a Base (like soapy water) on a yellow turmeric stain, it magically turns <b>Deep Red</b>!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2: The Spy Game',
+        question: 'If you dip Blue Litmus paper into an Acid, what color will it turn?',
+        options: ['Green', 'Yellow', 'Blue (stays the same)', 'Red'],
+        correctIndex: 3 // Red
+    },
+
+    // LEVEL 3: The Power Meter
+    {
+        type: 'theory',
+        illustration: '🌡️',
+        title: '8. Level 3: The pH Scale',
+        content: 'To see how strong an Acid or Base is, we use a power meter called the <b>pH Scale</b>.<br>It goes from 0 to 14. It is like a high score board for chemicals!'
+    },
+    {
+        type: 'theory',
+        illustration: '⚖️',
+        title: '9. Reading the Meter',
+        content: '<b>0 to 6:</b> The Acid Zone! (0 is the strongest, scariest acid).<br><b>8 to 14:</b> The Base Zone! (14 is the strongest base).<br>But what about the number 7?'
+    },
+    {
+        type: 'theory',
+        illustration: '💧',
+        title: '10. The Safe Zone (Neutral)',
+        content: 'Number <b>7</b> is right in the middle. It is the "Safe Zone" called <b>Neutral</b>.<br>Pure drinking water is a perfect 7. It is not an acid, and it is not a base!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🃏',
+        title: 'Quiz 3: Power Level',
+        question: 'If a liquid has a perfect pH score of 7, what is it?',
+        options: ['A super strong Acid', 'A super strong Base', 'Neutral (like water)', 'Poison'],
+        correctIndex: 2 // Neutral
+    },
+
+    // LEVEL 4: The Epic Battle
+    {
+        type: 'theory',
+        illustration: '⚔️',
+        title: '11. Level 4: The Epic Battle!',
+        content: 'What happens if you mix Team Acid and Team Base together in a bowl?<br>They fight an epic battle! But neither team wins. They <b>cancel each other out</b>!'
+    },
+    {
+        type: 'theory',
+        illustration: '🤝',
+        title: '12. Neutralization',
+        content: 'When they cancel each other out, scientists call it <b>Neutralization</b>.<br>They destroy each other\'s superpowers and become totally safe and neutral.'
+    },
+    {
+        type: 'theory',
+        illustration: '🎁',
+        title: '13. The Battle Loot (Salt & Water)',
+        content: 'When the battle is over, what is left behind? The loot!<br>An Acid and a Base mixing together will ALWAYS create two things: <b>Water</b> and a brand new thing called <b>SALT</b>!'
+    },
+    {
+        type: 'theory',
+        illustration: '🍟',
+        title: '14. More Than French Fries',
+        content: 'In science, "Salt" doesn\'t just mean the white stuff on your french fries.<br>A salt is ANY new material made when an acid and a base defeat each other!'
+    },
+
+    // BOSS LEVEL: Everyday Magic
+    {
+        type: 'theory',
+        illustration: '🐝',
+        title: '15. Boss Level: Healing Magic',
+        content: 'Did you know a bee sting hurts because the bee injects a tiny bit of <b>Acid</b> into your skin?<br>To stop the pain, you can put a mild <b>Base</b> (like baking soda) on it to cancel the acid!'
+    },
+    {
+        type: 'theory',
+        illustration: '🤢',
+        title: '16. The Tummy Monster',
+        content: 'Your tummy uses strong Acid to digest food. But sometimes, it makes too much and your tummy hurts!<br>Doctors give you an "Antacid" pill (which is a Base) to cancel the extra acid and make you feel better.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🏆',
+        title: 'Final Boss Quiz',
+        question: 'If your tummy has too much angry ACID, what kind of potion do you need to drink to cancel it out?',
+        options: [
+            'More Acid',
+            'A Base (Antacid)',
+            'Lemon Juice',
+            'Spicy Sauce'
+        ],
+        correctIndex: 1 // A Base
+    }
+],
+        
+          'disease': [
+    // LEVEL 1: The Invisible Invaders
+    {
+        type: 'theory',
+        illustration: '🏰',
+        title: '1. The Body Fortress',
+        content: 'Welcome to the Body Defense Game! 🎮<br>Your body is like a beautiful, strong castle. Most of the time, it is peaceful and happy inside.'
+    },
+    {
+        type: 'theory',
+        illustration: '👾',
+        title: '2. Meet the Villains: Germs!',
+        content: 'But wait! There are tiny, invisible villains trying to sneak into the castle. We call them <b>Germs</b> or <b>Pathogens</b>. If they get inside, they can make you feel sick (a Disease).'
+    },
+    {
+        type: 'theory',
+        illustration: '🦠',
+        title: '3. Bacteria vs. Viruses',
+        content: 'There are two main types of villains:<br>1. <b>Bacteria:</b> Little monsters that love to eat and multiply.<br>2. <b>Viruses:</b> Sneaky ninjas that hide inside your own cells!'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1: The Bad Guys',
+        question: 'What is the science name for the tiny, invisible villains that make us sick?',
+        options: ['Vitamins', 'Pathogens (Germs)', 'Proteins', 'Minerals'],
+        correctIndex: 1 // Pathogens
+    },
+
+    // LEVEL 2: How the Villains Travel
+    {
+        type: 'theory',
+        illustration: '🌬️',
+        title: '4. Level 2: Sneak Attacks',
+        content: 'How do germs travel to your castle?<br><b>Sneak Attack 1: The Air!</b> When a sick person coughs or sneezes, they shoot millions of invisible germs into the air like a cannon!'
+    },
+    {
+        type: 'theory',
+        illustration: '🦟',
+        title: '5. Bug Taxis',
+        content: '<b>Sneak Attack 2: Bug Taxis!</b><br>Some germs are lazy. They hitch a ride inside mosquitoes or ticks. When the bug bites you, the germ sneaks into your blood! (This causes diseases like Malaria).'
+    },
+    {
+        type: 'theory',
+        illustration: '🍎',
+        title: '6. The Dirty Food Trap',
+        content: '<b>Sneak Attack 3: Dirty Water & Food.</b><br>If you do not wash your hands or your apple, germs will hide on your food and ride straight into your tummy!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2: The Sneeze Cannon',
+        question: 'How do "airborne" germs travel from one person to another?',
+        options: ['By walking', 'Through mosquito bites', 'By coughing and sneezing', 'Through magical portals'],
+        correctIndex: 2 // Coughing and sneezing
+    },
+
+    // LEVEL 3: The Body's Defenses
+    {
+        type: 'theory',
+        illustration: '🛡️',
+        title: '7. Level 3: The Castle Walls',
+        content: 'Don\'t worry, your castle has amazing defenses! Your <b>Skin</b> is the giant outer wall. Germs cannot get through your skin unless you have a cut or scrape.'
+    },
+    {
+        type: 'theory',
+        illustration: '⚔️',
+        title: '8. The Brave Guards',
+        content: 'If germs DO get inside, your army wakes up! Meet the <b>White Blood Cells</b>. They are brave knight guards that float in your blood, hunting down and eating the bad germs! CHOMP! 😋'
+    },
+    {
+        type: 'theory',
+        illustration: '🔥',
+        title: '9. The Fever Alarm',
+        content: 'Sometimes, your body gets really hot. That is a <b>Fever</b>!<br>Your body turns up the heat on purpose because germs HATE the heat. It is a trap to melt the villains away!'
+    },
+    {
+        type: 'theory',
+        illustration: '🤧',
+        title: '10. The Sneeze Blaster',
+        content: 'Got germs in your nose? Your body uses the <b>Sneeze Blaster</b> to shoot them out at 100 miles per hour! (Just remember to cover your mouth so you don\'t hit your friends!)'
+    },
+    {
+        type: 'quiz',
+        illustration: '🤺',
+        title: 'Quiz 3: The Knights',
+        question: 'Who are the brave guards inside your body that hunt down and eat germs?',
+        options: ['Red Blood Cells', 'White Blood Cells', 'Bones', 'Muscles'],
+        correctIndex: 1 // White Blood Cells
+    },
+
+    // LEVEL 4: Potions and Training Camps
+    {
+        type: 'theory',
+        illustration: '🧪',
+        title: '11. Level 4: Magic Potions',
+        content: 'Sometimes your guards need help. The doctor gives you a magic potion called <b>Antibiotics</b>.<br>But careful! It ONLY defeats Bacteria monsters, not Virus ninjas!'
+    },
+    {
+        type: 'theory',
+        illustration: '📜',
+        title: '12. The Training Camp (Vaccines)',
+        content: 'How do we stop germs before they even attack? With a <b>Vaccine</b>!<br>A vaccine is like a training camp for your White Blood Cell guards.'
+    },
+    {
+        type: 'theory',
+        illustration: '🖼️',
+        title: '13. The Wanted Poster',
+        content: 'A vaccine shows your guards a "Wanted Poster" (a tiny, weak piece of the germ).<br>Your guards practice fighting it. So, when the REAL germ shows up, your guards already know exactly how to defeat it instantly!'
+    },
+    {
+        type: 'quiz',
+        illustration: '💉',
+        title: 'Quiz 4: The Ultimate Shield',
+        question: 'What do we call the "training camp" that shows your guards a Wanted Poster of the germ?',
+        options: ['A Band-Aid', 'A Vaccine', 'An X-Ray', 'A Thermometer'],
+        correctIndex: 1 // A Vaccine
+    },
+
+    // BOSS LEVEL: The Daily Quests
+    {
+        type: 'theory',
+        illustration: '🧼',
+        title: '14. Boss Level: The Soap Weapon',
+        content: 'You are the commander of the castle! Your best weapon is <b>Soap and Water</b>.<br>Soap literally explodes the armor of a germ! Wash your hands for 20 seconds to be a germ-destroying hero.'
+    },
+    {
+        type: 'theory',
+        illustration: '🥦',
+        title: '15. Power-Up Foods',
+        content: 'Your guards need energy to fight. Eating fruits and vegetables gives them <b>Vitamins</b>, which act like power-ups for your immune system!'
+    },
+    {
+        type: 'theory',
+        illustration: '🛏️',
+        title: '16. The Sleep Recharge',
+        content: 'When you sleep, your castle repairs its walls and makes new guards. If you stay up too late playing games, your guards get tired and the germs might win!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🏆',
+        title: 'Final Boss Quiz',
+        question: 'What happens to germs when you wash your hands with soap and water?',
+        options: [
+            'They get clean and shiny',
+            'They go to sleep',
+            'Their armor explodes and they wash away',
+            'They become stronger'
+        ],
+        correctIndex: 2 // Armor explodes
+    }
+],
+
+            
+            
 
             // MATH
             'ratio': [
