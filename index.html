@@ -807,9 +807,7 @@
                 .catch((error) => alert("Login Error: " + error.message));
         });
 
-        document.getElementById('logout-btn').addEventListener('click', () => {
-            signOut(auth).then(() => location.reload());
-        });
+        
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
