@@ -3932,9 +3932,641 @@
         ],
         correctIndex: 0 // 12 ÷ 3 + 4 = 4 + 4 = 8
     }
-]
-            
+],
+
+            'coding': [
+    // LEVEL 1: Welcome to Spy School
+    {
+        type: 'theory',
+        illustration: '🕵️‍♂️',
+        title: '1. Welcome to Spy School!',
+        content: 'Game shuru hota hai Secret Agent training se! 🎮<br><b>Coding-Decoding</b> ka matlab hai apne secret message ko chhupana (code karna) aur fir us chhupay hue message ko wapas padhna (decode karna).'
+    },
+    {
+        type: 'theory',
+        illustration: '🔤',
+        title: '2. The Alphabet Ranks',
+        content: 'Ek achhe spy ko A se Z tak sabke number yaad hone chahiye.<br>A = 1, B = 2, C = 3... karte karte Z = 26.<br>Lekin kya hum exam mein baith kar ABCD likhenge? Nahi!'
+    },
+    {
+        type: 'theory',
+        illustration: '💊',
+        title: '3. The Magic Pill: EJOTY',
+        content: 'ABCD ke numbers yaad rakhne ka cheat code hai: <b>EJOTY</b>!<br>E = 5<br>J = 10<br>O = 15<br>T = 20<br>Y = 25<br>Agar koi puche "P" ka number kya hai? Toh O(15) ke baad P aata hai, toh P = 16!'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1: The Agent ID',
+        question: 'EJOTY trick use karke batao, alphabet "T" ka number (Agent ID) kya hai?',
+        options: ['10', '15', '20', '25'],
+        correctIndex: 2 // T = 20
+    },
+
+    // LEVEL 2: The Reverse Ninjas (Opposite Letters)
+    {
+        type: 'theory',
+        illustration: '🥷',
+        title: '4. The Reverse Ninjas',
+        content: 'Spies ko ulta ghoomna bhi aana chahiye! Ise kehte hain <b>Opposite Letters</b>.<br>Jo position A ki aage se hai (1st), wahi Z ki peechhe se hai (1st). Toh A aur Z bane "Opposite Partners".'
+    },
+    {
+        type: 'theory',
+        illustration: '🔗',
+        title: '5. The Partner Trick (A to M)',
+        content: 'Partners ko yaad rakhne ki funny trick:<br><b>A-Z</b> (A-Zad)<br><b>B-Y</b> (BoY)<br><b>C-X</b> (CruX)<br><b>D-W</b> (DeW)<br><b>E-V</b> (EVening)<br><b>F-U</b> (FUn)'
+    },
+    {
+        type: 'theory',
+        illustration: '🤝',
+        title: '6. The Partner Trick (G to M)',
+        content: 'Aur aage dekho:<br><b>G-T</b> (GT Road)<br><b>H-S</b> (High School)<br><b>I-R</b> (Indian Railway)<br><b>J-Q</b> (Jungle Queen)<br><b>K-P</b> (KaanPur)<br><b>L-O</b> & <b>M-N</b> (LOve, MaN)'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2: Find the Partner',
+        question: 'Spies ki language mein, "H" (High) ka opposite partner kaun hai?',
+        options: ['R', 'S', 'T', 'P'],
+        correctIndex: 1 // High School -> H-S
+    },
+
+    // LEVEL 3: The Shifting Game (+1, -1)
+    {
+        type: 'theory',
+        illustration: '➡️',
+        title: '7. The +1 Forward Shift',
+        content: 'Sabse basic spy code: Har letter ko ek step aage badha do (+1)!<br>Agar "BAT" likhna hai, toh:<br>B -> C<br>A -> B<br>T -> U<br>BAT ban gaya <b>CBU</b>!'
+    },
+    {
+        type: 'theory',
+        illustration: '⬅️',
+        title: '8. The Reverse Shift (-1)',
+        content: 'Kabhi kabhi hum code ko ek step peechhe le jate hain (-1).<br>Agar "DOG" likhna hai, toh:<br>D -> C<br>O -> N<br>G -> F<br>DOG ban gaya <b>CNF</b>!'
+    },
+    {
+        type: 'theory',
+        illustration: '🔀',
+        title: '9. The Cross Jumble',
+        content: 'Advanced Spies letters ki jagah (position) badal dete hain. Pehle letter ko aakhiri (last) bana dete hain!<br>Example: "CAT" ko "TAC" likh denge. Ise <b>Position Based Coding</b> kehte hain.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 3: Decode the Message',
+        question: 'Agar "APPLE" ko code mein "BQQMF" (+1 shift) likha jata hai, toh "BOY" ko kya likhenge?',
+        options: ['APX', 'CPZ', 'CNX', 'ANY'],
+        correctIndex: 1 // B->C, O->P, Y->Z = CPZ
+    },
+
+    // LEVEL 4: The Number Lock (Letter to Number)
+    {
+        type: 'theory',
+        illustration: '🔢',
+        title: '10. The Number Lock',
+        content: 'Level Up! Jab words ko numbers mein badla jata hai. Sabse common rule: <b>Letters ke numbers ko Add (+) kar do!</b>'
+    },
+    {
+        type: 'theory',
+        illustration: '➕',
+        title: '11. Number Lock Example',
+        content: 'Socho "CAT" ka code 24 diya hai. Kaise aaya?<br>C = 3<br>A = 1<br>T = 20<br>Add karo: 3 + 1 + 20 = <b>24</b>. Magic solved!'
+    },
+    {
+        type: 'theory',
+        illustration: '🎭',
+        title: '12. Word Substitution (The Illusion)',
+        content: 'Bohot mazedar question! "Agar Red ko Blue kahein, Blue ko White kahein..."<br>Isme poora question mat padho. Sirf aakhiri line padho ki pucha kya hai!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🤔',
+        title: 'Quiz 4: The Illusion Test',
+        question: 'Agar "Sky" ko "Water" kaha jaye, aur "Water" ko "Sand" kaha jaye... Toh machli (fish) kahan tairti hai?',
+        options: ['Sky', 'Water', 'Sand', 'Cloud'],
+        correctIndex: 2 // Fish swims in water, but water is called "Sand".
+    },
+
+    // BOSS LEVEL: The Alien Language (Message Coding)
+    {
+        type: 'theory',
+        illustration: '👽',
+        title: '13. Boss Level: Alien Language',
+        content: 'Competitive exams ka sabse favourite question: <b>Message Coding</b>!<br>Question: "how are you" is written as "ka pa na". Ye Chinese ya Alien jaisi lagti hai!'
+    },
+    {
+        type: 'theory',
+        illustration: '🔍',
+        title: '14. Finding the Common Clue',
+        content: 'Ise solve karne ka ek hi rule hai: <b>Dono lines mein Common (Same) word dhoondo.</b><br>Line 1: "she is good" -> "pa la ta"<br>Line 2: "he is bad" -> "la na sa"'
+    },
+    {
+        type: 'theory',
+        illustration: '💡',
+        title: '15. Solving the Alien Code',
+        content: 'Pichle card mein, dono sentences mein <b>"is"</b> common hai.<br>Aur unke codes mein kya common hai? <b>"la"</b>!<br>Toh turant pata chal gaya ki "is" ka code "la" hai!'
+    },
+    {
+        type: 'theory',
+        illustration: '⚡',
+        title: '16. The Speed Trick',
+        content: 'Exam mein poora paragraph solve mat karna. Jo word question mein pucha gaya hai, sirf us line ko dekho aur baaki ke words ko cancel (cut) karte jao.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🏆',
+        title: 'Final Boss Quiz',
+        question: '"mango is sweet" = "pi ra sa". "apple is red" = "sa la na". In dono lines ke hisaab se, "is" ka code kya hoga?',
+        options: [
+            'pi',
+            'ra',
+            'sa',
+            'la'
+        ],
+        correctIndex: 2 // "is" dono mein common hai, aur code mein "sa" common hai!
+    }
+],
+
+            'bloodRel': [
+    // LEVEL 1: The Family Building (Generations)
+    {
+        type: 'theory',
+        illustration: '🏢',
+        title: '1. Welcome to the Family Building!',
+        content: 'Game shuru hota hai Family Tree se! 🎮<br>Socho ek building hai. Aap <b>Ground Floor (0)</b> par khade ho. Aapke upar wale floors par bade log hain, aur neeche wale floors par chhote bachhe!'
+    },
+    {
+        type: 'theory',
+        illustration: '👦',
+        title: '2. The 0th Floor (Our Generation)',
+        content: 'Aapke floor par kaun kaun hai?<br>Aap, aapke Bhai (Brother), Behan (Sister), aur saare Cousins. Shadi ke baad Husband/Wife aur Brother-in-law/Sister-in-law bhi isi floor par aate hain.'
+    },
+    {
+        type: 'theory',
+        illustration: '👨‍🦳',
+        title: '3. The +1 & +2 Floors (The Elders)',
+        content: '<b>+1 Floor:</b> Mummy, Papa, Uncle, Aunt, Father-in-law.<br><b>+2 Floor:</b> Dada, Dadi (Grandfather, Grandmother) aur Nana, Nani.'
+    },
+    {
+        type: 'theory',
+        illustration: '👶',
+        title: '4. The -1 Floor (The Kids)',
+        content: 'Aapke neeche wale floor par kaun hai?<br>Aapke Beta (Son), Beti (Daughter), aur aapke bhai-behan ke bachhe: <b>Nephew (Bhatija/Bhanja)</b> aur <b>Niece (Bhatiji/Bhanji)</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1: Floor Test',
+        question: 'Aapka "Nephew" (Bhatija/Bhanja) Family Building ke kis floor par aayega?',
+        options: ['+1 Floor', '0th Floor', '-1 Floor', '+2 Floor'],
+        correctIndex: 2 // -1 Floor (Neeche wali generation)
+    },
+
+    // LEVEL 2: The English Translation Trap
+    {
+        type: 'theory',
+        illustration: '🌍',
+        title: '5. The "English" Trap',
+        content: 'English language bohot ajeeb hai! Yahan Chacha, Mama, Fufa, aur Mausa... in sabko sirf ek hi naam diya gaya hai: <b>Uncle</b>!<br>Aur Bua, Mausi, Chachi sab ban jati hain: <b>Aunt</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🧬',
+        title: '6. Paternal vs Maternal',
+        content: 'Exam wale aapko confuse karenge! Isliye do words yaad rakho:<br><b>Paternal (P for Papa):</b> Papa ki side ke rishte (Jaise Paternal Uncle = Chacha/Tau).<br><b>Maternal (M for Mummy):</b> Mummy ki side ke rishte (Jaise Maternal Uncle = Mama).'
+    },
+    {
+        type: 'theory',
+        illustration: '🚫',
+        title: '7. The "Cousin" Rule',
+        content: 'Ek bohot badi mistake jo hum real life mein karte hain: "He is my cousin brother."<br>English mein <b>Cousin Brother ya Cousin Sister jaisa kuch nahi hota!</b> Sirf "Cousin" bolte hain.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2: The Side Test',
+        question: 'Agar question mein "Maternal Grandfather" likha hai, toh uska Hindi mein kya matlab hoga?',
+        options: ['Dada ji', 'Nana ji', 'Chacha ji', 'Mama ji'],
+        correctIndex: 1 // Maternal = Mummy ki side = Nana ji
+    },
+
+    // LEVEL 3: The Detective Drawing (Symbols)
+    {
+        type: 'theory',
+        illustration: '✏️',
+        title: '8. Drawing the Map (Symbols)',
+        content: 'Exam mein relations dimaag mein solve karna bohot hard hai. Hum ek Map banayenge! Uske liye kuch Secret Symbols chahiye.'
+    },
+    {
+        type: 'theory',
+        illustration: '🚹',
+        title: '9. Male and Female Symbols',
+        content: '<b>Male (Aadmi):</b> Isko humesha ek <b>Box (Square)</b> ke andar band karo, ya uske upar (+) laga do.<br><b>Female (Aurat):</b> Isko humesha ek <b>Circle</b> mein band karo, ya (-) laga do.'
+    },
+    {
+        type: 'theory',
+        illustration: '🔗',
+        title: '10. The Connectors (Lines)',
+        content: '<b>Bhai-Behan (Siblings):</b> Ek single line se jodo (A --- B).<br><b>Husband-Wife:</b> Ek double line se jodo (A === B) ya beech mein ek Heart (❤️) bana do taki pata chale ye married hain!'
+    },
+    {
+        type: 'theory',
+        illustration: '⬇️',
+        title: '11. The Generation Line',
+        content: 'Parents aur Bachhon ko humesha ek <b>Vertical Line (Upar se neeche)</b> se jodo.<br>Papa ka Box upar, aur unke neeche line lagakar bete ka Box!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🕵️‍♂️',
+        title: 'Quiz 3: Map Reading',
+        question: 'Agar A aur B ke beech mein "Double Line (===)" bani hai, toh unka kya rishta hai?',
+        options: ['Bhai-Behan', 'Husband-Wife', 'Papa-Beta', 'Dost'],
+        correctIndex: 1 // Double line is for married couples
+    },
+
+    // LEVEL 4: The Photograph Traps
+    {
+        type: 'theory',
+        illustration: '📸',
+        title: '12. Pointing to a Photograph',
+        content: 'Exam ka sabse famous question: "Ek photo ki taraf ishara karte hue Ram ne kaha..."<br>Inhe solve karne ka Ninja Trick: Hamesha sentence ko <b>"My" (Mera)</b> word se padhna shuru karo!'
+    },
+    {
+        type: 'theory',
+        illustration: '🪤',
+        title: '13. The "Only Son/Daughter" Trap',
+        content: 'Sabse bada trap! Agar koi aadmi kehta hai: "Main apne papa ka ONLY SON (eklauta beta) hu."<br>Iska matlab wo kisi aur ki nahi, <b>Khud apni (Himself)</b> baat kar raha hai!'
+    },
+    {
+        type: 'theory',
+        illustration: '🎭',
+        title: '14. The Name Trap',
+        content: 'WARNING! Blood relations mein kabhi bhi naam padh kar gender guess mat karna.<br>"Sonu" ladka bhi ho sakta hai aur ladki bhi! Jab tak question mein na likha ho (He/She, Son/Daughter), tab tak assume mat karna.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 4: The Photo Mystery',
+        question: 'Ram ne ek photo ki taraf ishara karke kaha: "Wo mere Papa ke eklauti aulaad (only child) ka beta hai." Photo mein kaun hai?',
+        options: ['Ram ka bhai', 'Ram khud', 'Ram ka beta', 'Ram ka papa'],
+        correctIndex: 2 // Ram ke papa ka only child = Ram. Uska beta = Ram ka beta.
+    },
+
+    // BOSS LEVEL: Coded Blood Relations
+    {
+        type: 'theory',
+        illustration: '👽',
+        title: '15. Boss Level: Coded Relations',
+        content: 'Advanced questions alien code jaise hote hain:<br>"A + B" means A is the father of B.<br>"A - B" means A is the mother of B.'
+    },
+    {
+        type: 'theory',
+        illustration: '⚡',
+        title: '16. The Gender Elimination Trick',
+        content: 'Bina pen uthaye options kaise cut karein?<br>Agar question pucha hai "Kaunse option mein P, Q ka Father hai?"<br>Toh P ko pakka <b>Male</b> hona chahiye! Jis option mein P ke aage Mother/Sister wala sign ho, usko turant kaat do!'
+    },
+    {
+        type: 'theory',
+        illustration: '🗺️',
+        title: '17. Building the Coded Map',
+        content: 'Hamesha <b>Left se Right</b> padhte hue tree banao.<br>Example: P + Q - R.<br>Pehle P aur Q ka rishta banao (P is father of Q). Fir Q aur R ka rishta banao (Q is mother of R).'
+    },
+    {
+        type: 'theory',
+        illustration: '🕵️‍♀️',
+        title: '18. Tracing it Back',
+        content: 'Tree banne ke baad pocha jata hai "How is P related to R?"<br>Hamesha <b>R se chal kar P tak jao</b>. R ki mother hai Q, aur Q ke father hain P. Toh P hue R ke Nana ji (Maternal Grandfather)!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🏆',
+        title: 'Final Boss Quiz',
+        question: 'Agar "A + B" = A is father of B. Aur "A * B" = A is brother of B. Toh "P * Q + R" mein P ka R se kya rishta hai?',
+        options: [
+            'Father (Papa)',
+            'Paternal Uncle (Chacha/Tau)',
+            'Brother (Bhai)',
+            'Son (Beta)'
+        ],
+        correctIndex: 1 // Q is father of R. P is brother of Q. Papa ka bhai = Chacha (Paternal Uncle).
+    }
+],
+
+            'syllogism': [
+    // LEVEL 1: Welcome to the Crazy Universe
+    {
+        type: 'theory',
+        illustration: '🌌',
+        title: '1. Welcome to the Crazy Universe!',
+        content: 'Game shuru hota hai Logic Universe se! 🎮<br><b>Syllogism</b> ek aisi crazy duniya hai kahan "Saari Billiyan, Kutte ho sakti hain" (All cats are dogs)! Yahan real-world ka dimaag bilkul mat lagana.'
+    },
+    {
+        type: 'theory',
+        illustration: '⚖️',
+        title: '2. The Supreme Law',
+        content: 'Is game ka ek hi rule hai: <b>Statement is God!</b><br>Question mein jo "Statement" diya hai, wo 100% sach hai. Humein bas check karna hai ki unke neeche diye gaye "Conclusions" (Guess) sahi hain ya galat.'
+    },
+    {
+        type: 'theory',
+        illustration: '🪄',
+        title: '3. The Magic Rings (Venn Diagram)',
+        content: 'Is game ko jeetne ka ek hi weapon hai: <b>Venn Diagrams</b>!<br>Hum har ek cheez (jaise Cats, Dogs) ke liye ek Magic Ring (Circle) banayenge aur unhe aapas mein jodenge.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1: The First Rule',
+        question: 'Agar statement kehta hai "All Boys are Birds" (Saare ladke pakshi hain), toh aap kya sochoge?',
+        options: ['Ye toh real life mein impossible hai!', 'Statement 100% sach hai, isi ko manenge.', 'Question galat type hua hai.', 'Main isko skip kar dunga.'],
+        correctIndex: 1 // Statement is God (100% true)
+    },
+
+    // LEVEL 2: The 4 Basic Spells (ALL, SOME, NO, SOME NOT)
+    {
+        type: 'theory',
+        illustration: '⭕',
+        title: '4. Spell 1: "ALL" (Sab Kuch)',
+        content: 'Statement: <b>"All A are B"</b>.<br>Kaise banayenge? "A" ka chhota circle banakar, usko poori tarah "B" ke bade circle ke andar daal do! B ne A ko poora kha liya hai.'
+    },
+    {
+        type: 'theory',
+        illustration: '🤝',
+        title: '5. Spell 2: "SOME" (Thoda Sa)',
+        content: 'Statement: <b>"Some A are B"</b>.<br>Kaise banayenge? Dono circles ko thoda sa overlap kar do. Ye aapas mein best friends ban gaye hain aur inka kuch area common hai.'
+    },
+    {
+        type: 'theory',
+        illustration: '⚔️',
+        title: '6. Spell 3: "NO" (Dushmani)',
+        content: 'Statement: <b>"No A is B"</b>.<br>Dono circles ko door door banao, aur unke beech mein ek line kheenchar <b>Cross (X)</b> laga do! Inki kadi dushmani hai, ye kabhi ek dusre ko touch nahi karenge.'
+    },
+    {
+        type: 'theory',
+        illustration: '💔',
+        title: '7. Spell 4: "SOME NOT" (Thodi Dushmani)',
+        content: 'Statement: <b>"Some A are not B"</b>.<br>A ke circle ka ek chhota sa hissa (part) dark karo, aur wahan se line nikal kar B par Cross (X) laga do. A ka thoda sa hissa B se nafrat karta hai!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2: The Ring Check',
+        question: 'Agar aapne "Some A are B" ka diagram (overlapping circles) banaya hai, toh kya hum bol sakte hain ki "All A are B"?',
+        options: ['Haan, bol sakte hain', 'Nahi, hum sirf thode se (Some) ki guarantee le sakte hain', 'Dono circles alag hain', 'Pata nahi'],
+        correctIndex: 1 // Only SOME is guaranteed, ALL is a guess (False).
+    },
+
+    // LEVEL 3: The "Unknown" Zone (Very Important!)
+    {
+        type: 'theory',
+        illustration: '🌫️',
+        title: '8. The Fog of War (Unknown Zone)',
+        content: 'Rule: Agar do circles ke beech mein koi direct connection nahi hai (na touch kar rahe hain, na Cross(X) laga hai)... toh unke beech <b>Sab kuch Unknown hai!</b>'
+    },
+    {
+        type: 'theory',
+        illustration: '🤐',
+        title: '9. Rule of Silence',
+        content: 'Agar relation Unknown hai, toh koi bhi Definite (pakka) conclusion pooche, toh chup-chaap <b>False (Galat)</b> mark kar do!<br>Kyunki jiske baare mein pata nahi, uspe hum guess nahi kar sakte.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🕵️‍♂️',
+        title: 'Quiz 3: The Unknown Test',
+        question: 'A ka circle B se touch kar raha hai. B ka circle C se touch kar raha hai. (A-B-C). Kya A aur C aapas mein touch kar rahe hain?',
+        options: ['Haan', 'Nahi, A aur C ke beech relation "Unknown" hai', 'A aur C dushman hain', 'A aur C best friends hain'],
+        correctIndex: 1 // No direct connection, so it's Unknown!
+    },
+
+    // LEVEL 4: Magic Level (Possibilities)
+    {
+        type: 'theory',
+        illustration: '✨',
+        title: '10. Level 4: "Possibility" (Sambhavna)',
+        content: 'Advanced Magic! Agar conclusion mein <b>"is a possibility"</b> ya <b>"can be"</b> likha ho, toh game change ho jata hai. Ab humein pakka nahi pata karna, bas ye sochna hai ki "kya aisa ho sakta hai?"'
+    },
+    {
+        type: 'theory',
+        illustration: '🔓',
+        title: '11. The Power of Unknown',
+        content: 'Golden Trick: Agar do circles ke beech relation <b>Unknown</b> hai, toh unke beech <b>HAARE TAREAH KI POSSIBILITY TRUE HOTI HAI!</b><br>Wo friends bhi ho sakte hain, dushman bhi!'
+    },
+    {
+        type: 'theory',
+        illustration: '🛑',
+        title: '12. When Possibility Fails',
+        content: 'Agar koi cheez already 100% True hai, toh uski "Possibility" hamesha <b>False</b> hoti hai.<br>Jaise: Agar bahar barish ho rahi hai, aur koi bole "Barish hone ki possibility hai"... toh wo bewakoof hai!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 4: Magic Test',
+        question: 'A aur C ke beech koi connection ya Cross(X) nahi hai (Unknown). Conclusion kehta hai: "All A being C is a possibility". Kya ye True hoga?',
+        options: ['False', 'True', 'Dono dushman hain', 'Question galat hai'],
+        correctIndex: 1 // True! Unknown relation = All possibilities are True!
+    },
+
+    // BOSS LEVEL: "Either/Or" & "Only a Few"
+    {
+        type: 'theory',
+        illustration: '⚖️',
+        title: '13. The "Either/Or" Trap',
+        content: 'Exam mein kabhi kabhi answer aata hai "Either 1 or 2 follows". Iske 3 rules hain:<br>1. Dono conclusions akele mein False hone chahiye.<br>2. Dono ke words (Elements) same hone chahiye.<br>3. Ek Positive (Some) aur ek Negative (No) hona chahiye.'
+    },
+    {
+        type: 'theory',
+        illustration: '🔥',
+        title: '14. Boss Concept: "Only a Few" (Keval Kuch)',
+        content: 'Aajkal bank exams ka sabse favourite! Statement: <b>"Only a few A are B"</b>.<br>Iska matlab 2 baatein hain: "Kuch A, B hain" AND "Kuch A, B NAHI hain" (dono ek sath!).'
+    },
+    {
+        type: 'theory',
+        illustration: '🏹',
+        title: '15. The One-Way Arrow',
+        content: '"Only a few A are B" mein ek secret chhupa hai!<br>B poora uth kar A ke andar ja sakta hai (Possibility True).<br>Lekin A KABHI BHI poora uth kar B ke andar <b>nahi ja sakta!</b> (Kyunki A ka kuch part hamesha bahar rahega).'
+    },
+    {
+        type: 'quiz',
+        illustration: '🏆',
+        title: 'Final Boss Quiz',
+        question: 'Statement: "Only a few Cats are Dogs". Conclusion: "All Cats can be Dogs". Kya ye sach ho sakta hai?',
+        options: [
+            'True (Haan ho sakta hai)',
+            'False (Nahi, saari Cats kabhi Dogs nahi ho sakti)',
+            'Either/Or case hai',
+            'Pata nahi'
+        ],
+        correctIndex: 1 // False! "Only a few" means a part of Cats is strictly blocked from being Dogs.
+    }
+],
         
+        
+        
+            
+        'calendarClock': [
+    // LEVEL 1: Welcome to Time Travel (Calendar Basics)
+    {
+        type: 'theory',
+        illustration: '⏳',
+        title: '1. Welcome to Time Travel Academy!',
+        content: 'Game shuru hota hai Time Machine se! 🎮<br>Calendar ko hack karne ka sabse bada secret hai: <b>Number 7</b>. Har 7 din baad same day wapas aa jata hai. (Jaise Monday ke 7 din baad wapas Monday!).'
+    },
+    {
+        type: 'theory',
+        illustration: '👽',
+        title: '2. The "Odd Days" Magic',
+        content: 'Jo din 7 ke group (Week) mein fit nahi hote, unhe hum <b>Odd Days (Extra Days)</b> kehte hain.<br>Jaise 10 din mein: 7 din ka 1 week ban gaya, aur <b>3 Odd Days</b> bach gaye. Saara game inhi bache hue extra dino ka hai!'
+    },
+    {
+        type: 'theory',
+        illustration: '🗓️',
+        title: '3. Normal Year vs Leap Year',
+        content: '<b>Normal Year:</b> 365 days. 365 ko 7 se divide karo = 52 Weeks aur <b>1 Odd Day</b>.<br><b>Leap Year:</b> 366 days (Feb mein 29 days). Isme bachte hain <b>2 Odd Days</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1: The Extra Day Test',
+        question: 'Agar ek Normal Year (365 days) khatam hota hai, toh humaari pocket mein kitne "Odd Days" (Extra din) bachte hain?',
+        options: ['0', '1', '2', '3'],
+        correctIndex: 1 // 1 Odd Day
+    },
+
+    // LEVEL 2: The Time Jumps
+    {
+        type: 'theory',
+        illustration: '🚀',
+        title: '4. The +1 Year Jump',
+        content: 'Agar aaj 1st Jan 2025 ko Monday hai, toh 1st Jan 2026 ko kya hoga?<br>Kyunki 2025 Normal Year hai (1 Odd Day), hum bas <b>+1 day jump</b> karenge. Answer: Tuesday!'
+    },
+    {
+        type: 'theory',
+        illustration: '🐸',
+        title: '5. The Leap Year Jump (+2)',
+        content: 'Agar beech mein 29th Feb aa jaye (Leap Year), toh wo ek extra magic din le aata hai. Tab hum <b>+2 days jump</b> karenge! Jaise Monday se direct Wednesday.'
+    },
+    {
+        type: 'theory',
+        illustration: '🔄',
+        title: '6. The Copy-Paste Calendar',
+        content: 'Kya aapko pata hai calendars repeat hote hain? Ek purana calendar wapas use ho sakta hai!<br><b>Leap Year</b> ka calendar hamesha <b>28 saal</b> baad exactly copy-paste (repeat) hota hai.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2: The Time Jump',
+        question: 'Agar aaj (Monday) se main 15 din aage Time Travel karu, toh kaunsa din hoga? (Hint: Odd Days nikalo!)',
+        options: ['Tuesday', 'Wednesday', 'Sunday', 'Monday'],
+        correctIndex: 0 // 15 / 7 = 1 remainder (Odd Day). Monday + 1 = Tuesday.
+    },
+
+    // LEVEL 3: Welcome to the Clock Tower
+    {
+        type: 'theory',
+        illustration: '🕰️',
+        title: '7. Welcome to the Clock Tower!',
+        content: 'Ab hum Clock (Ghadi) ki duniya mein aayenge. Ye ek Racetrack hai jo 360 degrees (ek poora circle) ka hai. Yahan do main racers hain: Hour Hand aur Minute Hand.'
+    },
+    {
+        type: 'theory',
+        illustration: '🐢',
+        title: '8. The Slow Tortoise (Hour Hand)',
+        content: 'Hour Hand (Ghante ki sui) ek aalsi kachhua (tortoise) hai.<br>Ye 1 minute mein sirf <b>0.5° (aadha degree)</b> chalta hai. Bohot slow!'
+    },
+    {
+        type: 'theory',
+        illustration: '🐇',
+        title: '9. The Fast Rabbit (Minute Hand)',
+        content: 'Minute Hand (Minute ki sui) ek tez khargosh (rabbit) hai.<br>Ye 1 minute mein <b>6° (six degrees)</b> bhagta hai. Ye tortoise se bohot tez hai!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🏁',
+        title: 'Quiz 3: The Race',
+        question: 'Racetrack par "Fast Rabbit" (Minute Hand) 1 minute mein kitni aage badhta hai?',
+        options: ['1 degree', '0.5 degree', '6 degrees', '30 degrees'],
+        correctIndex: 2 // 6 degrees
+    },
+
+    // LEVEL 4: The Ultimate Clock Cheat Codes
+    {
+        type: 'theory',
+        illustration: '📐',
+        title: '10. The Magic Angle Formula',
+        content: 'Time diya ho (Jaise 4:20) aur dono sui ke beech ka Angle pucha ho? Ye cheat code (formula) lagao:<br><b>Angle = |30 × H - 5.5 × M|</b><br>(H = Hours, M = Minutes).'
+    },
+    {
+        type: 'theory',
+        illustration: '🫂',
+        title: '11. The Meeting Point (0°)',
+        content: 'Dono sui (hands) ek din (24 hours) mein kitni baar ek dusre se milti (overlap/0°) hain?<br>Aap sochoge 24 baar? <b>Ghalat!</b> Wo sirf <b>22 baar</b> milti hain! (11:00 se 1:00 ke beech sirf 12 baje milti hain).'
+    },
+    {
+        type: 'theory',
+        illustration: '⬅️➡️',
+        title: '12. The Opposite Point (180°)',
+        content: 'Dono sui ek dum seedhi line mein, par opposite direction mein kitni baar aati hain? Ye bhi din mein exactly <b>22 baar</b> hota hai!'
+    },
+    {
+        type: 'theory',
+        illustration: '📐',
+        title: '13. The 90 Degree Attack',
+        content: 'Right Angle (90°) din mein kitni baar banta hai?<br>Kyunki har ghante mein ye 2 baar banta hai, toh 24 ghante mein ye total <b>44 baar</b> banta hai!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 4: The Trap Question',
+        question: 'Clock ki dono sui (hands) 24 hours (ek poore din) mein kitni baar ek dusre ke upar (overlap) aati hain?',
+        options: ['12 baar', '24 baar', '22 baar', '44 baar'],
+        correctIndex: 2 // 22 baar
+    },
+
+    // BOSS LEVEL: Mirror & Water Dimensions
+    {
+        type: 'theory',
+        illustration: '🪞',
+        title: '14. Boss Level: Mirror Image',
+        content: 'Exam mein puchenge: "Clock mein 3:15 ho raha hai, usko sheeshe (Mirror) mein dekho toh kya time hoga?"<br>Secret Trick: Diye gaye time ko <b>11:60</b> se subtract (-) kar do!'
+    },
+    {
+        type: 'theory',
+        illustration: '📝',
+        title: '15. Using the Mirror Trick',
+        content: 'Time hai 3:15.<br>11:60 mein se 3:15 minus karo:<br>Hours: 11 - 3 = 8.<br>Mins: 60 - 15 = 45.<br>Answer: <b>8:45</b>! Bina ghadi draw kiye answer aa gaya!'
+    },
+    {
+        type: 'theory',
+        illustration: '💧',
+        title: '16. The Water Image Trick',
+        content: 'Agar puche "Pani (Water) mein clock kaisi dikhegi?"<br>Iska cheat code alag hai: Diye gaye time ko <b>18:30</b> se minus (-) kar do!'
+    },
+    {
+        type: 'theory',
+        illustration: '🤒',
+        title: '17. The Sick Clock (Faulty Clocks)',
+        content: 'Agar ghadi kharab (faulty) ho jaye aur har ghante 5 minute tej (fast) ho jaye?<br>Toh 24 ghante mein wo 24 x 5 = 120 minutes (2 hours) aage nikal jayegi! Ise Gaining Time kehte hain.'
+    },
+    {
+        type: 'theory',
+        illustration: '🌟',
+        title: '18. Final Revision Magic',
+        content: 'Calendar ka King: "Odd Days" (÷7).<br>Clock ka King: "Angle Formula" (30H - 5.5M).<br>Mirror ka King: "11:60".'
+    },
+    {
+        type: 'quiz',
+        illustration: '🏆',
+        title: 'Final Boss Quiz',
+        question: 'Agar asli ghadi mein 04:20 baj rahe hain, toh "Mirror Image Trick" (11:60) lagakar batao, sheeshe mein kya time dikhega?',
+        options: [
+            '06:40',
+            '07:40',
+            '08:20',
+            '07:20'
+        ],
+        correctIndex: 1 // 11:60 - 04:20 = 07:40
+    }
+]
+             
         
         
         
