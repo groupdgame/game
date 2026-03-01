@@ -349,13 +349,20 @@
         let currentUser = null;
 
         // --- 2. TOPICS DEFINITIONS ---
+              // --- 2. TOPICS DEFINITIONS ---
         // Make variables global (window.) so HTML can see them
         window.scienceTopics = [
             { id: 'units', name: 'Units', icon: '📏', locked: false },
             { id: 'vitamins', name: 'Vitamins', icon: '💊', locked: true },
             { id: 'periodic', name: 'Periodic T.', icon: '⚛️', locked: true },
             { id: 'newton', name: 'Newton', icon: '🍎', locked: true },
-            { id: 'body', name: 'Human Body', icon: '🫀', locked: true }
+            { id: 'body', name: 'Human Body', icon: '🫀', locked: true },
+            // Naye Science Topics:
+            { id: 'light', name: 'Light', icon: '💡', locked: true },
+            { id: 'electricity', name: 'Electricity', icon: '⚡', locked: true },
+            { id: 'workEnergy', name: 'Work/Energy', icon: '⚙️', locked: true },
+            { id: 'acidBase', name: 'Acid/Base', icon: '🧪', locked: true },
+            { id: 'disease', name: 'Diseases', icon: '🦠', locked: true }
         ];
 
         window.mathTopics = [
@@ -364,7 +371,12 @@
             { id: 'lcm', name: 'LCM/HCF', icon: '🔢', locked: true },
             { id: 'profit', name: 'Profit', icon: '💰', locked: true },
             { id: 'speed', name: 'Speed', icon: '⏱️', locked: true },
-            { id: 'percentage', name: 'Percent', icon: '%', locked: true }
+            { id: 'percentage', name: 'Percent', icon: '%', locked: true },
+            // Naye Maths Topics:
+            { id: 'numSystem', name: 'Num System', icon: '🧮', locked: true },
+            { id: 'timeWork', name: 'Time/Work', icon: '⏳', locked: true },
+            { id: 'interest', name: 'SI & CI', icon: '📈', locked: true },
+            { id: 'mensuration', name: 'Mensuration', icon: '📐', locked: true }
         ];
 
         window.reasoningTopics = [
@@ -373,8 +385,14 @@
             { id: 'mathOps', name: 'Operations', icon: '➕', locked: true },
             { id: 'ranking', name: 'Ranking', icon: '🥇', locked: true },
             { id: 'artValues', name: 'Art. Values', icon: '🎭', locked: true },
-            { id: 'insertSign', name: 'Insert Sign', icon: '❓', locked: true }
+            { id: 'insertSign', name: 'Insert Sign', icon: '❓', locked: true },
+            // Naye Reasoning Topics:
+            { id: 'coding', name: 'Coding', icon: '🕵️', locked: true },
+            { id: 'bloodRel', name: 'Blood Rel.', icon: '👨‍👩‍👧', locked: true },
+            { id: 'syllogism', name: 'Syllogism', icon: '🤔', locked: true },
+            { id: 'calendarClock', name: 'Cal/Clock', icon: '📅', locked: true }
         ];
+
 
         // --- 3. LESSON CONTENT ---
         window.allLessons = {
