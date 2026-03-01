@@ -2628,7 +2628,641 @@
         correctIndex: 1 // X * 1.2 = 60 -> X = 50
     }
 ],
-            
+            'numSystem': [
+    // LEVEL 1: Basic Counting (The Beginning)
+    {
+        type: 'theory',
+        illustration: '🌌',
+        title: '1. Welcome to Number Universe!',
+        content: 'Game shuru hota hai <b>Natural Numbers (Prakritik Sankhya)</b> se.<br>Ye basic counting numbers hain: <b>1, 2, 3, 4...</b> aur aage tak. Socho ye Level 1 ke basic gold coins hain!'
+    },
+    {
+        type: 'theory',
+        illustration: '0️⃣',
+        title: '2. The Hero: ZERO!',
+        content: 'Lekin 1 se pehle kya aata hai? India ne duniya ko diya apna super-hero: <b>Zero (0)</b>!<br>Jab Natural numbers ki team mein Zero jud jata hai, toh wo <b>Whole Numbers (Purna Sankhya)</b> ban jate hain (0, 1, 2, 3...).'
+    },
+    {
+        type: 'theory',
+        illustration: '🚇',
+        title: '3. Going Underground!',
+        content: 'Kya zero se chhota bhi kuch hota hai? Haan! Jab game mein aap underground jaate ho, toh <b>Negative numbers</b> aate hain (-1, -2, -3...).<br>Positive, Negative aur Zero ki puri family ko <b>Integers (Purnank)</b> kehte hain.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1: The Basics',
+        question: 'Agar hum Natural Numbers mein sirf "0" add kar dein, toh us nayi team ka naam kya hoga?',
+        options: ['Integers', 'Negative Numbers', 'Whole Numbers', 'Fractions'],
+        correctIndex: 2 // Whole Numbers
+    },
+
+    // LEVEL 2: Even, Odd & Prime (The Characters)
+    {
+        type: 'theory',
+        illustration: '👯‍♂️',
+        title: '4. The Pairing Game (Even)',
+        content: 'Milte hain <b>Even Numbers (Sam Sankhya)</b> se!<br>Ye wo numbers hain jo hamesha jodi (pairs) mein rehte hain aur <b>2 se exactly divide</b> hote hain. Jaise: 2, 4, 6, 8, 10.'
+    },
+    {
+        type: 'theory',
+        illustration: '🐺',
+        title: '5. The Lone Wolves (Odd)',
+        content: 'Dusri taraf hain <b>Odd Numbers (Visham Sankhya)</b>.<br>Inki jodi nahi ban paati aur ye 2 se divide nahi hote. Inke last mein 1, 3, 5, 7 ya 9 aata hai. Jaise: 13, 27, 99.'
+    },
+    {
+        type: 'theory',
+        illustration: '👑',
+        title: '6. The VIP Bosses (Prime)',
+        content: 'Ab aate hain game ke VIPs: <b>Prime Numbers (Abhajya Sankhya)</b>!<br>Ye kisi se dosti nahi karte. Ye sirf <b>1 aur Khud (itself)</b> se divide hote hain. Jaise: 2, 3, 5, 7, 11.<br><i>Fun Fact: 2 akela Even Prime number hai!</i>'
+    },
+    {
+        type: 'theory',
+        illustration: '🪖',
+        title: '7. The Regular Soldiers',
+        content: 'Jo numbers Prime nahi hote, unhe <b>Composite Numbers</b> kehte hain. Inke bohot saare factors (tukde) hote hain. Jaise: 4, 6, 8, 9.<br><i>Warning: Number 1 na toh Prime hai aur na hi Composite! Wo unique hai.</i>'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2: The VIP Check',
+        question: 'Inmein se kaunsa ek Prime Number (VIP) hai, jo kisi ke table mein nahi aata?',
+        options: ['9', '15', '17', '21'],
+        correctIndex: 2 // 17
+    },
+
+    // LEVEL 3: Rational vs Irrational (Advanced but Easy!)
+    {
+        type: 'theory',
+        illustration: '🍕',
+        title: '8. Slicing the Pizza',
+        content: 'Do integers ke beech ki jagah mein kya hota hai? Wahan aate hain fractions (p/q).<br>Aise numbers jinhe hum <b>p/q ke form mein</b> likh sakte hain, unhe <b>Rational Numbers (Parimey Sankhya)</b> kehte hain. (Condition: q zero nahi hona chahiye!).'
+    },
+    {
+        type: 'theory',
+        illustration: '🤪',
+        title: '9. The Crazy Numbers',
+        content: 'Kuch numbers bohot crazy hote hain. Wo decimal ke baad kabhi khatam nahi hote aur repeat bhi nahi hote! Inhe <b>Irrational Numbers (Aparimey Sankhya)</b> kehte hain.<br>Jaise: $\\pi$ (Pi) aur $\\sqrt{2}$. Inhe p/q form mein nahi likh sakte.'
+    },
+    {
+        type: 'theory',
+        illustration: '🌍',
+        title: '10. The Mega Family',
+        content: 'Jab hum saare Rational aur saare Irrational numbers ko ek badi team mein mila dete hain, toh us ultimate team ko <b>Real Numbers (Vastavik Sankhya)</b> kehte hain. Number line par har ek point ek Real number hai!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🤔',
+        title: 'Quiz 3: The Crazy Check',
+        question: 'Pi ($\\pi$) jiski value kabhi end nahi hoti, wo kis type ka number hai?',
+        options: ['Rational Number', 'Irrational Number', 'Whole Number', 'Even Number'],
+        correctIndex: 1 // Irrational
+    },
+
+    // LEVEL 4: Place Value & Face Value (Power Levels)
+    {
+        type: 'theory',
+        illustration: '🏰',
+        title: '11. Power of Position',
+        content: 'Game mein position se power milti hai! Ise <b>Place Value (Sthaniya Maan)</b> kehte hain.<br>Number <b>456</b> mein, 4 ki power sirf 4 nahi, balki <b>400</b> hai kyunki wo Hundred ki seat par baitha hai!'
+    },
+    {
+        type: 'theory',
+        illustration: '🪞',
+        title: '12. The True Mirror Face',
+        content: 'Ek hota hai <b>Face Value (Jaatiya Maan)</b>. Ye digit ka asli chehra hai jo kabhi nahi badalta.<br>Number <b>456</b> mein 4 ki Face Value hamesha <b>4</b> hi rahegi, chahe wo kisi bhi seat par ho.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 4: Power Test',
+        question: 'Number 7,890 mein "8" ki Place Value (Sthaniya Maan) kya hai?',
+        options: ['8', '80', '800', '8000'],
+        correctIndex: 2 // 800 (Hundred's place)
+    },
+
+    // LEVEL 5: Ninja Tricks (Divisibility Rules - Advanced)
+    {
+        type: 'theory',
+        illustration: '🥷',
+        title: '13. Ninja Trick: Rule of 2 & 5',
+        content: 'Bade number ko bina divide kiye kaise check karein?<br><b>Rule of 2:</b> Agar aakhiri digit 0, 2, 4, 6, 8 hai, toh cut jayega!<br><b>Rule of 5:</b> Agar aakhiri digit sirf 0 ya 5 hai, toh cut jayega!'
+    },
+    {
+        type: 'theory',
+        illustration: '✨',
+        title: '14. Ninja Trick: Rule of 3',
+        content: 'Koi bada number 3 se divide hoga ya nahi? Sirf uske saare digits ko add (sum) kar do!<br>Example: 123 -> $1+2+3=6$.<br>Kyunki 6, three ke table mein aata hai, isliye 123 bhi 3 se cut jayega!'
+    },
+    {
+        type: 'theory',
+        illustration: '🎩',
+        title: '15. The Magic of 11',
+        content: '11 ka rule thoda tricky hai! Ek chhod kar ek (alternate) digits ko add karo. Fir dono sums ko minus (subtract) karo.<br>Agar answer <b>0 ya 11</b> aaye, toh wo number 11 se perfectly divide hoga!'
+    },
+    {
+        type: 'theory',
+        illustration: '⚔️',
+        title: '16. Co-Prime Numbers',
+        content: 'Advanced Concept! <b>Co-Prime</b> wo 2 numbers hote hain jinke beech 1 ke alawa koi common factor nahi hota.<br>Jaise 8 aur 15. Dono prime nahi hain, par ek sath ye Co-prime hain kyunki inka HCF 1 hai.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🏆',
+        title: 'Final Boss Quiz',
+        question: 'Bina divide kiye batao: Kya number "432" 3 se divide hoga? (Trick yaad karo!)',
+        options: [
+            'Nahi, last mein 2 hai.',
+            'Haan, kyunki 4+3+2 = 9, jo 3 se cut-ta hai.',
+            'Nahi, kyunki ye ek Odd number hai.',
+            'Haan, kyunki ye Prime hai.'
+        ],
+        correctIndex: 1 // Sum of digits is 9, which is divisible by 3.
+    }
+],
+        'timeWork': [
+    // LEVEL 1: The Inverse Rule (The Basics)
+    {
+        type: 'theory',
+        illustration: '🏰',
+        title: '1. The Building Game',
+        content: 'Welcome to the Time & Work Quest! 🎮<br>Socho aapko ek bada sa Lego Castle banana hai. Agar aap akele banaoge toh bohot time lagega. Lekin agar aapke 4 dost aa jayein, toh kya hoga?'
+    },
+    {
+        type: 'theory',
+        illustration: '⚖️',
+        title: '2. The See-Saw Rule',
+        content: 'Time aur Work ek see-saw ki tarah hain (Inverse Relation).<br><b>Zada log (More Workers) = Kam Time (Less Time).</b><br><b>Kam log (Less Workers) = Zada Time (More Time).</b>'
+    },
+    {
+        type: 'theory',
+        illustration: '🏃‍♂️',
+        title: '3. Speed vs Time',
+        content: 'Jo tez kaam karta hai (High Speed/Efficiency), wo hamesha <b>kam din (Less Days)</b> lega.<br>Speed aur Time hamesha ek dusre ke dushman (opposite) hote hain!'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1: The Friend Assist',
+        question: 'Agar 1 bacha ek pizza 10 minute mein khata hai, toh 2 bache waisa hi ek pizza kitni der mein khayenge?',
+        options: ['20 minute', '10 minute', '5 minute', '15 minute'],
+        correctIndex: 2 // 5 minute (Double speed = Half time)
+    },
+
+    // LEVEL 2: The Magic "Chocolate Box" Trick (Advanced made easy!)
+    {
+        type: 'theory',
+        illustration: '🍫',
+        title: '4. The Chocolate Trick!',
+        content: 'Books mein fractions (1/10) sikhate hain, jo boring hai! Hum sikhenge <b>Chocolate Method</b>.<br>Total Work ko hum hamesha "Total Chocolates" manenge!'
+    },
+    {
+        type: 'theory',
+        illustration: '📦',
+        title: '5. Finding Total Chocolates',
+        content: 'Question: "A takes 10 days, B takes 15 days."<br>Total chocolates kitni hain? Sirf 10 aur 15 ka <b>LCM</b> nikal lo.<br>LCM of 10 & 15 = <b>30 Chocolates</b> (Total Work).'
+    },
+    {
+        type: 'theory',
+        illustration: '😋',
+        title: '6. Finding One-Day Speed',
+        content: 'A khata hai 30 chocolates 10 din mein = <b>3 chocolates/day</b> (A ki speed).<br>B khata hai 30 chocolates 15 din mein = <b>2 chocolates/day</b> (B ki speed).'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2: Speed Check',
+        question: 'Agar total 40 chocolates hain, aur Rahul unhe 8 din mein khata hai. Rahul ek din mein kitni khayega?',
+        options: ['8', '5', '4', '10'],
+        correctIndex: 1 // 40 / 8 = 5
+    },
+
+    // LEVEL 3: Co-op Mode (Working Together)
+    {
+        type: 'theory',
+        illustration: '🤝',
+        title: '7. Co-op Mode (A + B)',
+        content: 'Ab A aur B ne team bana li!<br>A ki speed = 3 choc/day.<br>B ki speed = 2 choc/day.<br>Dono mil kar khayenge = <b>5 chocolates ek din mein!</b>'
+    },
+    {
+        type: 'theory',
+        illustration: '🏆',
+        title: '8. Finishing the Game',
+        content: 'Total box mein 30 chocolates hain. Dono milkar 1 din mein 5 kha rahe hain.<br>Time = Total Chocolates ÷ Ek din ka kaam.<br>Time = 30 ÷ 5 = <b>6 Days!</b> Boom! Answer aa gaya.'
+    },
+    {
+        type: 'theory',
+        illustration: '🧑‍🤝‍🧑',
+        title: '9. Three Player Co-op',
+        content: 'Agar C bhi aa jaye? Same rule!<br>Teeno ka 1 din ka chocolate sum karo, aur Total Chocolates se divide kar do. Itna simple hai!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 3: Team Up',
+        question: 'A khata hai 4 choc/day, B khata hai 6 choc/day. Total 50 chocolates hain. Dono milkar kitne din lenge?',
+        options: ['10 Days', '5 Days', '8 Days', '12 Days'],
+        correctIndex: 1 // 50 / (4+6) = 5
+    },
+
+    // LEVEL 4: The Rage Quitter (Leaving the work)
+    {
+        type: 'theory',
+        illustration: '🚪',
+        title: '10. The Player Leaves',
+        content: 'Level Up! "A aur B ne kaam shuru kiya, par 2 din baad A chala gaya."<br>Koi baat nahi! Pehle dekho 2 din mein unhone milkar kitni chocolates khayi.'
+    },
+    {
+        type: 'theory',
+        illustration: '🧮',
+        title: '11. Solving the Quitter Problem',
+        content: 'Speed: A=3, B=2. Milkar=5.<br>2 din mein khayi = 5 × 2 = <b>10 chocolates</b>.<br>Bachi kitni? 30 - 10 = <b>20 chocolates bachi hain!</b>'
+    },
+    {
+        type: 'theory',
+        illustration: '🦸‍♂️',
+        title: '12. The Lone Hero',
+        content: 'Ab A chala gaya. Bachi hui 20 chocolates akele B (Speed=2) ko khani hain.<br>B ko kitna time lagega? 20 ÷ 2 = <b>10 Days</b> extra lagenge!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🤔',
+        title: 'Quiz 4: Leftovers',
+        question: '15 chocolates bachi hain. A akela bacha hai aur wo 3 choc/day khata hai. Kitne din mein box khatam hoga?',
+        options: ['3', '10', '5', '8'],
+        correctIndex: 2 // 15 / 3 = 5
+    },
+
+    // LEVEL 5: Superpowers (Efficiency)
+    {
+        type: 'theory',
+        illustration: '⚡',
+        title: '13. 2x Super Speed',
+        content: 'Advanced Rule! "A is twice as fast as B."<br>Iska matlab: Agar B ek din mein 1 chocolate khata hai, toh A ek din mein <b>2 chocolates</b> khayega!'
+    },
+    {
+        type: 'theory',
+        illustration: '🔄',
+        title: '14. Speed vs Days Trick',
+        content: 'Agar A ki speed B se <b>Double (2:1)</b> hai...<br>Toh A ko time <b>Half (1:2)</b> lagega!<br>Jitna tez khao ge, utne kam din lagenge.'
+    },
+
+    // LEVEL 6: The Epic MDH Formula (Final Boss)
+    {
+        type: 'theory',
+        illustration: '🌶️',
+        title: '15. The MDH Spell',
+        content: 'Group wale questions ke liye Magic Spell: <b>MDH</b> (Asli Masale Sach Sach!)<br><b>M</b> = Men (Kitne log)<br><b>D</b> = Days (Kitne din)<br><b>H</b> = Hours (Kitne ghante)'
+    },
+    {
+        type: 'theory',
+        illustration: '⚖️',
+        title: '16. The Balancing Formula',
+        content: 'Formula: <b>$M_1 \times D_1 \times H_1 = M_2 \times D_2 \times H_2$</b><br>Dono side ko barabar kar do! Work (W) hamesha denominator (neeche) aata hai.'
+    },
+    {
+        type: 'theory',
+        illustration: '🕷️',
+        title: '17. The Spider Trap',
+        content: 'Question: "7 spiders 7 web banati hain 7 din mein. 1 spider 1 web kitne din mein banayegi?"<br>Socho! Agar 7 makdiya 7 jaale 7 din mein bana rahi hain, toh ek makdi apna ek jaala 7 din mein hi banayegi!'
+    },
+    {
+        type: 'theory',
+        illustration: '📝',
+        title: '18. Using MDH for the Spider',
+        content: '$M_1=7, D_1=7, W_1=7$ (Webs is Work).<br>Formula: $(7 \times 7) / 7 = (1 \times D_2) / 1$.<br>Solve karo: $7 = D_2$. Answer is 7 Days!'
+    },
+    {
+        type: 'theory',
+        illustration: '🛠️',
+        title: '19. Alternating Days (Tag Team)',
+        content: 'Ek din A kaam karta hai, agle din B. Ise Tag Team kehte hain.<br>Ismein hamesha "2 Din" ka set banta hai. Dono ki ek-ek din ki chocolate add karo aur 2 days likho!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Boss Quiz',
+        question: 'MDH Rule se solve karo: 10 log ek deewar ko 5 din mein banate hain. 5 log us deewar ko kitne din mein banayenge?',
+        options: ['10 Din', '5 Din', '2 Din', '20 Din'],
+        correctIndex: 0 // 10 * 5 = 5 * D2 -> D2 = 10
+    }
+],
+
+        'intrest': [
+    // LEVEL 1: The Magic Garden (Basic Terms)
+    {
+        type: 'theory',
+        illustration: '🌳',
+        title: '1. The Magic Garden',
+        content: 'Welcome to the Magic Bank! 🎮<br>Socho tumhare paas kuch Gold Coins hain. Agar tum inhe Magic Bank ke garden mein bo doge (plant karoge), toh ye grow karenge! Ise hum <b>Investing</b> kehte hain.'
+    },
+    {
+        type: 'theory',
+        illustration: '🌱',
+        title: '2. The Seed (Principal - P)',
+        content: 'Jo asli gold coins tumne shuru mein plant kiye, unhe <b>Principal (P)</b> kehte hain. Ye tumhara apna original paisa hai.'
+    },
+    {
+        type: 'theory',
+        illustration: '🧪',
+        title: '3. Magic Potion (Rate - R%)',
+        content: 'Ped kitna fast bada hoga? Ye depend karta hai <b>Rate (R)</b> par!<br>Rate humesha Percentage (%) mein hota hai. Jaise 10% per year. Ye bank ka magic potion hai.'
+    },
+    {
+        type: 'theory',
+        illustration: '⏳',
+        title: '4. The Waiting Game (Time - T)',
+        content: 'Ped ek din mein bada nahi hota! Tumhe wait karna padega. Ise <b>Time (T)</b> kehte hain, jo humesha Years (Saal) mein count hota hai.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1: The First Step',
+        question: 'Tumhare asli gold coins jo tumne garden mein plant kiye, unhe kya kehte hain?',
+        options: ['Interest', 'Amount', 'Principal', 'Rate'],
+        correctIndex: 2 // Principal
+    },
+
+    // LEVEL 2: Simple Interest (The Honest Friend)
+    {
+        type: 'theory',
+        illustration: '🍎',
+        title: '5. What is Simple Interest (SI)?',
+        content: 'Simple Interest (SI) ek bohot honest rule hai. Agar ped par har saal <b>exactly 10 apples</b> aate hain, toh har saal 10 hi aayenge! Kabhi change nahi honge.'
+    },
+    {
+        type: 'theory',
+        illustration: '📏',
+        title: '6. The SI Rule',
+        content: 'Agar 1st year mein tumhe ₹100 ka profit (Interest) mila, toh 2nd year bhi ₹100 milega, aur 10th year bhi ₹100 hi milega. <b>SI hamesha Principal par lagta hai.</b>'
+    },
+    {
+        type: 'theory',
+        illustration: '🪄',
+        title: '7. The SI Magic Spell',
+        content: 'Simple Interest nikalne ka formula bohot easy hai:<br>$SI = \\frac{P \\times R \\times T}{100}$<br>Bas teeno ko multiply karo aur 100 se divide kar do!'
+    },
+    {
+        type: 'theory',
+        illustration: '🧺',
+        title: '8. The Final Basket (Amount)',
+        content: 'Jab tum apna ped katoge, toh tumhe kya milega?<br>Tumhara apna Seed (Principal) + Naye Apples (Interest)!<br>Ise <b>Amount (A)</b> kehte hain. $A = P + SI$.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2: The Honest Tree',
+        question: 'Agar 1st year ka Simple Interest ₹50 hai, toh sirf 3rd year ka Simple Interest kitna hoga?',
+        options: ['₹150', '₹50', '₹100', '₹0'],
+        correctIndex: 1 // SI never changes, so it's ₹50 for the 3rd year too!
+    },
+
+    // LEVEL 3: Compound Interest (The Snowball Magic)
+    {
+        type: 'theory',
+        illustration: '❄️',
+        title: '9. Enter Compound Interest (CI)',
+        content: 'Level Up! <b>Compound Interest (CI)</b> ek magic snowball ki tarah hai. Ye pahaad se girte hue gol aur bada hota chala jata hai!'
+    },
+    {
+        type: 'theory',
+        illustration: '🔁',
+        title: '10. Interest on Interest!',
+        content: 'CI ki sabse badi power hai: <b>B्याज par B्याज!</b><br>Ismein ped par jo apples aate hain, un apples ke andar se bhi naye chote ped nikal aate hain! Growth bohot fast hoti hai.'
+    },
+    {
+        type: 'theory',
+        illustration: '👯‍♂️',
+        title: '11. The Year 1 Twins',
+        content: 'Bohot important trick! Pehle (1st) saal ke liye, <b>SI aur CI bilkul Twins hote hain!</b> Dono ki value ekdum same hoti hai. Asli magic 2nd year se shuru hota hai.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🤔',
+        title: 'Quiz 3: The Twins',
+        question: 'Pehle (1st) saal ke liye SI aur CI mein kya fark hota hai?',
+        options: ['CI bada hota hai', 'SI bada hota hai', 'Dono bilkul same (Twins) hote hain', 'Dono zero hote hain'],
+        correctIndex: 2 // Dono same hote hain
+    },
+
+    // LEVEL 4: The CI Spell & Cheat Codes
+    {
+        type: 'theory',
+        illustration: '📜',
+        title: '12. The CI Magic Spell',
+        content: 'CI mein hum direct "Amount" nikalte hain. Formula thoda heavy hai, par yaad karna zaroori hai:<br>$A = P(1 + \\frac{R}{100})^T$<br>Aur CI nikalne ke liye: $CI = A - P$.'
+    },
+    {
+        type: 'theory',
+        illustration: '⚔️',
+        title: '13. SI vs CI Battle',
+        content: 'Socho tumne ₹100 dale 10% par.<br><b>SI:</b> Year 1=10, Year 2=10. Total = ₹20.<br><b>CI:</b> Year 1=10. Year 2 mein ₹10 par bhi 10% milega (₹1). Year 2=11. Total = ₹21. CI Wins! 🏆'
+    },
+    {
+        type: 'theory',
+        illustration: '🧩',
+        title: '14. Cheat Code: 2-Year Difference',
+        content: 'Exam ka sabse famous question! "2 saal ke SI aur CI ka difference batao".<br>Pura solve mat karna! Ye cheat code use karo:<br><b>Difference (D) = $P(\\frac{R}{100})^2$</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🚀',
+        title: 'Quiz 4: The Ultimate Power',
+        question: '"Interest par Interest" (Apples growing on Apples) kis magic rule mein milta hai?',
+        options: ['Simple Interest', 'Compound Interest', 'Discount', 'Principal'],
+        correctIndex: 1 // Compound Interest
+    },
+
+    // LEVEL 5: Time Travel (Half-Yearly & Quarterly)
+    {
+        type: 'theory',
+        illustration: '✂️',
+        title: '15. Time Travel: Half-Yearly',
+        content: 'Kabhi kabhi bank kehta hai, "Hum saal mein 2 baar interest denge (Half-Yearly)".<br>Rule: <b>Rate ko Aadha (Half) kardo, aur Time ko Double kardo!</b>'
+    },
+    {
+        type: 'theory',
+        illustration: '🍕',
+        title: '16. Example of Half-Yearly',
+        content: 'Agar R=10% per year hai aur T=1 year hai, par compounding <b>Half-Yearly</b> hai:<br>Naya Rate = 5% (Har 6 mahine ka).<br>Naya Time = 2 cycles (Kyunki 1 saal mein do baar 6 mahine aate hain).'
+    },
+    {
+        type: 'theory',
+        illustration: '🍰',
+        title: '17. The Quarterly Trick',
+        content: 'Agar compounding <b>Quarterly</b> ho (har 3 mahine mein):<br>Saal mein 4 quarter hote hain.<br>Toh <b>Rate ko 4 se divide kardo</b>, aur <b>Time ko 4 se multiply kardo</b>!'
+    },
+    {
+        type: 'theory',
+        illustration: '💰',
+        title: '18. The Rule of 72 (Bonus Secret)',
+        content: 'Ek aur real-life cheat code! Mera paisa double kab hoga?<br>Bas <b>72</b> ko apne Interest Rate se divide kardo.<br>Agar bank 8% interest de raha hai: 72 ÷ 8 = 9 Saal mein paisa DOUBLE!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Boss Quiz',
+        question: 'Agar bank interest "Half-Yearly" (Har 6 mahine mein) de raha hai, toh magic potion (Rate - R) ka kya hoga?',
+        options: ['Double ho jayega', 'Same rahega', 'Aadha (Half) ho jayega', 'Zero ho jayega'],
+        correctIndex: 2 // Aadha (Half) ho jayega
+    }
+],
+            'mensuration': [
+    // LEVEL 1: The Flat World (2D & Perimeter)
+    {
+        type: 'theory',
+        illustration: '🗺️',
+        title: '1. Welcome to Geometry City!',
+        content: 'Game shuru hota hai <b>2D World</b> se! 🎮<br>2D matlab "Two-Dimensional" (Flat). Jaise aapki notebook ka paper. Inke paas sirf Length (L) aur Breadth (B) hoti hai, motai (thickness) nahi hoti!'
+    },
+    {
+        type: 'theory',
+        illustration: '🚧',
+        title: '2. The Boundary Wall (Perimeter)',
+        content: 'Socho aapke paas ek khet (field) hai. Uske chaaron taraf fence (taar) lagani hai. Kitni taar lagegi?<br>Is boundary ki total length ko <b>Perimeter (Parimaap)</b> kehte hain! Bas saari sides ko plus (+) kar do.'
+    },
+    {
+        type: 'theory',
+        illustration: '🟦',
+        title: '3. Square & Rectangle Boundaries',
+        content: '<b>Square:</b> Saari 4 sides equal hoti hain. Toh Perimeter = $4 \\times Side$.<br><b>Rectangle:</b> Aamne-saamne ki sides equal hoti hain. Toh Perimeter = $2(L + B)$.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1: The Fencing Mission',
+        question: 'Agar ek Square garden ki ek side 5 meter hai, toh uske chaaron taraf fence lagane ke liye kitni taar chahiye?',
+        options: ['10 meter', '25 meter', '20 meter', '15 meter'],
+        correctIndex: 2 // 4 x 5 = 20
+    },
+
+    // LEVEL 2: Painting the Floor (Area)
+    {
+        type: 'theory',
+        illustration: '🎨',
+        title: '4. The Magic Carpet (Area)',
+        content: 'Agar boundary <i>Perimeter</i> hai, toh andar ka space kya hai?<br>Zameen par carpet bichhana ho ya deewar par paint karna ho, us flat space ko <b>Area (Chetraphal)</b> kehte hain!'
+    },
+    {
+        type: 'theory',
+        illustration: '📏',
+        title: '5. The Area Formulas',
+        content: '<b>Rectangle:</b> $L \\times B$ (Lambaai ko Chaudaai se multiply karo).<br><b>Square:</b> $Side \\times Side$ (Kyunki L aur B same hote hain).<br><b>Triangle:</b> $\\frac{1}{2} \\times Base \\times Height$ (Rectangle ka aadha!).'
+    },
+    {
+        type: 'theory',
+        illustration: '🍕',
+        title: '6. The Perfect Pizza (Circle)',
+        content: 'Circle ki duniya gol hai! Ismein line nahi hoti.<br>Center se kinare tak ki doori = <b>Radius (r)</b>.<br>Poori seedhi line jo center se guzre = <b>Diameter (D)</b>. Yaad rakhna: $D = 2r$.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2: The Pizza Slice',
+        question: 'Agar ek Circle (Pizza) ka Radius 7 cm hai, toh uska Diameter kitna hoga?',
+        options: ['7 cm', '14 cm', '21 cm', '3.5 cm'],
+        correctIndex: 1 // Diameter is double the radius
+    },
+
+    // LEVEL 3: The Magic Number & Circle Formulas
+    {
+        type: 'theory',
+        illustration: '✨',
+        title: '7. The Magic Number: Pi ($\\pi$)',
+        content: 'Circle ke saare secrets ek magic number mein chhupe hain: <b>$\\pi$ (Pi)</b>!<br>Iski value hamesha fixed hoti hai: $\\frac{22}{7}$ ya $3.14$.'
+    },
+    {
+        type: 'theory',
+        illustration: '🎡',
+        title: '8. Circle ka Perimeter & Area',
+        content: 'Circle ki boundary ko hum Perimeter nahi, <b>Circumference</b> kehte hain. Formula: $2\\pi r$.<br>Aur Circle ke andar ka Area nikalne ka formula hai: $\\pi r^2$.'
+    },
+
+    // LEVEL 4: Level Up! The 3D World (Surface Area)
+    {
+        type: 'theory',
+        illustration: '🧊',
+        title: '9. Level Up: The 3D World!',
+        content: 'Ab hum flat duniya se nikal kar 3D duniya mein aa gaye hain! Inke paas Length, Breadth ke sath <b>Height (H)</b> bhi hoti hai. (Jaise Ludo ka Dice ya ek Box).'
+    },
+    {
+        type: 'theory',
+        illustration: '🎁',
+        title: '10. Gift Wrapping (Surface Area)',
+        content: 'Agar kisi 3D box ko bahar se gift paper se pack karna ho, toh kitna paper lagega? Ise <b>Surface Area (Prishthiya Chetraphal)</b> kehte hain. Ye box ke bahar ki "skin" hai!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🤔',
+        title: 'Quiz 3: The Paint Job',
+        question: 'Agar mujhe ek bade se dande (pole) ko bahar se red paint karna hai, toh main calculation ke liye kya nikalunga?',
+        options: ['Volume', 'Perimeter', 'Surface Area', 'Diagonal'],
+        correctIndex: 2 // Bahar se paint matlab Surface Area
+    },
+
+    // LEVEL 5: 3D Shapes & Volume
+    {
+        type: 'theory',
+        illustration: '📦',
+        title: '11. Cuboid & Cube',
+        content: '<b>Cuboid (Shoe Box):</b> Iske 6 rectangular faces hote hain.<br><b>Cube (Dice):</b> Iski saari sides equal hoti hain. Iska Total Surface Area hota hai $6a^2$ (Kyunki 6 square faces hote hain!).'
+    },
+    {
+        type: 'theory',
+        illustration: '🥤',
+        title: '12. Cylinder & Cone',
+        content: '<b>Cylinder (Coke Can):</b> Oopar aur neeche circle, beech mein curved. Curved Area = $2\\pi r h$.<br><b>Cone (Birthday Hat):</b> Ek point par khatam hota hai. Iski ek slant height (l) bhi hoti hai!'
+    },
+    {
+        type: 'theory',
+        illustration: '🚰',
+        title: '13. Filling the Tank (Volume)',
+        content: 'Ab baat aati hai andar ki! Ek water tank ke <i>andar</i> kitna pani aa sakta hai? Ya ek room mein kitni hawa bhari hai? Is <b>Capacity</b> ko <b>Volume (Aayatan)</b> kehte hain.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 4: Inside Out',
+        question: 'Ek glass ke andar kitna juice aayega, ye janne ke liye hum kya calculate karte hain?',
+        options: ['Area', 'Volume', 'Perimeter', 'Diameter'],
+        correctIndex: 1 // Andar ka space = Volume
+    },
+
+    // BOSS LEVEL: Advanced Tricks & Exam Secrets
+    {
+        type: 'theory',
+        illustration: '🧪',
+        title: '14. The Volume Formulas',
+        content: 'Bas ye 3 magic spells yaad kar lo:<br>Cuboid Volume = $L \\times B \\times H$<br>Cube Volume = $Side^3$ ($a^3$)<br>Cylinder Volume = $\\pi r^2 h$'
+    },
+    {
+        type: 'theory',
+        illustration: '🗡️',
+        title: '15. Boss Trick 1: The Longest Stick',
+        content: 'Advanced Exam Question: "Ek room mein sabse lamba danda (pole) kahan rakha ja sakta hai?"<br>Answer: <b>Diagonal!</b> Kone se kone tak. Cuboid ke diagonal ka formula: $\\sqrt{L^2 + B^2 + H^2}$.'
+    },
+    {
+        type: 'theory',
+        illustration: '🔥',
+        title: '16. Boss Trick 2: The Melting Trick',
+        content: 'Sabse bada exam secret! Agar hum ek badi iron ki ball ko aag mein pighla kar (melt karke) chhoti chhoti balls banayein, toh kya same rahega?<br><b>Unka Total Volume hamesha SAME rahega!</b> Shape badlega, par loha utna hi rahega.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🏆',
+        title: 'Final Boss Quiz',
+        question: 'Agar hum ek metal ke Cylinder ko pighla (melt) kar ek Cube banate hain, toh un dono shapes mein kya cheez bilkul change nahi hogi?',
+        options: [
+            'Surface Area',
+            'Height',
+            'Radius',
+            'Volume'
+        ],
+        correctIndex: 3 // Melting questions me hamesha Volume same rehta hai!
+    }
+],
+        
+        
         
             
             // REASONING
