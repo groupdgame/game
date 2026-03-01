@@ -40,18 +40,25 @@
         }
         #google-login-btn:active { transform: scale(0.95); }
 
-        /* --- USER PROFILE (Top Left) --- */
-        #user-profile {
-            position: fixed; top: 10px; left: 15px; z-index: 1001;
-            display: none; align-items: center; background: rgba(255,255,255,0.9);
-            padding: 5px 10px; border-radius: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        
+        /* --- MAIN APP TOOLBAR --- */
+        #main-toolbar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 60px;
+            background: var(--primary); color: white; z-index: 1001;
+            display: none; /* Login ke baad JS isko 'flex' karega */
+            justify-content: space-between; align-items: center;
+            padding: 0 20px; box-sizing: border-box;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        #user-pic { width: 32px; height: 32px; border-radius: 50%; border: 2px solid white; }
-        #user-name { margin-left: 8px; font-weight: bold; font-size: 14px; color: var(--text); }
-        #logout-btn {
-            margin-left: 10px; padding: 4px 8px; font-size: 11px;
-            background: #ff4b4b; color: white; border: none; border-radius: 6px; cursor: pointer;
-        }
+        #menu-btn { font-size: 28px; cursor: pointer; }
+        #toolbar-title { font-size: 22px; font-weight: bold; margin-left: 10px; }
+        #profile-btn { cursor: pointer; display: flex; align-items: center; }
+        #toolbar-user-pic { width: 36px; height: 36px; border-radius: 50%; border: 2px solid white; object-fit: cover; background: white;}
+        
+        /* Map ki padding thodi badhani hogi kyunki ab upar toolbar hai */
+        #path-view { padding-top: 80px; }
+
+        
 
         /* --- TOP BAR --- */
         #top-bar {
@@ -171,17 +178,22 @@
     <audio id="sound-wrong" src="https://www.soundjay.com/buttons/sounds/button-10.mp3"></audio>
 
     <div id="login-overlay">
-        <h1 style="color:#58cc02; font-size:40px; margin-bottom:10px;">Science App</h1>
+        <h1 style="color:#58cc02; font-size:40px; margin-bottom:10px;">Group D Game</h1>
         <p style="margin-bottom: 30px; color: #777;">Sign in to save your progress!</p>
         <button id="google-login-btn">Login with Google</button>
         <p id="loading-text" style="display:none; margin-top:20px; color: #58cc02; font-weight: bold;">Loading your progress...</p>
     </div>
 
-    <div id="user-profile">
-        <img id="user-pic" src="" alt="User">
-        <span id="user-name">Player</span>
-        <button id="logout-btn">Logout</button>
+
+    <div id="main-toolbar">
+        <div id="menu-btn" onclick="openDrawer()">☰</div>
+        <div id="toolbar-title">Group D</div>
+        <div id="profile-btn" onclick="openProfile()">
+            <img id="toolbar-user-pic" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile">
+        </div>
     </div>
+
+    
 
     <div id="top-bar">
         <span class="close-icon" onclick="exitLesson()">✕</span>
@@ -806,10 +818,11 @@
                 document.getElementById('loading-text').style.display = 'block';
                 document.getElementById('google-login-btn').style.display = 'none';
 
-                // Update Profile UI
-                if(user.photoURL) document.getElementById('user-pic').src = user.photoURL;
-                if(user.displayName) document.getElementById('user-name').innerText = user.displayName.split(' ')[0];
-                document.getElementById('user-profile').style.display = 'flex';
+                // Update Toolbar UI
+                if(user.photoURL) document.getElementById('toolbar-user-pic').src = user.photoURL;
+                document.getElementById('main-toolbar').style.display = 'flex';
+
+                
 
                 // Load Data
                 await loadUserProgress(user.uid);
