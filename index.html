@@ -380,16 +380,796 @@
         window.allLessons = {
             // SCIENCE
             'units': [
-                { type: 'theory', illustration: '📏', title: '1. What is a Unit?', content: 'A unit is a standard quantity used to measure something.<br>Example: We measure length in <b>Meters (m)</b>.' },
-                { type: 'theory', illustration: '⚖️', title: '2. SI Units', content: 'Length -> <b>Meter (m)</b><br>Mass -> <b>Kilogram (kg)</b><br>Time -> <b>Second (s)</b>' },
-                { type: 'quiz', illustration: '❓', title: 'Quiz 1', question: 'What is the SI unit of Mass?', options: ['Gram', 'Pound', 'Kilogram', 'Ton'], correctIndex: 2 },
-                { type: 'theory', illustration: '⚡', title: '3. Derived Units', content: 'Speed = Distance / Time.<br>Unit of Speed = <b>m/s</b>.' },
-                { type: 'quiz', illustration: '🏆', title: 'Final Quiz', question: 'Unit of Force is?', options: ['Joule', 'Newton', 'Watt', 'Pascal'], correctIndex: 1 }
-            ],
-            'vitamins': [ { type: 'theory', illustration: '🥕', title: 'Vitamin A', content: 'Good for Eyes. Source: Carrots.' }, { type: 'quiz', illustration: '❓', title: 'Quiz', question: 'Deficiency of Vit C causes?', options: ['Scurvy', 'Rickets'], correctIndex: 0 } ],
-            'periodic': [ { type: 'theory', illustration: 'H', title: 'Hydrogen', content: 'First element. Atomic Number 1.' }, { type: 'quiz', illustration: '❓', title: 'Quiz', question: 'Symbol for Oxygen?', options: ['O', 'Ox'], correctIndex: 0 } ],
-            'newton': [ { type: 'theory', illustration: '🚀', title: '3rd Law', content: 'Action and Reaction are equal and opposite.' }, { type: 'quiz', illustration: '❓', title: 'Quiz', question: 'F = m x ?', options: ['a', 'v'], correctIndex: 0 } ],
-            'body': [ { type: 'theory', illustration: '🫀', title: 'Heart', content: 'Pumps blood to the body.' }, { type: 'quiz', illustration: '❓', title: 'Quiz', question: 'Largest organ?', options: ['Liver', 'Skin'], correctIndex: 1 } ],
+    // PART 1: The Foundation
+    {
+        type: 'theory',
+        illustration: '📏',
+        title: '1. What is a Physical Quantity?',
+        content: 'Anything that can be <b>measured</b> is a Physical Quantity.<br>It has two parts:<br>1. <b>Magnitude</b> (Number: 5)<br>2. <b>Unit</b> (Standard: kg)<br>Example: "5 kg".'
+    },
+    {
+        type: 'theory',
+        illustration: '🌍',
+        title: '2. Why do we need Standards?',
+        content: 'In the past, people used "Hand span" or "Foot". This was confusing!<br>Now we use the <b>SI System</b> (International System) so the whole world agrees.'
+    },
+    {
+        type: 'theory',
+        illustration: '🏛️',
+        title: '3. The 7 Fundamental Units',
+        content: 'These are the "Parents" of all units. They don\'t depend on anything else.<br>1. Length (<b>Meter</b>)<br>2. Mass (<b>Kilogram</b>)<br>3. Time (<b>Second</b>)'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Which is NOT a fundamental quantity?',
+        options: ['Mass', 'Speed', 'Time', 'Length'],
+        correctIndex: 1 // Speed (Derived from Distance/Time)
+    },
+
+    // PART 2: The 7 Pillars (SI Base Units)
+    {
+        type: 'theory',
+        illustration: '⚡',
+        title: '4. The Other 4 Fundamentals',
+        content: '4. Electric Current: <b>Ampere (A)</b><br>5. Temperature: <b>Kelvin (K)</b> (Not Celsius!)<br>6. Amount of Substance: <b>Mole (mol)</b><br>7. Luminous Intensity: <b>Candela (cd)</b>'
+    },
+    {
+        type: 'theory',
+        illustration: '🧱',
+        title: '5. Derived Units',
+        content: 'These are made by mixing Fundamental units.<br><b>Area:</b> Length × Width = $m^2$<br><b>Speed:</b> Distance ÷ Time = $m/s$<br><b>Density:</b> Mass ÷ Volume = $kg/m^3$'
+    },
+    {
+        type: 'theory',
+        illustration: '🏋️',
+        title: '6. Special Names (Newton/Joule)',
+        content: 'Some derived units get famous names.<br>Force = $kg \cdot m/s^2$ → <b>Newton (N)</b>.<br>Energy = Force × Dist → <b>Joule (J)</b>.<br>Power = Energy ÷ Time → <b>Watt (W)</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🤔',
+        title: 'Quiz 2',
+        question: 'What is the SI unit of Temperature?',
+        options: ['Celsius', 'Fahrenheit', 'Kelvin', 'Degree'],
+        correctIndex: 2 // Kelvin
+    },
+
+    // PART 3: The Power of 10 (Prefixes)
+    {
+        type: 'theory',
+        illustration: '🔬',
+        title: '7. Small Prefixes (Micro/Nano)',
+        content: '<b>Milli (m):</b> $10^{-3}$ (0.001)<br><b>Micro ($\mu$):</b> $10^{-6}$ (Millionth)<br><b>Nano (n):</b> $10^{-9}$ (Billionth)<br>"Nanotechnology is super small!"'
+    },
+    {
+        type: 'theory',
+        illustration: '🔭',
+        title: '8. Big Prefixes (Kilo/Giga)',
+        content: '<b>Kilo (k):</b> $10^3$ (1,000)<br><b>Mega (M):</b> $10^6$ (Million)<br><b>Giga (G):</b> $10^9$ (Billion)<br>"1 Gigabyte = 1 Billion bytes."'
+    },
+    {
+        type: 'theory',
+        illustration: '🔄',
+        title: '9. Conversion Trick',
+        content: '<b>Big to Small:</b> Multiply (Run 5km → 5000m).<br><b>Small to Big:</b> Divide (5000m → 5km).<br><i>"King Henry Died By Drinking Chocolate Milk"</i> (Kilo, Hecto, Deca, Base, Deci, Centi, Milli).'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 3',
+        question: 'How many meters in 1 micrometer?',
+        options: ['$10^{-3}$', '$10^{-6}$', '$10^{-9}$', '$10^6$'],
+        correctIndex: 1 // Micro = 10^-6
+    },
+
+    // PART 4: Accuracy, Precision & Errors
+    {
+        type: 'theory',
+        illustration: '🎯',
+        title: '10. Accuracy vs Precision',
+        content: '<b>Accuracy:</b> How close to the "True Value". (Hitting the Bullseye).<br><b>Precision:</b> How detailed/close the measurements are to <i>each other</i>. (Hitting the same spot 5 times, even if wrong).'
+    },
+    {
+        type: 'theory',
+        illustration: '⚠️',
+        title: '11. Types of Errors',
+        content: '<b>Systematic Error:</b> Faulty machine (Zero error). Always wrong by the same amount.<br><b>Random Error:</b> Human mistake, temperature change. Can be reduced by taking the <i>Average</i>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🤏',
+        title: '12. Least Count',
+        content: 'The <b>smallest</b> value a tool can measure.<br>Ruler: 1mm (0.1cm).<br>Vernier Caliper: 0.1mm (0.01cm).<br>Smaller Least Count = More Precise.'
+    },
+    {
+        type: 'quiz',
+        illustration: '📏',
+        title: 'Quiz 4',
+        question: 'A scale reads 10.2g, 10.1g, 10.2g. The true weight is 15g.',
+        options: [
+            'High Accuracy, Low Precision',
+            'High Precision, Low Accuracy',
+            'High Accuracy, High Precision',
+            'Low Accuracy, Low Precision'
+        ],
+        correctIndex: 1 // Precise (values are close) but Inaccurate (far from 15)
+    },
+
+    // PART 5: Significant Figures (Crucial for Exams)
+    {
+        type: 'theory',
+        illustration: '🔢',
+        title: '13. Significant Figures (Sig Figs)',
+        content: 'These tell us how "trustworthy" a number is.<br>Rule 1: All non-zero digits count (456 → 3 sig figs).<br>Rule 2: Zeros <b>between</b> numbers count (406 → 3 sig figs).'
+    },
+    {
+        type: 'theory',
+        illustration: '0️⃣',
+        title: '14. The Trailing Zero Rule',
+        content: '<b>With Decimal:</b> Trailing zeros count (2.50 → 3 sig figs).<br><b>No Decimal:</b> Trailing zeros DO NOT count (2500 → 2 sig figs).<br>Leading zeros <i>never</i> count (0.005 → 1 sig fig).'
+    },
+    {
+        type: 'theory',
+        illustration: '➕',
+        title: '15. Calculation Rules',
+        content: '<b>Multiplying/Dividing:</b> Answer must have the <i>least</i> sig figs of the inputs.<br>2.0 (2 sigs) × 3.00 (3 sigs) = 6.0 (keep 2 sigs).'
+    },
+    {
+        type: 'quiz',
+        illustration: '📝',
+        title: 'Quiz 5',
+        question: 'How many Sig Figs in 0.004050?',
+        options: ['6', '5', '4', '3'],
+        correctIndex: 2 // 4, 0, 5, 0 (Leading don't count, Trailing with decimal do)
+    },
+
+    // PART 6: Dimensional Analysis (Advanced)
+    {
+        type: 'theory',
+        illustration: '📦',
+        title: '16. Dimensions [M L T]',
+        content: 'We use brackets to show nature, not value.<br><b>[M]</b> Mass, <b>[L]</b> Length, <b>[T]</b> Time.<br>Velocity = Distance/Time = $L/T$ = $[LT^{-1}]$.'
+    },
+    {
+        type: 'theory',
+        illustration: '💪',
+        title: '17. Dimension of Force',
+        content: 'Force = Mass × Acceleration.<br>Mass = $[M]$.<br>Acceleration = $[LT^{-2}]$.<br>Force = $[MLT^{-2}]$. (Memorize this!).'
+    },
+    {
+        type: 'theory',
+        illustration: '⚖️',
+        title: '18. Principle of Homogeneity',
+        content: 'You can only add/subtract things with the <b>same dimensions</b>.<br>In $v = u + at$:<br>$[v]$ must equal $[u]$ and $[at]$.<br>You cannot add Time to Mass!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'Identify the dimensions of Volume:',
+        options: ['$[L^2]$', '$[L^3]$', '$[MLT]$', '$[M^3]$'],
+        correctIndex: 1 // Length × Breadth × Height = L × L × L = L^3
+    }
+],
+
+            'vitamins': [
+    // PART 1: The Basics (Micronutrients)
+    {
+        type: 'theory',
+        illustration: '💊',
+        title: '1. What are Vitamins?',
+        content: 'Vitamins are <b>organic compounds</b> needed in small amounts.<br>They are <b>"Micronutrients"</b>.<br>⚠️ Important: They do <b>NOT</b> provide energy (0 Calories), but they regulate body functions.'
+    },
+    {
+        type: 'theory',
+        illustration: '💧',
+        title: '2. The Great Divide',
+        content: '<b>1. Fat Soluble:</b> Stored in the body (Liver/Fat). Can be toxic if taken too much.<br><b>2. Water Soluble:</b> Not stored (excreted in urine). Must be eaten daily.'
+    },
+    {
+        type: 'theory',
+        illustration: '🐛',
+        title: '3. Mnemonic: KEDA',
+        content: 'Remember "<b>KEDA</b>" (Keeda/Insect).<br>Vitamins <b>K, E, D, A</b> are Fat Soluble.<br>The rest (<b>B, C</b>) are Water Soluble.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Which vitamin is excreted in urine daily?',
+        options: ['Vitamin A', 'Vitamin D', 'Vitamin C', 'Vitamin K'],
+        correctIndex: 2 // Vitamin C (Water soluble)
+    },
+
+    // PART 2: Fat Soluble (A, D, E, K)
+    {
+        type: 'theory',
+        illustration: '🥕',
+        title: '4. Vitamin A (Retinol)',
+        content: '<b>Chemical Name:</b> Retinol / Beta-Carotene.<br><b>Function:</b> Vision (Rod cells) & Immune system.<br><b>Source:</b> Carrots, Papaya, Golden Rice.'
+    },
+    {
+        type: 'theory',
+        illustration: '👁️',
+        title: '5. Vitamin A Deficiency',
+        content: '1. <b>Night Blindness</b> (Nyctalopia): Can\'t see in dim light.<br>2. <b>Xerophthalmia</b>: Dryness of the eye (Cornea damage).<br>3. Keratomalacia (Advanced).'
+    },
+    {
+        type: 'theory',
+        illustration: '☀️',
+        title: '6. Vitamin D (Calciferol)',
+        content: '<b>Chemical Name:</b> Calciferol / Cholecalciferol.<br><b>Function:</b> Helps absorb <b>Calcium</b> for bones.<br><b>Source:</b> Sunlight (Skin makes it!), Fish oil.'
+    },
+    {
+        type: 'theory',
+        illustration: '🦴',
+        title: '7. Vitamin D Deficiency',
+        content: '<b>In Children:</b> Rickets (Bow legs, soft bones).<br><b>In Adults:</b> Osteomalacia (Bone pain).<br><i>Fact: It acts like a Hormone!</i>'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2',
+        question: 'Which vitamin is produced by our skin?',
+        options: ['A', 'D', 'E', 'K'],
+        correctIndex: 1 // Vitamin D
+    },
+
+    // PART 3: The Beauty & Clotting Vitamins
+    {
+        type: 'theory',
+        illustration: '💅',
+        title: '8. Vitamin E (Tocopherol)',
+        content: '<b>Chemical Name:</b> Tocopherol ("Beauty Vitamin").<br><b>Function:</b> Antioxidant (Anti-aging), Reproductive health.<br><b>Deficiency:</b> Sterility (Infertility), Weak muscles.'
+    },
+    {
+        type: 'theory',
+        illustration: '🩸',
+        title: '9. Vitamin K (Phylloquinone)',
+        content: '<b>Chemical Name:</b> Phylloquinone.<br><b>Function:</b> <b>Blood Clotting</b> (Stops bleeding).<br><b>Deficiency:</b> Hemorrhage (Excessive bleeding).<br><i>Source: Green leafy vegetables.</i>'
+    },
+
+    // PART 4: Water Soluble (Vitamin C)
+    {
+        type: 'theory',
+        illustration: '🍋',
+        title: '10. Vitamin C (Ascorbic Acid)',
+        content: '<b>Chemical Name:</b> Ascorbic Acid.<br><b>Function:</b> Collagen synthesis (Skin/Gums), Immunity, Healing.<br><b>Fact:</b> Destroyed by heat (Cooking kills it).'
+    },
+    {
+        type: 'theory',
+        illustration: '🦷',
+        title: '11. Scurvy (The Sailor\'s Disease)',
+        content: 'Deficiency of C causes <b>Scurvy</b>.<br>Symptoms: Bleeding gums, loose teeth, old wounds opening up.<br>Source: Citrus fruits (Lemon, Orange, Amla).'
+    },
+    {
+        type: 'quiz',
+        illustration: '🍊',
+        title: 'Quiz 3',
+        question: 'Which vitamin helps in healing wounds?',
+        options: ['Vitamin K', 'Vitamin C', 'Vitamin A', 'Vitamin E'],
+        correctIndex: 1 // C makes collagen
+    },
+
+    // PART 5: The B-Complex Family (Energy & Nerves)
+    {
+        type: 'theory',
+        illustration: '⚡',
+        title: '12. B1 (Thiamine)',
+        content: '<b>Deficiency:</b> <b>Beri-Beri</b>.<br>Symptoms: Weak muscles, nerve damage.<br>Source: Whole grains (Polished rice eaters often get Beri-Beri!).'
+    },
+    {
+        type: 'theory',
+        illustration: '👅',
+        title: '13. B2 (Riboflavin)',
+        content: '<b>Deficiency:</b> Cheilosis / Glossitis.<br>Symptoms: Cracks at corners of mouth, red tongue.<br><i>Fact: Makes urine yellow.</i>'
+    },
+    {
+        type: 'theory',
+        illustration: '😵',
+        title: '14. B3 (Niacin)',
+        content: '<b>Deficiency:</b> <b>Pellagra</b> (The 4 D\'s).<br>1. Dermatitis (Skin rash)<br>2. Diarrhea<br>3. Dementia (Memory loss)<br>4. Death (if untreated).'
+    },
+    {
+        type: 'theory',
+        illustration: '🤰',
+        title: '15. B9 (Folic Acid)',
+        content: 'Crucial for <b>Pregnant Women</b>.<br>Deficiency causes "Neural Tube Defects" in babies.<br>Also causes Megaloblastic Anemia.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🌾',
+        title: 'Quiz 4',
+        question: 'Polished rice consumption causes deficiency of:',
+        options: ['B1 (Thiamine)', 'B12', 'A', 'C'],
+        correctIndex: 0 // Beri-Beri
+    },
+
+    // PART 6: The Complex B12
+    {
+        type: 'theory',
+        illustration: '🧬',
+        title: '16. B12 (Cyanocobalamin)',
+        content: '<b>Chemical Name:</b> Cyanocobalamin (Contains <b>Cobalt</b> metal).<br><b>Deficiency:</b> Pernicious Anemia (Deadly).<br><b>Source:</b> ONLY Animal products (Meat/Dairy). Vegans need supplements.'
+    },
+    {
+        type: 'theory',
+        illustration: '🦠',
+        title: '17. Gut Synthesis',
+        content: 'Did you know?<br>Our gut bacteria produce small amounts of <b>Vitamin B12</b> and <b>Vitamin K</b> inside our body!'
+    },
+
+    // PART 7: Advanced Concepts (Toxicity & Antioxidants)
+    {
+        type: 'theory',
+        illustration: '🛡️',
+        title: '18. The Antioxidants',
+        content: 'These protect cells from damage (Free radicals).<br>The "ACE" Team:<br><b>Vitamin A, Vitamin C, Vitamin E</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '☠️',
+        title: '19. Hypervitaminosis',
+        content: 'Taking too many vitamins can be toxic!<br>Usually happens with Fat-Soluble (A, D) because they get stored.<br>Water-soluble (B, C) are usually safe (peed out).'
+    },
+    {
+        type: 'quiz',
+        illustration: '🏆',
+        title: 'Final Mastery Quiz',
+        question: 'Which vitamin contains the metal Cobalt?',
+        options: ['B6', 'B9', 'B12', 'B2'],
+        correctIndex: 2 // Cyanocobalamin (B12)
+    }
+],
+            
+'periodic': [
+    // PART 1: History & Structure
+    {
+        type: 'theory',
+        illustration: '📜',
+        title: '1. The Evolution',
+        content: '<b>Mendeleev:</b> Arranged by <b>Atomic Mass</b> (Had gaps for unknown elements).<br><b>Moseley (Modern):</b> Arranged by <b>Atomic Number (Z)</b>.<br><i>Law: Properties repeat periodically with Z.</i>'
+    },
+    {
+        type: 'theory',
+        illustration: '🗺️',
+        title: '2. The Grid (7 x 18)',
+        content: '<b>Periods (Rows):</b> 7 horizontal rows. Represent the number of <b>Shells (n)</b>.<br><b>Groups (Columns):</b> 18 vertical columns. Elements have same <b>Valence Electrons</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🧱',
+        title: '3. The 4 Blocks (s, p, d, f)',
+        content: 'Named after the subshell where the <i>last electron</i> enters.<br><b>s-block:</b> Metals (Left).<br><b>p-block:</b> Mixed (Right).<br><b>d-block:</b> Transition Metals (Middle).<br><b>f-block:</b> Inner Transition (Bottom).'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Which block contains Metals, Non-metals, and Metalloids?',
+        options: ['s-block', 'p-block', 'd-block', 'f-block'],
+        correctIndex: 1 // p-block is the most diverse
+    },
+
+    // PART 2: Atomic Radius (Size)
+    {
+        type: 'theory',
+        illustration: '📏',
+        title: '4. Atomic Radius Trend',
+        content: '<b>Down a Group:</b> Increases (New shells added).<br><b>Across a Period:</b> Decreases (Nuclear charge pulls shells closer).<br><i>Result: Francium is huge; Helium is tiny.</i>'
+    },
+    {
+        type: 'theory',
+        illustration: '🛡️',
+        title: '5. Advanced: Shielding Effect',
+        content: 'Inner electrons repel outer electrons, "shielding" them from the nucleus.<br><b>Order:</b> s > p > d > f.<br>Poor shielding by d/f electrons causes size anomalies (e.g., Ga < Al).'
+    },
+    {
+        type: 'theory',
+        illustration: '⚛️',
+        title: '6. Ionic Radius Rule',
+        content: '<b>Cation ($+$):</b> Smaller than parent (Lost shell/electrons).<br><b>Anion ($-$):</b> Larger than parent (Repulsion expands shell).<br>Order: $Mg^{2+} < Mg < Cl < Cl^-$'
+    },
+    {
+        type: 'quiz',
+        illustration: '🤔',
+        title: 'Quiz 2',
+        question: 'Isoelectronic Species: Which is smallest?',
+        options: ['$O^{2-}$', '$F^-$', '$Na^+$', '$Mg^{2+}$'],
+        correctIndex: 3 // Mg2+ has most protons (12) pulling same 10 electrons
+    },
+
+    // PART 3: Ionization Energy (IE)
+    {
+        type: 'theory',
+        illustration: '🔋',
+        title: '7. Ionization Energy (IE)',
+        content: 'Energy required to <b>remove</b> an electron.<br>High IE = Hard to remove (Noble Gases).<br>Low IE = Easy to remove (Alkali Metals).<br><i>Trend: Increases L→R, Decreases Top→Bottom.</i>'
+    },
+    {
+        type: 'theory',
+        illustration: '⚠️',
+        title: '8. IE Exceptions (Exam Favorite)',
+        content: '<b>Half-filled & Full-filled</b> orbitals are extra stable.<br>Expected: B > Be.<br>Reality: <b>Be > B</b> (Be has full $2s^2$).<br>Expected: O > N.<br>Reality: <b>N > O</b> (N has half-full $2p^3$).'
+    },
+    {
+        type: 'theory',
+        illustration: '📈',
+        title: '9. Successive IE',
+        content: 'Removing the 2nd electron is always harder.<br>$IE_1 < IE_2 < IE_3$.<br>Huge jump in energy means you broke a stable Noble Gas core.'
+    },
+    {
+        type: 'quiz',
+        illustration: '⚡',
+        title: 'Quiz 3',
+        question: 'Which element has the highest Ionization Energy?',
+        options: ['Fluorine', 'Helium', 'Cesium', 'Hydrogen'],
+        correctIndex: 1 // Helium (Smallest size + Full shell)
+    },
+
+    // PART 4: Electron Gain Enthalpy (Affinity)
+    {
+        type: 'theory',
+        illustration: '💖',
+        title: '10. Electron Affinity (EA)',
+        content: 'Energy released when an atom <b>accepts</b> an electron.<br>High negative value = Loves electrons (Halogens).<br>Positive value = Hates electrons (Noble Gases).'
+    },
+    {
+        type: 'theory',
+        illustration: '📉',
+        title: '11. The Chlorine Trap',
+        content: '<b>Fluorine vs Chlorine:</b><br>Fluorine is smaller, but has high repulsion ($2p$ is crowded).<br>Chlorine has more space ($3p$).<br>Result: <b>Cl has the highest EA</b> in the table, not F.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧪',
+        title: 'Quiz 4',
+        question: 'Which element releases most energy gaining an electron?',
+        options: ['Fluorine', 'Chlorine', 'Oxygen', 'Sulfur'],
+        correctIndex: 1 // Chlorine (Due to repulsion in Fluorine)
+    },
+
+    // PART 5: Electronegativity (EN)
+    {
+        type: 'theory',
+        illustration: '🧲',
+        title: '12. Electronegativity',
+        content: 'Power to <b>attract</b> shared electrons in a bond.<br>It is not an energy, just a tendency.<br>Scale: <b>Pauling Scale</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '👑',
+        title: '13. The Three Kings',
+        content: 'Most Electronegative Elements (FON):<br>1. <b>Fluorine</b> (4.0)<br>2. <b>Oxygen</b> (3.5)<br>3. <b>Nitrogen</b> (3.0)<br>They form Hydrogen Bonds.'
+    },
+    {
+        type: 'theory',
+        illustration: '🤝',
+        title: '14. Diagonal Relationship',
+        content: 'Elements in Period 2 resemble elements in Period 3 diagonally.<br><b>Li ≈ Mg</b><br><b>Be ≈ Al</b><br><b>B ≈ Si</b><br>Reason: Similar Ionic Potential (Charge/Size ratio).'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 5',
+        question: 'Which pair shows a Diagonal Relationship?',
+        options: ['Li and Na', 'Be and Mg', 'Be and Al', 'B and C'],
+        correctIndex: 2 // Be and Al
+    },
+
+    // PART 6: Advanced Anomalies
+    {
+        type: 'theory',
+        illustration: '🏗️',
+        title: '15. Lanthanide Contraction',
+        content: 'In f-block, size decreases slightly.<br>Effect: 4d and 5d metals have <b>almost same size</b>.<br>Ex: Zr (160pm) ≈ Hf (159pm).<br>This makes separation very hard.'
+    },
+    {
+        type: 'theory',
+        illustration: '😴',
+        title: '16. Inert Pair Effect',
+        content: 'In heavy p-block elements (Tl, Pb, Bi), the outer s-electrons refuse to react.<br>Result: Stability of lower oxidation state increases.<br><b>$Pb^{2+}$ is more stable than $Pb^{4+}$</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🌈',
+        title: '17. Nature of Oxides',
+        content: '<b>Metals:</b> Basic Oxides ($Na_2O$).<br><b>Non-metals:</b> Acidic Oxides ($SO_2$).<br><b>Metalloids/Center:</b> Amphoteric ($Al_2O_3$, $ZnO$).<br>Neutral: $CO, NO, N_2O$.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'Why are Zr and Hf almost the same size?',
+        options: [
+            'Lanthanide Contraction',
+            'Inert Pair Effect',
+            'Diagonal Relationship',
+            'Effective Nuclear Charge'
+        ],
+        correctIndex: 0 // Due to poor shielding of 4f electrons
+    }
+],
+
+            
+'newton': [
+    // PART 1: The First Law (The Law of Laziness)
+    {
+        type: 'theory',
+        illustration: '🛋️',
+        title: '1. First Law: Inertia',
+        content: '<b>"Objects are lazy."</b><br>If an object is sitting still, it stays still.<br>If it is moving, it keeps moving.<br>Unless you <b>force</b> it to stop or start.'
+    },
+    {
+        type: 'theory',
+        illustration: '🚌',
+        title: '2. Real Life: The Bus Stop',
+        content: 'Imagine you are standing in a moving bus.<br>The driver hits the brakes suddenly.<br><b>Result:</b> You fall forward.<br><b>Why?</b> Your body wanted to keep moving!'
+    },
+    {
+        type: 'theory',
+        illustration: '☕',
+        title: '3. Real Life: The Magic Cloth',
+        content: 'Pulling a tablecloth quickly without breaking dishes.<br>The dishes have <b>Inertia</b> (Laziness).<br>They want to stay where they are, so the cloth slips out underneath.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Which object has more "Laziness" (Inertia)?',
+        options: ['A feather', 'A pencil', 'A truck', 'A football'],
+        correctIndex: 2 // More Mass = More Inertia (Harder to move)
+    },
+
+    // PART 2: The Second Law (The Formula)
+    {
+        type: 'theory',
+        illustration: '💪',
+        title: '4. Second Law: F = ma',
+        content: '<b>Force = Mass × Acceleration</b><br>It means: To move something heavy (Mass), you need a bigger push (Force).'
+    },
+    {
+        type: 'theory',
+        illustration: '🛒',
+        title: '5. Real Life: Shopping Cart',
+        content: '<b>Empty Cart:</b> Easy to push (Low Mass). You run fast.<br><b>Full Cart:</b> Hard to push (High Mass). You move slow.<br>To make the full cart go fast, you must push <b>harder</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🏏',
+        title: '6. Real Life: Catching a Ball',
+        content: 'A tennis ball hits you? No pain (Low Mass).<br>A bowling ball hits you? Ouch! (High Mass).<br>More mass = More force needed to stop it.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🤔',
+        title: 'Quiz 2',
+        question: 'If you kick a bowling ball and a football with the SAME force...',
+        options: [
+            'Bowling ball goes faster',
+            'Football goes faster',
+            'Same speed',
+            'Neither moves'
+        ],
+        correctIndex: 1 // Less mass (football) accelerates more
+    },
+
+    // PART 3: The Third Law (Action-Reaction)
+    {
+        type: 'theory',
+        illustration: '🪞',
+        title: '7. Third Law: Action & Reaction',
+        content: '<b>"For every action, there is an equal and opposite reaction."</b><br>Forces always come in pairs.<br>If you push the wall, the wall pushes you back.'
+    },
+    {
+        type: 'theory',
+        illustration: '🎈',
+        title: '8. Real Life: Balloon Rocket',
+        content: 'Blow up a balloon and let it go.<br><b>Action:</b> Air rushes OUT (Backwards).<br><b>Reaction:</b> Balloon flies FORWARD.<br>This is exactly how rockets work!'
+    },
+    {
+        type: 'theory',
+        illustration: '🏊',
+        title: '9. Real Life: Swimming',
+        content: 'How do you swim forward?<br>You push the water <b>backwards</b> with your hands.<br>The water pushes you <b>forwards</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🚶',
+        title: 'Quiz 3',
+        question: 'When you walk, what direction do you push the ground?',
+        options: ['Forward', 'Backward', 'Down', 'Up'],
+        correctIndex: 1 // You push ground BACK, ground pushes you FORWARD
+    },
+
+    // PART 4: Putting it all together
+    {
+        type: 'theory',
+        illustration: '⚽',
+        title: '10. The Soccer Kick',
+        content: '1. Ball is still (<b>1st Law</b>).<br>2. You kick it hard (<b>2nd Law - Force</b>).<br>3. Your foot hurts a little (<b>3rd Law - Reaction</b> from ball).'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'A gun recoils (jerks back) when fired. Which law is this?',
+        options: ['1st Law', '2nd Law', '3rd Law', 'Law of Gravity'],
+        correctIndex: 2 // Bullet goes forward, Gun goes backward (Action/Reaction)
+    }
+],
+            
+'body': [
+    // PART 1: The Levels of Organization
+    {
+        type: 'theory',
+        illustration: '🧱',
+        title: '1. Building Blocks',
+        content: '<b>Cell:</b> The smallest unit of life.<br><b>Tissue:</b> Group of similar cells (Muscle, Nerve).<br><b>Organ:</b> Group of tissues (Heart, Stomach).<br><b>System:</b> Group of organs (Digestive, Nervous).'
+    },
+    {
+        type: 'theory',
+        illustration: '🩸',
+        title: '2. The 4 Tissue Types',
+        content: '1. <b>Epithelial:</b> Covering/Skin.<br>2. <b>Connective:</b> Support (Bone, Blood, Fat).<br>3. <b>Muscular:</b> Movement.<br>4. <b>Nervous:</b> Control.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Blood is which type of tissue?',
+        options: ['Liquid Tissue', 'Connective Tissue', 'Epithelial Tissue', 'Muscular Tissue'],
+        correctIndex: 1 // Blood connects body systems
+    },
+
+    // PART 2: Skeletal & Muscular (Movement)
+    {
+        type: 'theory',
+        illustration: '💀',
+        title: '3. The Skeleton (206 Bones)',
+        content: '<b>Axial Skeleton:</b> Skull, Spine, Ribs (Protection).<br><b>Appendicular Skeleton:</b> Arms, Legs, Pelvis (Movement).<br><i>Smallest bone: Stapes (Ear). Largest: Femur (Thigh).</i>'
+    },
+    {
+        type: 'theory',
+        illustration: '🔗',
+        title: '4. Ligament vs Tendon',
+        content: '<b>Ligament:</b> Connects <b>Bone to Bone</b> (Like a "Ligature").<br><b>Tendon:</b> Connects <b>Muscle to Bone</b> (Achilles Tendon).<br>Strain = Tendon injury. Sprain = Ligament injury.'
+    },
+    {
+        type: 'theory',
+        illustration: '💪',
+        title: '5. Sliding Filament Theory (Advanced)',
+        content: 'How muscles contract: Filaments called <b>Actin</b> and <b>Myosin</b> slide over each other.<br>Requires <b>ATP</b> (Energy) and <b>Calcium ions</b> ($Ca^{2+}$).'
+    },
+    {
+        type: 'quiz',
+        illustration: '🦵',
+        title: 'Quiz 2',
+        question: 'Which tissue connects Muscle to Bone?',
+        options: ['Ligament', 'Cartilage', 'Tendon', 'Joint'],
+        correctIndex: 2 // Tendon
+    },
+
+    // PART 3: Circulatory System (Transport)
+    {
+        type: 'theory',
+        illustration: '❤️',
+        title: '6. Double Circulation',
+        content: 'The heart pumps blood twice:<br>1. <b>Pulmonary:</b> Heart → Lungs → Heart (To get Oxygen).<br>2. <b>Systemic:</b> Heart → Body → Heart (To deliver Oxygen).'
+    },
+    {
+        type: 'theory',
+        illustration: '🛣️',
+        title: '7. Arteries vs Veins',
+        content: '<b>Arteries:</b> Carry blood <b>Away</b> from heart (Thick walls, High pressure).<br><b>Veins:</b> Carry blood <b>Towards</b> heart (Thin walls, Valves to stop backflow).<br><i>Exception: Pulmonary Artery carries deoxygenated blood!</i>'
+    },
+    {
+        type: 'theory',
+        illustration: '⚡',
+        title: '8. Cardiac Cycle (Advanced)',
+        content: '<b>Systole:</b> Contraction (Pumping).<br><b>Diastole:</b> Relaxation (Filling).<br>Pacemaker: <b>SA Node</b> generates the electric signal.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🩺',
+        title: 'Quiz 3',
+        question: 'Which vessel carries blood AWAY from the heart?',
+        options: ['Vein', 'Capillary', 'Artery', 'Ventricle'],
+        correctIndex: 2 // Artery (A for Away)
+    },
+
+    // PART 4: Respiratory System (Gas Exchange)
+    {
+        type: 'theory',
+        illustration: '🫁',
+        title: '9. The Alveoli',
+        content: 'Tiny air sacs in lungs where magic happens.<br>Oxygen enters blood, $CO_2$ leaves.<br>Surface area of alveoli = A Tennis Court!'
+    },
+    {
+        type: 'theory',
+        illustration: '🎈',
+        title: '10. Breathing Mechanism',
+        content: '<b>Diaphragm:</b> A muscle below lungs.<br><b>Inhale:</b> Diaphragm moves <b>Down</b> (Volume Up, Pressure Down).<br><b>Exhale:</b> Diaphragm moves <b>Up</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🧪',
+        title: '11. Gas Transport (Advanced)',
+        content: 'Oxygen is carried by <b>Hemoglobin</b> (in RBCs).<br>$CO_2$ is mostly carried as <b>Bicarbonate ions</b> ($HCO_3^-$) in the plasma.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🫧',
+        title: 'Quiz 4',
+        question: 'Where does gas exchange take place?',
+        options: ['Trachea', 'Bronchi', 'Alveoli', 'Diaphragm'],
+        correctIndex: 2 // Alveoli
+    },
+
+    // PART 5: Digestive System (Fueling)
+    {
+        type: 'theory',
+        illustration: '🍔',
+        title: '12. Digestion Locations',
+        content: '<b>Mouth:</b> Starch digestion (Amylase).<br><b>Stomach:</b> Protein digestion (Pepsin + HCl).<br><b>Small Intestine:</b> Fat digestion (Bile + Lipase).'
+    },
+    {
+        type: 'theory',
+        illustration: '🦠',
+        title: '13. Villi & Absorption',
+        content: 'Small intestine has finger-like <b>Villi</b>.<br>They increase surface area to absorb nutrients into the blood.'
+    },
+    {
+        type: 'theory',
+        illustration: '🟢',
+        title: '14. Role of Liver & Bile',
+        content: 'Liver makes <b>Bile</b>.<br>Gallbladder stores it.<br>Bile <b>Emulsifies</b> fats (breaks big drops into tiny droplets) so enzymes can work.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🥣',
+        title: 'Quiz 5',
+        question: 'Which acid is found in the stomach?',
+        options: ['Sulfuric Acid', 'Hydrochloric Acid (HCl)', 'Citric Acid', 'Acetic Acid'],
+        correctIndex: 1 // HCl
+    },
+
+    // PART 6: Nervous & Control (The CPU)
+    {
+        type: 'theory',
+        illustration: '🧠',
+        title: '15. The Neuron',
+        content: 'The basic unit of the brain.<br><b>Dendrite:</b> Receives signal.<br><b>Axon:</b> Transmits signal.<br><b>Synapse:</b> Gap between two neurons.'
+    },
+    {
+        type: 'theory',
+        illustration: '⚡',
+        title: '16. Action Potential (Advanced)',
+        content: 'How a nerve signal moves: It is an electrical wave driven by <b>Sodium ($Na^+$)</b> rushing IN and <b>Potassium ($K^+$)</b> rushing OUT.'
+    },
+    {
+        type: 'theory',
+        illustration: '🛡️',
+        title: '17. Reflex Arc',
+        content: 'Automatic response (touching fire).<br>Signal goes to <b>Spinal Cord</b> and back.<br>Brain is skipped to save time!'
+    },
+    {
+        type: 'theory',
+        illustration: '⚖️',
+        title: '18. Homeostasis',
+        content: 'The body\'s ability to stay stable (Temp, pH, Water).<br>Controlled by <b>Negative Feedback Loops</b> (e.g., Sweating to cool down).'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'Which ion rushes INTO the neuron to trigger a signal?',
+        options: ['Potassium ($K^+$)', 'Calcium ($Ca^{2+}$)', 'Sodium ($Na^+$)', 'Chlorine ($Cl^-$)'],
+        correctIndex: 2 // Sodium influx causes depolarization
+    }
+],
 
             // MATH
             'ratio': [
@@ -878,11 +1658,915 @@
     }
 ],
                  
-                 
+                 'speed': [
+    // PART 1: The Basics
+    {
+        type: 'theory',
+        illustration: '🏎️',
+        title: '1. What is Speed?',
+        content: 'Speed tells us <b>how fast</b> something is moving.<br>It is the distance covered in a specific time.<br>Formula: <b>Speed = Distance ÷ Time</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '📏',
+        title: '2. Units of Speed',
+        content: '<b>SI Unit:</b> Meters per second ($m/s$).<br><b>Common Unit:</b> Kilometers per hour ($km/h$).<br>Note: In physics, we usually prefer $m/s$.'
+    },
+    {
+        type: 'theory',
+        illustration: '🔄',
+        title: '3. The Magic Conversion (5/18)',
+        content: 'To change <b>km/h to m/s</b>: Multiply by <b>5/18</b>.<br>To change <b>m/s to km/h</b>: Multiply by <b>18/5</b>.<br><i>(Derived from 1000m / 3600s).</i>'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Convert 72 km/h to m/s:',
+        options: ['10 m/s', '20 m/s', '25 m/s', '15 m/s'],
+        correctIndex: 1 // 72 * (5/18) = 4 * 5 = 20
+    },
+
+    // PART 2: Speed vs Velocity (The Direction Game)
+    {
+        type: 'theory',
+        illustration: '🧭',
+        title: '4. Speed vs Velocity',
+        content: '<b>Speed:</b> Scalar (Magnitude only). "50 km/h".<br><b>Velocity:</b> Vector (Magnitude + Direction). "50 km/h <b>North</b>".'
+    },
+    {
+        type: 'theory',
+        illustration: '↩️',
+        title: '5. The U-Turn Trap',
+        content: 'If you drive to a shop and come back:<br><b>Average Speed:</b> Positive number.<br><b>Average Velocity:</b> <b>ZERO</b> (Because displacement is zero!).'
+    },
+    {
+        type: 'theory',
+        illustration: '📉',
+        title: '6. Uniform vs Non-Uniform',
+        content: '<b>Uniform:</b> Constant speed (Cruise control).<br><b>Non-Uniform:</b> Speed changes (Traffic).<br><b>Instantaneous Speed:</b> Speed at a specific second (What the Speedometer shows).'
+    },
+    {
+        type: 'quiz',
+        illustration: '🤔',
+        title: 'Quiz 2',
+        question: 'What does a car speedometer measure?',
+        options: ['Average Velocity', 'Average Speed', 'Instantaneous Speed', 'Total Distance'],
+        correctIndex: 2 // Speed at that exact moment
+    },
+
+    // PART 3: Average Speed (The Exam Favorite)
+    {
+        type: 'theory',
+        illustration: '➗',
+        title: '7. The Average Speed Trap',
+        content: 'Warning! Average Speed is <b>NOT</b> $\frac{S_1 + S_2}{2}$.<br>Correct Formula: <b>Total Distance ÷ Total Time</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🔁',
+        title: '8. Equal Distance Trick',
+        content: 'If you go at speed <b>x</b> and return at speed <b>y</b> (same distance):<br>Average Speed = $\frac{2xy}{x+y}$.<br>This is the "Harmonic Mean".'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 3',
+        question: 'Go at 60, Return at 40. Average Speed?',
+        options: ['50', '48', '55', '45'],
+        correctIndex: 1 // (2*60*40) / (60+40) = 4800/100 = 48
+    },
+
+    // PART 4: Relative Speed (Trains & Boats)
+    {
+        type: 'theory',
+        illustration: '🚄',
+        title: '9. Relative Speed (Opposite)',
+        content: 'Two objects moving <b>towards</b> each other.<br>They crash faster!<br><b>Add the speeds ($S_1 + S_2$)</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🐢',
+        title: '10. Relative Speed (Same Direction)',
+        content: 'One object chasing another.<br>The gap closes slowly.<br><b>Subtract the speeds ($S_1 - S_2$)</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🛤️',
+        title: '11. Train Problem Logic',
+        content: 'To cross a bridge, a train must cover: <b>Length of Train + Length of Bridge</b>.<br>Time = (L_train + L_bridge) ÷ Speed.'
+    },
+    {
+        type: 'theory',
+        illustration: '🚣',
+        title: '12. Boat & Stream',
+        content: '<b>Downstream (With flow):</b> Speed = Boat + Water.<br><b>Upstream (Against flow):</b> Speed = Boat - Water.<br>It is harder to swim upstream!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🚔',
+        title: 'Final Mastery Quiz',
+        question: 'Police (100km/h) chases Thief (80km/h). What is the Relative Speed?',
+        options: ['180 km/h', '20 km/h', '90 km/h', '100 km/h'],
+        correctIndex: 1 // Same direction: 100 - 80 = 20
+    }
+],
+        'percentage': [
+    // PART 1: The Basics
+    {
+        type: 'theory',
+        illustration: '💯',
+        title: '1. What is Percentage?',
+        content: '<b>"Per Cent"</b> means "Per 100".<br>It is a fraction with denominator 100.<br>50% = 50/100 = <b>1/2</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '➗',
+        title: '2. Conversion Magic',
+        content: '<b>To Fraction:</b> Divide by 100 (20% → 1/5).<br><b>To Percentage:</b> Multiply by 100 (1/4 → 25%).<br>Memorize: 1/2=50%, 1/3=33.33%, 1/4=25%, 1/5=20%.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Convert 3/4 to percentage:',
+        options: ['30%', '45%', '75%', '60%'],
+        correctIndex: 2 // 3/4 * 100 = 75%
+    },
+
+    // PART 2: Percentage Change (Increase/Decrease)
+    {
+        type: 'theory',
+        illustration: '📈',
+        title: '3. Increase/Decrease Formula',
+        content: '<b>% Change = (Difference / Initial Value) × 100</b>.<br>Example: Salary 100 → 120.<br>Diff = 20. Initial = 100.<br>Change = 20%.'
+    },
+    {
+        type: 'theory',
+        illustration: '🔄',
+        title: '4. The "Of" Rule',
+        content: 'In word problems: "What percent <b>of A</b> is B?"<br>The number after "of" goes at the bottom.<br>Formula: <b>(B / A) × 100</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '📉',
+        title: 'Quiz 2',
+        question: 'Price drops from 50 to 40. Calculate % decrease.',
+        options: ['10%', '20%', '25%', '15%'],
+        correctIndex: 1 // (10/50)*100 = 20%
+    },
+
+    // PART 3: Successive Percentage (Advanced)
+    {
+        type: 'theory',
+        illustration: '⛓️',
+        title: '5. Successive Change',
+        content: 'Price increases by 10%, then again by 10%.<br>Total is <b>NOT 20%</b>.<br>100 → 110 → 121.<br>Total increase is <b>21%</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🧪',
+        title: '6. The AB Formula',
+        content: 'For two successive changes (A% and B%):<br><b>Net Change = A + B + (AB / 100)</b>.<br>Use negative signs for decreases.'
+    },
+    {
+        type: 'theory',
+        illustration: '⚖️',
+        title: '7. The +10% / -10% Trap',
+        content: 'If you increase by x% and then decrease by x%, you <b>ALWAYS lose</b>.<br>Loss % = $(x^2 / 100)$.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 3',
+        question: 'Salary +20% then -20%. Net result?',
+        options: ['No Change', '4% Loss', '4% Gain', '10% Loss'],
+        correctIndex: 1 // 400/100 = 4% Loss
+    },
+
+    // PART 4: Reverse Percentage (Finding the Original)
+    {
+        type: 'theory',
+        illustration: '🔙',
+        title: '8. Reverse Calculation',
+        content: 'If "Price <i>after</i> 20% tax is 120", what was the original?<br>Wrong: 120 - 20% = 96.<br>Right: Original × 1.20 = 120.<br>Original = 120 ÷ 1.2 = <b>100</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🆚',
+        title: '9. A vs B Logic',
+        content: 'If A is 25% <b>more</b> than B, then B is <b>NOT</b> 25% less than A.<br>Rule: If A is $1/n$ more, B is $1/(n+1)$ less.<br>Example: 25% (1/4) more → 20% (1/5) less.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🤔',
+        title: 'Quiz 4',
+        question: 'If A is 50% more than B, B is ___ less than A.',
+        options: ['50%', '33.33%', '25%', '100%'],
+        correctIndex: 1 // 1/2 more -> 1/3 less
+    },
+
+    // PART 5: Advanced Applications
+    {
+        type: 'theory',
+        illustration: '🗳️',
+        title: '10. Voting Problems',
+        content: 'Winner gets 60%, Loser gets 40%.<br>Majority = 20%.<br>If Majority is 2000 votes, then 20% = 2000.<br>Total Votes (100%) = 10,000.'
+    },
+    {
+        type: 'theory',
+        illustration: '👪',
+        title: '11. Population Growth',
+        content: 'Compound Growth works like Compound Interest.<br>Population $P$ grows at $R\%$ for $n$ years:<br><b>New = $P \times (1 + R/100)^n$</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'A number increased by 20% becomes 60. Find the number.',
+        options: ['48', '50', '40', '30'],
+        correctIndex: 1 // X * 1.2 = 60 -> X = 50
+    }
+],
+            
         
             
             // REASONING
-            'numSeries': [ { type: 'theory', illustration: '1️⃣', title: 'Series', content: 'Find missing number: 2, 4, 6...' }, { type: 'quiz', illustration: '❓', title: 'Quiz', question: 'Next: 10, 20, 30, __', options: ['40', '50'], correctIndex: 0 } ]
+            'numSeries': [
+    // PART 1: The Basics (Arithmetic & Geometric)
+    {
+        type: 'theory',
+        illustration: '➕',
+        title: '1. Arithmetic Series (AP)',
+        content: 'The difference between numbers is <b>constant</b>.<br>Example: 2, 5, 8, 11... (+3 each time).<br>Rule: Look for addition or subtraction.'
+    },
+    {
+        type: 'theory',
+        illustration: '✖️',
+        title: '2. Geometric Series (GP)',
+        content: 'The numbers grow very fast.<br>Example: 3, 6, 12, 24... (×2 each time).<br>Rule: Look for multiplication or division.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Find the next number: 5, 10, 20, 40, ?',
+        options: ['60', '80', '50', '100'],
+        correctIndex: 1 // 40 * 2 = 80
+    },
+
+    // PART 2: Squares & Cubes (The Memory Game)
+    {
+        type: 'theory',
+        illustration: '🟦',
+        title: '3. Square Series',
+        content: 'Based on $n^2$.<br>1, 4, 9, 16, 25...<br>Advanced: $n^2 + 1$ (2, 5, 10, 17...).<br>Advanced: $n^2 - 1$ (0, 3, 8, 15...).'
+    },
+    {
+        type: 'theory',
+        illustration: '📦',
+        title: '4. Cube Series',
+        content: 'Based on $n^3$.<br>1, 8, 27, 64, 125...<br>Recognizing 27, 64, 125 instantly is key to solving hard problems.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2',
+        question: 'Complete: 0, 7, 26, 63, ?',
+        options: ['124', '125', '100', '99'],
+        correctIndex: 0 // n^3 - 1 (125 - 1)
+    },
+
+    // PART 3: The "Double Difference" Method
+    {
+        type: 'theory',
+        illustration: '🪜',
+        title: '5. Step Logic',
+        content: 'If you can\'t find a pattern, take the <b>difference</b> between numbers.<br>If that doesn\'t work, take the difference of the difference!<br>Series: 2, 5, 11, 23...<br>Diff: 3, 6, 12... (×2 logic found!).'
+    },
+    {
+        type: 'theory',
+        illustration: '👯',
+        title: '6. Alternating Series',
+        content: 'Two series mixed together.<br>Example: <b>2</b>, 10, <b>4</b>, 15, <b>6</b>, 20...<br>Series A: 2, 4, 6...<br>Series B: 10, 15, 20...'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 3',
+        question: 'Find next: 3, 4, 7, 11, 18, 29, ?',
+        options: ['35', '40', '47', '42'],
+        correctIndex: 2 // 18 + 29 = 47 (Sum of previous two)
+    },
+
+    // PART 4: Prime Numbers (The Trap)
+    {
+        type: 'theory',
+        illustration: '🔢',
+        title: '7. Prime Number Series',
+        content: 'Numbers divisible only by 1 and themselves.<br>2, 3, 5, 7, 11, 13, 17...<br>Trap: Don\'t confuse 9 (odd) with Prime!'
+    },
+    {
+        type: 'quiz',
+        illustration: '⚠️',
+        title: 'Quiz 4',
+        question: 'Find odd one out: 3, 5, 7, 9, 11, 13',
+        options: ['9', '3', '7', '13'],
+        correctIndex: 0 // 9 is divisible by 3
+    },
+
+    // PART 5: Advanced Hybrid Logic
+    {
+        type: 'theory',
+        illustration: '🤖',
+        title: '8. Multiply + Add',
+        content: 'Most common in exams.<br>Example: ×2 + 1<br>5 → 11 (5×2 + 1)<br>11 → 23 (11×2 + 1)<br>Rule: Check if numbers roughly double.'
+    },
+    {
+        type: 'theory',
+        illustration: '🔄',
+        title: '9. Fibonacci Series',
+        content: 'Each number is the sum of the <b>two previous numbers</b>.<br>1, 1, 2, 3, 5, 8, 13...<br>Look for this when numbers grow steadily but not geometrically.'
+    },
+    {
+        type: 'theory',
+        illustration: '📉',
+        title: '10. Half-Pattern (×0.5)',
+        content: 'If a series decreases then increases.<br>Example: 10, 5, 5, 7.5, 15...<br>Logic: ×0.5, ×1, ×1.5, ×2.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'Solve: 4, 9, 19, 39, ?',
+        options: ['79', '89', '69', '59'],
+        correctIndex: 0 // ×2 + 1 logic (39*2 + 1 = 79)
+    }
+],
+
+            'distance': [
+    // PART 1: The Compass Basics
+    {
+        type: 'theory',
+        illustration: '🧭',
+        title: '1. The Cardinal Directions',
+        content: 'Remember <b>NEWS</b>:<br><b>N</b>orth (Up)<br><b>E</b>ast (Right)<br><b>W</b>est (Left)<br><b>S</b>outh (Down)<br><i>Note: Always draw a small cross on your paper before starting!</i>'
+    },
+    {
+        type: 'theory',
+        illustration: '✋',
+        title: '2. Left vs Right Turns',
+        content: 'Imagine yourself walking on the line.<br><b>Face North:</b> Left is West, Right is East.<br><b>Face South:</b> Left is East, Right is West (Opposite!).'
+    },
+    {
+        type: 'theory',
+        illustration: '🔄',
+        title: '3. Clockwise vs Anti-Clockwise',
+        content: '<b>Clockwise (CW):</b> Right Turn (Like a clock hands).<br><b>Anti-Clockwise (ACW):</b> Left Turn.<br>Standard turn = <b>90°</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'You face North. You turn 90° Clockwise. Where do you face?',
+        options: ['West', 'South', 'East', 'North-East'],
+        correctIndex: 2 // East
+    },
+
+    // PART 2: Angles & Rotation
+    {
+        type: 'theory',
+        illustration: '📐',
+        title: '4. Degree Movements',
+        content: '<b>45°:</b> Half turn (Face NE, NW, SE, SW).<br><b>180°:</b> Complete U-Turn (Face Opposite).<br><b>360°:</b> Full circle (Face Same).'
+    },
+    {
+        type: 'theory',
+        illustration: '🥨',
+        title: '5. Solving Rotation Problems',
+        content: 'Trick: Add all CW angles and all ACW angles separately.<br>Subtract the smaller from the larger.<br>Turn only once in the final direction.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🤔',
+        title: 'Quiz 2',
+        question: 'Face North. Turn 135° CW, then 45° ACW. Final face?',
+        options: ['East', 'West', 'North', 'South'],
+        correctIndex: 0 // Net: 135 - 45 = 90 CW (North -> East)
+    },
+
+    // PART 3: The Shadow Tricks (Exam Favorite)
+    {
+        type: 'theory',
+        illustration: '☀️',
+        title: '6. Morning Shadows (Sunrise)',
+        content: 'Sun is in <b>East</b>.<br>Shadow falls towards <b>West</b>.<br>If shadow is to your <b>Left</b>, you are facing <b>North</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🌅',
+        title: '7. Evening Shadows (Sunset)',
+        content: 'Sun is in <b>West</b>.<br>Shadow falls towards <b>East</b>.<br>If shadow is to your <b>Left</b>, you are facing <b>South</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🕛',
+        title: '8. Noon Shadow',
+        content: 'At 12:00 PM, the sun is exactly overhead.<br>There is <b>NO shadow</b> (or it is under your feet).<br>Trick question!'
+    },
+    {
+        type: 'quiz',
+        illustration: '👥',
+        title: 'Quiz 3',
+        question: 'Morning: Shadow falls to your Right. You are facing:',
+        options: ['North', 'South', 'East', 'West'],
+        correctIndex: 1 // Sun East -> Shadow West. If West is Right, Face is South.
+    },
+
+    // PART 4: Calculating Distance (Pythagoras)
+    {
+        type: 'theory',
+        illustration: '📏',
+        title: '9. Total Distance vs Displacement',
+        content: '<b>Total Distance:</b> Total path walked (Add everything).<br><b>Displacement:</b> Shortest line from Start to End (Hypotenuse).'
+    },
+    {
+        type: 'theory',
+        illustration: '🔺',
+        title: '10. Pythagoras Theorem',
+        content: 'Used for shortest distance.<br><b>$H^2 = P^2 + B^2$</b><br>Common Triplets: (3, 4, <b>5</b>), (6, 8, <b>10</b>), (5, 12, <b>13</b>).'
+    },
+    {
+        type: 'theory',
+        illustration: '🗺️',
+        title: '11. Direction Reference',
+        content: 'Question: "In which direction is he <b>from the starting point</b>?"<br>Draw an arrow FROM Start TO End.<br>If arrow goes Up-Right, answer is <b>North-East</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🚶',
+        title: 'Quiz 4',
+        question: 'Walk 3km North, then 4km East. How far from start?',
+        options: ['7km', '5km', '1km', '25km'],
+        correctIndex: 1 // Sqrt(3^2 + 4^2) = 5
+    },
+
+    // PART 5: Advanced Logic
+    {
+        type: 'theory',
+        illustration: '🧩',
+        title: '12. Coded Direction',
+        content: 'If "North becomes West"...<br>Logic: N to W is 90° ACW.<br>Apply the <b>same rotation</b> to everything else.<br>East becomes South.'
+    },
+    {
+        type: 'theory',
+        illustration: '🧘',
+        title: '13. Yoga Headstand',
+        content: 'If a person does a headstand facing North:<br>Their <b>Face</b> is North.<br>Their <b>Left Hand</b> will point <b>East</b> (Opposite of normal!).'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'A goes 10m North, turns Right, goes 10m. Direction from Start?',
+        options: ['North', 'East', 'North-East', 'North-West'],
+        correctIndex: 2 // Up and Right -> NE
+    }
+],
+
+            'mathOps': [
+    // PART 1: The Foundation (BODMAS)
+    {
+        type: 'theory',
+        illustration: '🧱',
+        title: '1. The Golden Rule: BODMAS',
+        content: 'You cannot just calculate left to right!<br><b>B</b>: Brackets ()<br><b>O</b>: Of (Powers/Roots)<br><b>D</b>: Division (÷)<br><b>M</b>: Multiplication (×)<br><b>A</b>: Addition (+)<br><b>S</b>: Subtraction (-)'
+    },
+    {
+        type: 'theory',
+        illustration: '⚠️',
+        title: '2. Why Order Matters',
+        content: 'Solve: <b>$10 - 2 \times 3$</b><br>Wrong: $8 \times 3 = 24$.<br>Right: Multiply first ($2 \times 3 = 6$). Then subtract ($10 - 6 = 4$).'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Solve: 12 ÷ 4 + 2',
+        options: ['2', '5', '6', '3'],
+        correctIndex: 1 // 3 + 2 = 5
+    },
+
+    // PART 2: Coded Operations (Substitution)
+    {
+        type: 'theory',
+        illustration: '🕵️',
+        title: '3. Decoding Symbols',
+        content: 'Question: "If $+$ means $\times$, $-$ means $\div$..."<br><b>Step 1:</b> Don\'t solve in your head.<br><b>Step 2:</b> Re-write the equation with the <i>new</i> real symbols.<br><b>Step 3:</b> Use BODMAS.'
+    },
+    {
+        type: 'theory',
+        illustration: '📝',
+        title: '4. Example',
+        content: 'If $P = \times$, $T = -$.<br>Problem: $4 \ P \ 3 \ T \ 2$.<br>Rewrite: $4 \times 3 - 2$.<br>Solve: $12 - 2 = 10$.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2',
+        question: 'If L=+, M=÷. Solve: 8 M 2 L 5',
+        options: ['9', '4', '13', '16'],
+        correctIndex: 0 // 8/2 + 5 = 4 + 5 = 9
+    },
+
+    // PART 3: The "Division Hack" (Advanced Strategy)
+    {
+        type: 'theory',
+        illustration: '⚡',
+        title: '5. The Division Trick',
+        content: 'In "Find the correct option" questions, check <b>Division (÷)</b> first.<br>If you see $5 \div 2$ (Decimal), but the answer is a whole number (12), that option is <b>Wrong</b>.<br>Eliminate it immediately!'
+    },
+    {
+        type: 'theory',
+        illustration: '🚫',
+        title: '6. Elimination Example',
+        content: 'Target: $= 10$.<br>Option A: $7 \div 2 + \dots$ (Result 3.5? Ignore A).<br>Option B: $8 \div 4 + \dots$ (Result 2? Check B).<br>This saves 90% of your time.'
+    },
+    {
+        type: 'quiz',
+        illustration: '👀',
+        title: 'Quiz 3',
+        question: 'Which is likely WRONG for an integer answer?',
+        options: ['12 ÷ 6', '12 ÷ 4', '12 ÷ 5', '12 ÷ 3'],
+        correctIndex: 2 // 12/5 is 2.4 (Decimal)
+    },
+
+    // PART 4: Interchanging Signs
+    {
+        type: 'theory',
+        illustration: '🔄',
+        title: '7. Interchange Logic',
+        content: 'Question: "Equation is wrong. Which two signs should be swapped to fix it?"<br>Strategy: Look for where Division <b>should</b> be to make numbers smaller or cleaner.'
+    },
+    {
+        type: 'theory',
+        illustration: '⚖️',
+        title: '8. Balancing Equations',
+        content: 'Fill in the blanks: $8 \ \_\ \ 4 \ \_\ \ 2 = 6$.<br>Try Division first: $8 \div 4 = 2$.<br>Then Add/Multiply: $2 + 4$?<br>Correct: $8 \div 4 + 4 = 6$.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 4',
+        question: 'Swap × and ÷: 4 × 2 ÷ 2 = ?',
+        options: ['1', '4', '8', '16'],
+        correctIndex: 1 // Becomes 4 ÷ 2 × 2 -> 2 × 2 -> 4
+    },
+
+    // PART 5: Advanced/Tricky
+    {
+        type: 'theory',
+        illustration: '🤯',
+        title: '9. The Bracket Trap',
+        content: 'Sometimes "Of" is hidden.<br>$10 \div 2(3)$ is TRICKY.<br>It means $10 \div 2 \times 3$.<br>BODMAS: $10 \div 2 = 5$. Then $5 \times 3 = 15$.'
+    },
+    {
+        type: 'theory',
+        illustration: '🔢',
+        title: '10. Number Interchange',
+        content: 'Question: "Swap 3 and 4".<br>Be careful: If the number is <b>34</b>, swapping makes it <b>43</b>.<br>Usually, we only swap standalone digits.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'Solve: 18 ÷ 3 × (4 - 2) + 1',
+        options: ['13', '4', '12', '7'],
+        correctIndex: 0 // Brackets(2) -> Div(6) -> Mult(12) -> Add(13)
+    }
+],
+
+            'ranking': [
+    // PART 1: The Golden Formula (Ranking)
+    {
+        type: 'theory',
+        illustration: '🔢',
+        title: '1. The Golden Rule',
+        content: 'To find the <b>Total</b> number of people in a row:<br><b>Total = (Left Position + Right Position) - 1</b>.<br><i>Why -1? Because you counted the same person twice!</i>'
+    },
+    {
+        type: 'theory',
+        illustration: '↔️',
+        title: '2. Finding Position',
+        content: 'If you know the Total and one side:<br><b>Position = (Total - Other Side) + 1</b>.<br>Example: Total 50. You are 10th from Left.<br>Right Position = (50 - 10) + 1 = <b>41st</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Rohan is 7th from Top and 26th from Bottom. How many total students?',
+        options: ['31', '32', '33', '34'],
+        correctIndex: 1 // 7 + 26 - 1 = 32
+    },
+
+    // PART 2: Swapping Positions (Advanced)
+    {
+        type: 'theory',
+        illustration: '🔄',
+        title: '3. The Interchange Problem',
+        content: 'Scenario: "A is 10th from Left. B is 15th from Right. They swap places. A becomes 20th from Left."<br><b>Trick:</b> New Position of A + Old Position of B - 1.<br>Total = 20 + 15 - 1 = <b>34</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🪜',
+        title: '4. Finding New Position',
+        content: 'In the swap above, what is B\'s new position?<br>A moved 10 spaces (10 to 20).<br>B must also move 10 spaces.<br>15 + 10 = <b>25th</b> from Right.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2',
+        question: 'A is 5th (L). B is 6th (R). Swap: A becomes 15th (L). Total?',
+        options: ['20', '21', '19', '22'],
+        correctIndex: 0 // 15 + 6 - 1 = 20
+    },
+
+    // PART 3: The "Between" Logic
+    {
+        type: 'theory',
+        illustration: '👥',
+        title: '5. Non-Overlapping Case',
+        content: 'When Total > (Left + Right).<br>People Between = <b>Total - (Left + Right)</b>.<br>Everyone stands separately.'
+    },
+    {
+        type: 'theory',
+        illustration: '🥨',
+        title: '6. Overlapping Case (Min/Max)',
+        content: 'When Total < (Left + Right).<br>The lines cross each other!<br>People Between = <b>(Left + Right) - (Total + 2)</b>.<br><i>The "+2" accounts for the two main people.</i>'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 3',
+        question: 'Total 10. A is 8th (L), B is 8th (R). How many between?',
+        options: ['4', '6', '2', '0'],
+        correctIndex: 0 // (8+8) - (10+2) = 16 - 12 = 4
+    },
+
+    // PART 4: Time Sequence & Comparison
+    {
+        type: 'theory',
+        illustration: '📅',
+        title: '7. Date Calculation',
+        content: 'Question: "If 3rd is Friday, what day is 25th?"<br>Gap = 25 - 3 = 22 days.<br>22 ÷ 7 = Remainder <b>1</b>.<br>Friday + 1 = <b>Saturday</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🦁',
+        title: '8. Comparison Logic',
+        content: 'P is taller than Q but shorter than R.<br>Draw it: <b>R > P > Q</b>.<br>Connect multiple sentences to build the full chain.'
+    },
+    {
+        type: 'theory',
+        illustration: '🗓️',
+        title: '9. The Leap Year Trap',
+        content: 'Normal Year: 365 days (1 odd day).<br>Leap Year: 366 days (2 odd days).<br>If Feb 29 is included in the gap, add <b>+1 extra day</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'In a row of boys, if A is 10th from left and B is 9th from right, and they swap...',
+        options: [
+            'We need the new position to find Total.',
+            'Total is 19.',
+            'Total is 18.',
+            'Total is 20.'
+        ],
+        correctIndex: 0 // Cannot calculate Total without knowing the New Position
+    }
+],
+
+            'artValues': [
+    // PART 1: Basic Symbol Substitution
+    {
+        type: 'theory',
+        illustration: '🔢',
+        title: '1. What are Artificial Values?',
+        content: 'In these problems, real numbers or signs are replaced by <b>codes</b>.<br>Your job is to <b>decode</b> them first, then solve using BODMAS.'
+    },
+    {
+        type: 'theory',
+        illustration: '📝',
+        title: '2. Type 1: Letter Codes',
+        content: 'If <b>A = 2</b>, <b>B = 3</b>, <b>C = 4</b>.<br>Find: $A \times B + C$.<br>Step 1: Substitute ($2 \times 3 + 4$).<br>Step 2: Solve ($6 + 4 = 10$).'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'If P=5, Q=10, R=2. Find (Q ÷ P) × R',
+        options: ['1', '4', '10', '20'],
+        correctIndex: 1 // (10/5) * 2 = 2 * 2 = 4
+    },
+
+    // PART 2: Operator Substitution (The Classic)
+    {
+        type: 'theory',
+        illustration: '🔄',
+        title: '3. Changing the Signs',
+        content: 'Problem: "If $+$ means $\div$, and $-$ means $\times$..."<br>Equation: $8 + 2 - 5$.<br><b>Step 1:</b> Rewrite immediately: $8 \div 2 \times 5$.<br><b>Step 2:</b> Solve: $4 \times 5 = 20$.'
+    },
+    {
+        type: 'theory',
+        illustration: '⚠️',
+        title: '4. The "Means" Trap',
+        content: 'Be careful with wording!<br>"<b>$+$ means $-$</b>": Replace $+$ with $-$.<br>"<b>$+$ is called $-$</b>": Same thing.<br>Never calculate with the old signs!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 2',
+        question: 'If + means ×, and - means +. Solve: 3 - 2 + 4',
+        options: ['10', '11', '5', '9'],
+        correctIndex: 1 // 3 + 2 × 4 = 3 + 8 = 11
+    },
+
+    // PART 3: Defining New Operations (Advanced)
+    {
+        type: 'theory',
+        illustration: '🛠️',
+        title: '5. Artificial Operators',
+        content: 'Sometimes new symbols are invented with specific rules.<br>Example: <b>$a \theta b = (a + b) \times a$</b>.<br>Solve $3 \theta 2$:<br>$(3 + 2) \times 3 = 5 \times 3 = 15$.'
+    },
+    {
+        type: 'theory',
+        illustration: '📦',
+        title: '6. The Box Problem',
+        content: 'If $\square(x) = x^2 - 1$.<br>Find $\square(4)$.<br>Solution: $4^2 - 1 = 16 - 1 = 15$.<br>Follow the <b>rule of the shape</b>.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧩',
+        title: 'Quiz 3',
+        question: 'If a $ b = (a + b) ÷ 2. Find 10 $ 6.',
+        options: ['4', '16', '8', '60'],
+        correctIndex: 2 // (10+6)/2 = 8
+    },
+
+    // PART 4: Interchange & Balancing
+    {
+        type: 'theory',
+        illustration: '⚖️',
+        title: '7. Interchange of Numbers',
+        content: 'Rule: "Interchange 3 and 5".<br>Problem: $3 \times 5 + 10$.<br>New: $5 \times 3 + 10$.<br><b>Note:</b> If the number is <b>35</b>, it becomes <b>53</b>!'
+    },
+    {
+        type: 'theory',
+        illustration: '🕵️',
+        title: '8. Finding the Correct Equation',
+        content: 'Question: "If $+$ and $-$ are swapped, which equation is correct?"<br>Strategy: Check the <b>equals sign</b> (=) logic last. Check standard arithmetic first.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🔄',
+        title: 'Quiz 4',
+        question: 'Swap 4 and 2. Solve: 4 ÷ 2 + 1',
+        options: ['3', '2', '5', '1.5'],
+        correctIndex: 3 // Becomes 2 ÷ 4 + 1 = 0.5 + 1 = 1.5
+    },
+
+    // PART 5: Advanced Conditionals (Banking Level)
+    {
+        type: 'theory',
+        illustration: '🚦',
+        title: '9. Conditional Coding',
+        content: 'Rules often depend on the digits:<br>1. If First digit is odd, code as X.<br>2. If Last digit is even, code as Y.<br>Apply <b>ALL</b> relevant conditions.'
+    },
+    {
+        type: 'theory',
+        illustration: '🛑',
+        title: '10. Priority of Conditions',
+        content: 'Sometimes two rules apply.<br>If Rule 1 says "Code as A" and Rule 2 says "Code as B", the question will specify priority (e.g., "Case 2 overrides Case 1").'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'Rule: x * y = x + y + xy. Find 2 * 3.',
+        options: ['6', '5', '11', '12'],
+        correctIndex: 2 // 2 + 3 + (2×3) = 5 + 6 = 11
+    }
+],
+
+            'insertSign': [
+    // PART 1: The Basics (What is this?)
+    {
+        type: 'theory',
+        illustration: '⚖️',
+        title: '1. The Goal',
+        content: 'You are given numbers and an answer.<br>Example: <b>4 _ 2 _ 1 = 6</b>.<br>You must fill the blanks with signs (+, -, ×, ÷) to make it true.<br>Solution: $4 + 2 \times 1 = 6$.'
+    },
+    {
+        type: 'theory',
+        illustration: '🧱',
+        title: '2. The Rule',
+        content: 'You MUST follow <b>BODMAS</b> after inserting the signs.<br>Wrong: $4 + 2 \times 1 = 6 \times 1 = 6$.<br>Right: Multiply first ($2 \times 1 = 2$). Then Add ($4 + 2 = 6$).'
+    },
+    {
+        type: 'quiz',
+        illustration: '❓',
+        title: 'Quiz 1',
+        question: 'Make it true: 8 _ 4 _ 2 = 4',
+        options: ['+, -', '÷, +', '-, ÷', '×, -'],
+        correctIndex: 2 // 8 - (4/2) = 8 - 2 = 6 (Wait, 8-2=6. Let's check options).
+                        // Let's re-evaluate:
+                        // A: 8+4-2 = 10 (No)
+                        // B: 8/4 + 2 = 2+2=4 (YES!)
+                        // C: 8-2 = 6 (No)
+    }
+    // Correction on Quiz 1 logic in the output below: Option 1 (Index 1) is correct.
+    ,
+
+    // PART 2: The Strategy (Don't Guess!)
+    {
+        type: 'theory',
+        illustration: '🎯',
+        title: '3. Strategy 1: Check the Equals (=)',
+        content: 'Sometimes the "=" is part of the options.<br><b>6 _ 2 _ 3</b>.<br>Options: [=, ×], [+, =].<br>Check where the result is. Usually, the biggest number is the result.'
+    },
+    {
+        type: 'theory',
+        illustration: '⚡',
+        title: '4. Strategy 2: The Division Hack',
+        content: 'This is the <b>most important</b> trick.<br>Look at where the <b>÷</b> sign goes.<br>If it creates a decimal (e.g., $7 \div 2$), but the answer is a whole number, that option is <b>WRONG</b>.<br>Eliminate it immediately!'
+    },
+    {
+        type: 'quiz',
+        illustration: '🚫',
+        title: 'Quiz 2',
+        question: 'Target = 10 (Integer). Which option is IMPOSSIBLE?',
+        options: ['12 ÷ 2', '12 ÷ 3', '12 ÷ 6', '12 ÷ 5'],
+        correctIndex: 3 // 12/5 = 2.4 (Decimal). Impossible for integer target.
+    },
+
+    // PART 3: Advanced Elimination
+    {
+        type: 'theory',
+        illustration: '🚀',
+        title: '5. Magnitude Check (Too Big/Small)',
+        content: 'If the target is small (e.g., 5) and you see <b>$50 \times 50$</b> in the option...<br>It will become 2500.<br>Unless there is a huge subtraction later, this option is likely <b>Wrong</b>.'
+    },
+    {
+        type: 'theory',
+        illustration: '🔍',
+        title: '6. The Last Digit Trick',
+        content: 'For large numbers ($234 \times 567$)...<br>Just check the last digit.<br>$4 \times 7 = 28$ (Ends in 8).<br>If the answer ends in 0, this is wrong.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🧠',
+        title: 'Quiz 3',
+        question: 'Solve: 5 _ 5 _ 5 = 30',
+        options: ['+, +', '×, +', '-, ×', '÷, +'],
+        correctIndex: 1 // 5 × 5 + 5 = 25 + 5 = 30
+    },
+
+    // PART 4: Complex Equations
+    {
+        type: 'theory',
+        illustration: '🤯',
+        title: '7. Sequential Operations',
+        content: 'Problem: $16 \_ 4 \_ 3 \_ 4 = 13$.<br>Options: $[\div, \times, -]$.<br>Apply in order:<br>1. $16 \div 4 = 4$.<br>2. $4 \times 3 = 12$.<br>3. $12 - 4 = 8$. (Not 13. Try next!).'
+    },
+    {
+        type: 'theory',
+        illustration: '⏳',
+        title: '8. Speed Solving',
+        content: 'Don\'t write the whole equation.<br>Write the result of the <b>Division</b> and <b>Multiplication</b> immediately above the numbers.<br>Then just add/subtract mentally.'
+    },
+    {
+        type: 'quiz',
+        illustration: '🎓',
+        title: 'Final Mastery Quiz',
+        question: 'Which set balances: 12 _ 3 _ 4 = 8?',
+        options: [
+            '÷ and +',  // 4 + 4 = 8 (YES)
+            '× and -',  // 36 - 4 = 32
+            '+ and ÷',  // 12 + 0.75
+            '- and ×'   // 12 - 12 = 0
+        ],
+        correctIndex: 0 // 12 ÷ 3 + 4 = 4 + 4 = 8
+    }
+]
+            
+        
+        
+        
+        
+
+        
+        
         };
 
         // --- 4. GLOBAL STATE ---
