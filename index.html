@@ -146,13 +146,14 @@
         /* --- MAIN AREA --- */
         #main-container { flex-grow: 1; overflow-y: auto; position: relative; padding-bottom: 80px; }
 
-        /* --- GAME MAP --- */
+                /* --- GAME MAP --- */
         #path-view {
             display: grid; grid-template-columns: 1fr 1fr 1fr; row-gap: 60px;
-            padding: 60px 20px 40px; 
+            padding: 80px 20px 130px; /* Upar 80px (Toolbar ke liye) aur Neeche 130px (Bottom Nav ke liye) */
             background: url('https://www.transparenttextures.com/patterns/cubes.png');
             justify-items: center;
         }
+
 
         .level-node {
             width: 70px; height: 70px; border-radius: 50%; background-color: var(--secondary);
