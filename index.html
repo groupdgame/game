@@ -71,38 +71,37 @@
         }
         .drawer-item:hover { background: #f0f0f0; color: var(--primary); }
         
-                /* --- PROFILE SCREEN --- */
-        #profile-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7); z-index: 2005;
-            display: none; /* Shuru me chhupa rahega */
-            justify-content: center; align-items: center;
+                /* --- FULL SCREEN PROFILE VIEW --- */
+        #profile-view {
+            display: none; flex-direction: column; height: 100vh; width: 100vw;
+            background: var(--bg); position: fixed; top: 0; left: 0; z-index: 2005;
         }
-        .profile-card {
-            background: white; width: 85%; max-width: 350px;
-            border-radius: 20px; padding: 30px 20px; text-align: center;
-            position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            animation: popIn 0.3s ease-out;
+        .profile-header-bar {
+            display: flex; align-items: center; padding: 0 20px;
+            background: var(--primary); color: white; height: 60px; box-sizing: border-box;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); gap: 20px;
         }
-        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .profile-header-bar h2 { font-size: 20px; margin: 0; }
+        .back-btn { font-size: 24px; cursor: pointer; font-weight: bold; }
         
-        .close-profile {
-            position: absolute; top: 15px; right: 20px;
-            font-size: 24px; cursor: pointer; color: var(--gray-dark);
+        .profile-content {
+            display: flex; flex-direction: column; align-items: center; padding: 50px 20px;
         }
         #profile-page-pic {
-            width: 100px; height: 100px; border-radius: 50%;
-            border: 4px solid var(--primary); margin-bottom: 10px; object-fit: cover;
+            width: 120px; height: 120px; border-radius: 50%;
+            border: 5px solid var(--primary); margin-bottom: 20px; object-fit: cover;
+            background: white;
         }
-        #profile-page-name { margin: 0; font-size: 24px; color: var(--text); }
-        #profile-page-email { margin: 5px 0 25px; color: var(--gray-dark); font-size: 14px; }
+        #profile-page-name { margin: 0; font-size: 26px; color: var(--text); font-weight: bold;}
+        #profile-page-email { margin: 8px 0 40px; color: var(--gray-dark); font-size: 16px; }
         
         #profile-logout-btn {
-            background: #ff4b4b; color: white; border: none; padding: 12px 30px;
-            font-size: 16px; font-weight: bold; border-radius: 30px; cursor: pointer;
-            width: 100%; box-shadow: 0 4px 0 #d43f3f; transition: transform 0.1s;
+            background: #ff4b4b; color: white; border: none; padding: 15px 40px;
+            font-size: 18px; font-weight: bold; border-radius: 30px; cursor: pointer;
+            width: 80%; max-width: 300px; box-shadow: 0 4px 0 #d43f3f; transition: transform 0.1s;
         }
         #profile-logout-btn:active { transform: translateY(4px); box-shadow: none; }
+        
         
 
         
@@ -240,10 +239,6 @@
 </head>
 <body>
 
-           <audio id="sound-applause" src="[https://www.myinstants.com/media/sounds/crowd-cheering.mp3](https://www.myinstants.com/media/sounds/crowd-cheering.mp3)" preload="auto"></audio>
-    <audio id="sound-correct" src="[https://www.myinstants.com/media/sounds/correct-chime.mp3](https://www.myinstants.com/media/sounds/correct-chime.mp3)" preload="auto"></audio>
-    <audio id="sound-wrong" src="[https://www.myinstants.com/media/sounds/error.mp3](https://www.myinstants.com/media/sounds/error.mp3)" preload="auto"></audio>
-
     
     <div id="login-overlay">
         <h1 style="color:#58cc02; font-size:40px; margin-bottom:10px;">Group D Game</h1>
@@ -261,15 +256,19 @@
         </div>
     </div>
 
-        <div id="profile-overlay">
-        <div class="profile-card">
-            <span class="close-profile" onclick="closeProfile()">✕</span>
+           <div id="profile-view" style="display: none;">
+        <div class="profile-header-bar">
+            <span class="back-btn" onclick="closeProfile()">← Back</span>
+            <h2>My Profile</h2>
+        </div>
+        <div class="profile-content">
             <img id="profile-page-pic" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile">
             <h2 id="profile-page-name">Player Name</h2>
             <p id="profile-page-email">player@email.com</p>
             <button id="profile-logout-btn" onclick="logoutUser()">Logout</button>
         </div>
-        </div>
+           </div>
+    
     
 
         <div id="drawer-overlay" onclick="closeDrawer()"></div>
@@ -4677,22 +4676,33 @@
             document.getElementById('side-drawer').classList.remove('open');
         };
 
-                window.openProfile = function() {
-            // Google se data uthakar HTML me dalna
+                 window.openProfile = function() {
+            // Data set karo
             if (currentUser) {
                 if(currentUser.photoURL) document.getElementById('profile-page-pic').src = currentUser.photoURL;
                 document.getElementById('profile-page-name').innerText = currentUser.displayName || "Player";
                 document.getElementById('profile-page-email').innerText = currentUser.email || "No Email";
             }
-            // Profile popup dikhana
-            document.getElementById('profile-overlay').style.display = 'flex';
+            
+            // Map aur Toolbars ko chhupao
+            document.getElementById('path-view').style.display = 'none';
+            document.getElementById('bottom-nav').style.display = 'none';
+            document.getElementById('main-toolbar').style.display = 'none';
+            
+            // Profile Full Screen dikhao
+            document.getElementById('profile-view').style.display = 'flex';
         };
 
         window.closeProfile = function() {
-            // Profile popup chhupana
-            document.getElementById('profile-overlay').style.display = 'none';
+            // Profile chhupao
+            document.getElementById('profile-view').style.display = 'none';
+            
+            // Map aur Toolbars ko wapas lao
+            document.getElementById('path-view').style.display = 'grid';
+            document.getElementById('bottom-nav').style.display = 'flex';
+            document.getElementById('main-toolbar').style.display = 'flex';
         };
-
+            
         window.logoutUser = function() {
             // Google se Logout karne ka code
             signOut(auth).then(() => {
