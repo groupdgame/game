@@ -4805,7 +4805,6 @@
             }
         };
 
-        window.checkAnswer = function(elementId, idx, correct) {
                 window.checkAnswer = function(elementId, idx, correct) {
             if (window.quizAnswered) return;
             const el = document.getElementById(elementId);
@@ -4823,6 +4822,7 @@
                 setTimeout(() => el.classList.remove('error'), 500);
             }
         };
+
 
 
         window.nextCard = function() {
