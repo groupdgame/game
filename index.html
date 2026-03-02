@@ -126,10 +126,11 @@
         
 
         /* --- TOP BAR --- */
-        #top-bar {
+                #top-bar {
             height: 50px; display: flex; align-items: center; padding: 0 20px;
             justify-content: space-between; visibility: hidden;
         }
+
 
         .progress-track {
             flex-grow: 1; height: 12px; background-color: var(--gray);
@@ -4751,6 +4752,8 @@
             document.getElementById('lesson-view').style.display = 'flex';
             document.getElementById('bottom-nav').style.display = 'none';
             document.getElementById('top-bar').style.visibility = 'visible';
+            document.getElementById('main-toolbar').style.display = 'none';
+            
             
             renderCard();
         };
@@ -4798,13 +4801,15 @@
             
             if (idx === correct) {
                 el.classList.add('selected');
-                document.getElementById('sound-correct').play().catch(e=>{});
+                document.getElementById('sound-correct').play().catch(e=>console.log(e));
+                if (navigator.vibrate) navigator.vibrate(50); // Sahi hone par chhota vibrate
                 window.quizAnswered = true;
                 nextBtn.disabled = false;
                 nextBtn.innerHTML = "Continue";
             } else {
                 el.classList.add('error');
-                document.getElementById('sound-wrong').play().catch(e=>{});
+                document.getElementById('sound-wrong').play().catch(e=>console.log(e));
+                if (navigator.vibrate) navigator.vibrate(200); // Galat hone par lamba vibrate
                 setTimeout(() => el.classList.remove('error'), 500);
             }
         };
@@ -4828,8 +4833,9 @@
             }
         };
 
-        window.finishLesson = function() {
-            document.getElementById('sound-applause').play().catch(e=>{});
+                window.finishLesson = function() {
+            document.getElementById('sound-applause').play().catch(e=>console.log(e));
+            if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 100]); // Taliyon ki tarah vibrate
             document.getElementById('progress-fill').style.width = '100%';
             
             // Unlock Next Level Logic
@@ -4837,12 +4843,12 @@
                 const nextTopic = window.currentTopics[window.currentTopicIndex + 1];
                 nextTopic.locked = false;
                 
-                // Save to Database
                 saveTopicUnlock(nextTopic.id);
             }
             
             document.getElementById('congrats-overlay').style.display = 'flex';
         };
+
 
         window.closeCongrats = function() {
             document.getElementById('congrats-overlay').style.display = 'none';
@@ -4854,6 +4860,8 @@
             document.getElementById('lesson-view').style.display = 'none';
             document.getElementById('bottom-nav').style.display = 'flex';
             document.getElementById('top-bar').style.visibility = 'hidden';
+            document.getElementById('main-toolbar').style.display = 'flex';
+                                                      
             renderPath();
         };
 
