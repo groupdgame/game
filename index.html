@@ -4806,24 +4806,24 @@
         };
 
         window.checkAnswer = function(elementId, idx, correct) {
+                window.checkAnswer = function(elementId, idx, correct) {
             if (window.quizAnswered) return;
             const el = document.getElementById(elementId);
             const nextBtn = document.getElementById('next-btn');
             
             if (idx === correct) {
                 el.classList.add('selected');
-                document.getElementById('sound-correct').play().catch(e=>console.log(e));
                 if (navigator.vibrate) navigator.vibrate(50); // Sahi hone par chhota vibrate
                 window.quizAnswered = true;
                 nextBtn.disabled = false;
                 nextBtn.innerHTML = "Continue";
             } else {
                 el.classList.add('error');
-                document.getElementById('sound-wrong').play().catch(e=>console.log(e));
                 if (navigator.vibrate) navigator.vibrate(200); // Galat hone par lamba vibrate
                 setTimeout(() => el.classList.remove('error'), 500);
             }
         };
+
 
         window.nextCard = function() {
             const topicId = window.currentTopics[window.currentTopicIndex].id;
@@ -4844,9 +4844,8 @@
             }
         };
 
-                window.finishLesson = function() {
-            document.getElementById('sound-applause').play().catch(e=>console.log(e));
-            if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 100]); // Taliyon ki tarah vibrate
+                        window.finishLesson = function() {
+            if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 100]); // Taliyon jaisa vibrate
             document.getElementById('progress-fill').style.width = '100%';
             
             // Unlock Next Level Logic
@@ -4854,11 +4853,13 @@
                 const nextTopic = window.currentTopics[window.currentTopicIndex + 1];
                 nextTopic.locked = false;
                 
-                saveTopicUnlock(nextTopic.id);
+                // Database me save karna
+                if(window.saveTopicUnlock) saveTopicUnlock(nextTopic.id);
             }
             
             document.getElementById('congrats-overlay').style.display = 'flex';
         };
+
 
 
         window.closeCongrats = function() {
