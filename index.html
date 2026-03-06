@@ -416,7 +416,7 @@
         // --- 1. FIREBASE SETUP ---
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         // YOUR API KEY HERE
         const firebaseConfig = {
@@ -4812,39 +4812,96 @@
         };
 
         // Ye baaki pages ke khali functions hain (inme hum aage kaam karenge)
-                window.openReviews = function() {
-            // Map aur Toolbars ko chhupana
+                        // Global variable taaki hum live connection ko control kar sakein
+        window.reviewsUnsubscribe = null;
+
+        window.loadLiveReviews = function() {
+            const reviewsList = document.getElementById('reviews-list');
+            reviewsList.innerHTML = "<p style='text-align:center; padding: 20px;'>Loading reviews...</p>";
+
+            // Firebase se reviews mangane ki Query (Purane se naye ki taraf)
+            const q = query(collection(db, "reviews"), orderBy("timestamp", "asc"));
+            
+            // onSnapshot se live data aata hai (Bina refresh kiye)
+            window.reviewsUnsubscribe = onSnapshot(q, (snapshot) => {
+                reviewsList.innerHTML = ""; // Purana data hatao
+                
+                if(snapshot.empty) {
+                    reviewsList.innerHTML = "<p style='text-align:center; padding: 20px; color:#777;'>Be the first to write a review! ⭐</p>";
+                    return;
+                }
+                
+                snapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const reviewHTML = `
+                        <div class="review-card">
+                            <img src="${data.photoURL || 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'}" alt="Profile">
+                            <div class="review-info">
+                                <h4>${data.name || 'Player'}</h4>
+                                <p>${data.text}</p>
+                            </div>
+                        </div>
+                    `;
+                    reviewsList.innerHTML += reviewHTML;
+                });
+                
+                // Naya message aane par page ko apne aap neeche scroll kar do
+                setTimeout(() => { reviewsList.scrollTop = reviewsList.scrollHeight; }, 100);
+            });
+        };
+
+        window.openReviews = function() {
             document.getElementById('path-view').style.display = 'none';
             document.getElementById('bottom-nav').style.display = 'none';
             document.getElementById('main-toolbar').style.display = 'none';
-            
-            // Reviews Page dikhana
             document.getElementById('reviews-view').style.display = 'flex';
 
-            // Abhi ke liye ek Dummy/Welcome review dikha rahe hain
-            document.getElementById('reviews-list').innerHTML = `
-                <div class="review-card">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Admin">
-                    <div class="review-info">
-                        <h4>Game Admin ✓</h4>
-                        <p>Welcome to the Group D Game reviews section! Be the first to share your experience with everyone.</p>
-                    </div>
-                </div>
-            `;
+            // Jaise hi page khule, live reviews load karna shuru karo
+            window.loadLiveReviews();
         };
 
         window.closeReviews = function() {
-            // Reviews band karke wapas aana
             document.getElementById('reviews-view').style.display = 'none';
             document.getElementById('path-view').style.display = 'grid';
             document.getElementById('bottom-nav').style.display = 'flex';
             document.getElementById('main-toolbar').style.display = 'flex';
+            
+            // Back aane par live update band kar do (Battery bachane ke liye)
+            if (window.reviewsUnsubscribe) window.reviewsUnsubscribe();
         };
 
-        window.submitReview = function() {
-            // Ye button abhi alert dega, agle step me isko Firebase se jodenge
-            alert("Awesome! Agle step mein hum ise Firebase database se link karenge taaki sabka review save ho sake!");
+
+                window.submitReview = async function() {
+            const input = document.getElementById('review-input');
+            const text = input.value.trim();
+
+            if (!text) {
+                alert("Bhai, kuch likh to do! 😅");
+                return;
+            }
+            if (!currentUser) {
+                alert("Review likhne ke liye Login karna zaroori hai!");
+                return;
+            }
+
+            try {
+                // Firebase ke "reviews" collection me data save karna
+                await addDoc(collection(db, "reviews"), {
+                    text: text,
+                    uid: currentUser.uid,
+                    name: currentUser.displayName || "Player",
+                    photoURL: currentUser.photoURL,
+                    timestamp: serverTimestamp() // Google ka exact time
+                });
+
+                // Message bhejne ke baad box khali kar do
+                input.value = ""; 
+            } catch (error) {
+                console.error("Review error: ", error);
+                alert("Bhai, review post nahi ho paya. Apna internet check karo!");
+            }
         };
+
 
 
                 window.openPage = function(pageType) {
