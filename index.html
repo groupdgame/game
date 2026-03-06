@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Group D Game</title>
@@ -281,13 +281,19 @@
             <h2>Menu</h2>
             <span class="close-drawer" onclick="closeDrawer()">✕</span>
         </div>
-        <div class="drawer-menu">
+                <div class="drawer-menu">
             <div class="drawer-item" onclick="switchSubject('science'); closeDrawer();">🧬 Science</div>
             <div class="drawer-item" onclick="switchSubject('math'); closeDrawer();">➗ Maths</div>
             <div class="drawer-item" onclick="switchSubject('reasoning'); closeDrawer();">🧠 Reasoning</div>
             <div class="drawer-item" onclick="openProfile(); closeDrawer();">👤 Profile</div>
             <div class="drawer-item" onclick="buyPremium(); closeDrawer();">👑 Premium</div>
+            
+            <div class="drawer-item" onclick="openReviews(); closeDrawer();">⭐ Reviews</div>
+            <div class="drawer-item" onclick="openWhatsApp(); closeDrawer();">💬 WhatsApp Support</div>
+            <div class="drawer-item" onclick="openPage('tnc'); closeDrawer();">📜 Terms & Conditions</div>
+            <div class="drawer-item" onclick="openPage('privacy'); closeDrawer();">🔒 Privacy Policy</div>
         </div>
+
     </div>
     
 
@@ -4720,7 +4726,24 @@
             alert("Premium feature jald hi aayega!");
         };
         
+                window.openWhatsApp = function() {
+            // Apna WhatsApp number yahan dalein (Country code 91 ke sath)
+            let phoneNumber = "919259688308"; 
+            let message = "Hi, I have some feedback for the Group D Game!";
+            
+            // Ye user ko direct WhatsApp app par le jayega
+            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, "_blank");
+        };
 
+        // Ye baaki pages ke khali functions hain (inme hum aage kaam karenge)
+        window.openReviews = function() {
+            alert("Reviews page jald hi banayenge!");
+        };
+
+        window.openPage = function(pageType) {
+            alert(pageType + " page jald hi banayenge!");
+        };
+        
         
         window.switchSubject = function(subject) {
             window.currentSubject = subject;
