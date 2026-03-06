@@ -115,6 +115,45 @@
         .text-page-content h3 { color: var(--primary); margin-top: 25px; margin-bottom: 10px; }
         
 
+                /* --- REVIEWS PAGE --- */
+        #reviews-view {
+            display: none; flex-direction: column; height: 100vh; width: 100vw;
+            background: #f0f2f5; position: fixed; top: 0; left: 0; z-index: 2005;
+        }
+        .reviews-list {
+            flex-grow: 1; overflow-y: auto; padding: 20px; padding-bottom: 90px;
+        }
+        .review-card {
+            background: white; padding: 15px; border-radius: 12px; margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; gap: 15px;
+            animation: slideIn 0.3s ease-out;
+        }
+        .review-card img {
+            width: 45px; height: 45px; border-radius: 50%; object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+        .review-info { flex-grow: 1; }
+        .review-info h4 { margin: 0 0 5px 0; font-size: 16px; color: var(--text); }
+        .review-info p { margin: 0; font-size: 14px; color: #555; line-height: 1.4; }
+        
+        .add-review-box {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            background: white; padding: 15px 20px; box-sizing: border-box;
+            display: flex; gap: 10px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+        .add-review-box input {
+            flex-grow: 1; padding: 12px 15px; border: 1px solid var(--gray);
+            border-radius: 25px; font-size: 15px; outline: none; transition: border 0.3s;
+        }
+        .add-review-box input:focus { border-color: var(--primary); }
+        .add-review-box button {
+            background: var(--primary); color: white; border: none;
+            padding: 0 20px; border-radius: 25px; font-weight: bold; cursor: pointer;
+            transition: transform 0.1s;
+        }
+        .add-review-box button:active { transform: scale(0.95); }
+
+        
         
         /* --- MAIN APP TOOLBAR --- */
         #main-toolbar {
@@ -294,6 +333,22 @@
             </div>
     
 
+    <div id="reviews-view" style="display: none;">
+        <div class="profile-header-bar">
+            <span class="back-btn" onclick="closeReviews()">←</span>
+            <h2>User Reviews</h2>
+        </div>
+        
+        <div class="reviews-list" id="reviews-list">
+            </div>
+
+        <div class="add-review-box">
+            <input type="text" id="review-input" placeholder="Write your review here...">
+            <button onclick="submitReview()">Post</button>
+        </div>
+    </div>
+    
+    
         <div id="drawer-overlay" onclick="closeDrawer()"></div>
     <div id="side-drawer">
         <div class="drawer-header">
@@ -4755,9 +4810,40 @@
         };
 
         // Ye baaki pages ke khali functions hain (inme hum aage kaam karenge)
-        window.openReviews = function() {
-            alert("Reviews page jald hi banayenge!");
+                window.openReviews = function() {
+            // Map aur Toolbars ko chhupana
+            document.getElementById('path-view').style.display = 'none';
+            document.getElementById('bottom-nav').style.display = 'none';
+            document.getElementById('main-toolbar').style.display = 'none';
+            
+            // Reviews Page dikhana
+            document.getElementById('reviews-view').style.display = 'flex';
+
+            // Abhi ke liye ek Dummy/Welcome review dikha rahe hain
+            document.getElementById('reviews-list').innerHTML = `
+                <div class="review-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Admin">
+                    <div class="review-info">
+                        <h4>Game Admin ✓</h4>
+                        <p>Welcome to the Group D Game reviews section! Be the first to share your experience with everyone.</p>
+                    </div>
+                </div>
+            `;
         };
+
+        window.closeReviews = function() {
+            // Reviews band karke wapas aana
+            document.getElementById('reviews-view').style.display = 'none';
+            document.getElementById('path-view').style.display = 'grid';
+            document.getElementById('bottom-nav').style.display = 'flex';
+            document.getElementById('main-toolbar').style.display = 'flex';
+        };
+
+        window.submitReview = function() {
+            // Ye button abhi alert dega, agle step me isko Firebase se jodenge
+            alert("Awesome! Agle step mein hum ise Firebase database se link karenge taaki sabka review save ho sake!");
+        };
+
 
                 window.openPage = function(pageType) {
             let title = "";
