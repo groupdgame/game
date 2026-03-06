@@ -102,6 +102,17 @@
         }
         #profile-logout-btn:active { transform: translateY(4px); box-shadow: none; }
         
+                /* --- TEXT PAGE VIEW --- */
+        #text-page-view {
+            display: none; flex-direction: column; height: 100vh; width: 100vw;
+            background: var(--bg); position: fixed; top: 0; left: 0; z-index: 2005;
+        }
+        .text-page-content {
+            padding: 20px 25px; overflow-y: auto; flex-grow: 1; 
+            line-height: 1.6; color: var(--text); font-size: 16px;
+            padding-bottom: 50px;
+        }
+        .text-page-content h3 { color: var(--primary); margin-top: 25px; margin-bottom: 10px; }
         
 
         
@@ -273,6 +284,14 @@
         </div>
            </div>
     
+            <div id="text-page-view" style="display: none;">
+        <div class="profile-header-bar">
+            <span class="back-btn" onclick="closeTextPage()">←</span>
+            <h2 id="text-page-title">Page Title</h2>
+        </div>
+        <div class="text-page-content" id="text-page-content">
+            </div>
+            </div>
     
 
         <div id="drawer-overlay" onclick="closeDrawer()"></div>
@@ -4740,9 +4759,54 @@
             alert("Reviews page jald hi banayenge!");
         };
 
-        window.openPage = function(pageType) {
-            alert(pageType + " page jald hi banayenge!");
+                window.openPage = function(pageType) {
+            let title = "";
+            let content = "";
+
+            if (pageType === 'tnc') {
+                title = "Terms & Conditions";
+                content = `
+                    <h3>1. Introduction</h3>
+                    <p>Welcome to Group D Game. By using our application, you agree to these basic terms.</p>
+                    <h3>2. Account & Data</h3>
+                    <p>We only use your Google login to save your game progress safely.</p>
+                    <h3>3. Fair Play</h3>
+                    <p>Please use this educational app for learning purposes. We reserve the right to block accounts showing suspicious activities.</p>
+                `;
+            } else if (pageType === 'privacy') {
+                title = "Privacy Policy";
+                content = `
+                    <h3>1. Information We Collect</h3>
+                    <p>We only collect basic information via Google Login: your Name, Email ID, and Profile Picture.</p>
+                    <h3>2. How We Use It</h3>
+                    <p>Your data is used strictly to create your profile and save your unlocked levels in the game.</p>
+                    <h3>3. Data Sharing</h3>
+                    <p>Your privacy is important to us. We do NOT share or sell your data to any third-party companies.</p>
+                `;
+            }
+
+            // HTML me title aur content set karna
+            document.getElementById('text-page-title').innerText = title;
+            document.getElementById('text-page-content').innerHTML = content;
+
+            // Map aur Toolbars ko chhupana
+            document.getElementById('path-view').style.display = 'none';
+            document.getElementById('bottom-nav').style.display = 'none';
+            document.getElementById('main-toolbar').style.display = 'none';
+            
+            // Text Page dikhana
+            document.getElementById('text-page-view').style.display = 'flex';
         };
+
+        // Page band karke wapas aane ka function
+        window.closeTextPage = function() {
+            document.getElementById('text-page-view').style.display = 'none';
+            
+            document.getElementById('path-view').style.display = 'grid';
+            document.getElementById('bottom-nav').style.display = 'flex';
+            document.getElementById('main-toolbar').style.display = 'flex';
+        };
+
         
         
         window.switchSubject = function(subject) {
