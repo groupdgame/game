@@ -244,11 +244,11 @@
 <body>
 
     
-    <div id="login-overlay">
+        <div id="login-overlay">
         <h1 style="color:#58cc02; font-size:40px; margin-bottom:10px;">Group D Game</h1>
-        <p style="margin-bottom: 30px; color: #777;">Sign in to save your progress!</p>
-        <button id="google-login-btn">Login with Google</button>
-        <p id="loading-text" style="display:none; margin-top:20px; color: #58cc02; font-weight: bold;">Loading your progress...</p>
+        <p id="login-subtext" style="display:none; margin-bottom: 30px; color: #777;">Sign in to save your progress!</p>
+        <button id="google-login-btn" style="display:none;">Login with Google</button>
+        <p id="loading-text" style="margin-top:20px; color: #58cc02; font-weight: bold;">Loading Game...</p>
     </div>
 
 
@@ -4597,18 +4597,18 @@
 
         
 
-        onAuthStateChanged(auth, async (user) => {
+                onAuthStateChanged(auth, async (user) => {
             if (user) {
                 // User Logged In
                 currentUser = user;
+                document.getElementById('loading-text').innerText = 'Loading your progress...';
                 document.getElementById('loading-text').style.display = 'block';
                 document.getElementById('google-login-btn').style.display = 'none';
+                document.getElementById('login-subtext').style.display = 'none';
 
                 // Update Toolbar UI
                 if(user.photoURL) document.getElementById('toolbar-user-pic').src = user.photoURL;
                 document.getElementById('main-toolbar').style.display = 'flex';
-
-                
 
                 // Load Data
                 await loadUserProgress(user.uid);
@@ -4620,10 +4620,11 @@
                 // User Logged Out
                 document.getElementById('login-overlay').style.display = 'flex';
                 document.getElementById('google-login-btn').style.display = 'block';
+                document.getElementById('login-subtext').style.display = 'block';
                 document.getElementById('loading-text').style.display = 'none';
-                document.getElementById('user-profile').style.display = 'none';
             }
         });
+
 
         // --- 6. DATABASE LOGIC ---
         async function loadUserProgress(uid) {
